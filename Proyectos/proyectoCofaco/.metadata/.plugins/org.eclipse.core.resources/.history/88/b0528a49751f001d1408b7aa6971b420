@@ -1,0 +1,11 @@
+package clases;
+
+public class OrdenP {
+	//atributos privados
+	private int nroOp;
+	private String colorOp;
+	private String cliente;
+	//contructor 
+	public OrdenP() {};
+	
+}

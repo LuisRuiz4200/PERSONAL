@@ -1,0 +1,74 @@
+package arreglos;
+
+import java.util.ArrayList;
+import clases.Confeccion;
+import java.io.*;
+
+public class ArregloConfeccion {
+	//atributo privado 
+	private ArrayList <Confeccion> confeccion;
+	//constructor
+	public ArregloConfeccion() {
+		confeccion=new ArrayList<Confeccion>();
+	}
+	//metodos de mantenimiento 
+	public int tamaño() {
+		return confeccion.size();
+	}
+	public void adicionar (Confeccion c) {
+		confeccion.add(c);
+	}
+	public void eliminar (Confeccion c) {
+		confeccion.remove(c);
+	}
+	public Confeccion obtener(int i) {
+		return confeccion.get(i);
+	}
+	public Confeccion buscar (String codigoCiti) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getCodigoCiti()==codigoCiti) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	//metodos para grabar y cargar
+	
+	public void grabarConfeccion () {
+		try {
+			String fila;
+			Confeccion c;
+			PrintWriter pw;
+			pw= new PrintWriter(new FileWriter ("confeccion.txt"));
+			for (int i=0;i<tamaño();i++) {
+				c=obtener(i);
+				fila=c.getCodigoCiti() + ";" + 
+					 c.getNombre();
+				pw.println(fila);
+				
+			}
+			pw.close();
+			
+			
+		}
+		catch (Exception e) {
+			
+		}
+	}
+	public void cargarConfeccion () {
+		try {
+			String[]x;
+			Confeccion c;
+			BufferedReader bw;
+			
+			bw=new BufferedReader(new FileReader("confeccion.txt"));
+			while (bw!=null) {
+				
+			}
+			}
+		}
+		catch(Exception e) {
+			
+		}
+	}
+}

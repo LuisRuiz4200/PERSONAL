@@ -1,0 +1,39 @@
+package arreglos;
+
+import java.util.ArrayList;
+import clases.OrdenP;
+import java.io.*;
+
+public class ArregloOrdenes {
+	//variable global
+	private ArrayList <OrdenP> ordenes;
+	//contructor 
+	public ArregloOrdenes() {
+		ordenes=new ArrayList<OrdenP>();
+	}
+	//metodos de mantenimiento
+	public int tamaño () {
+		return ordenes.size(); 
+	}
+	public OrdenP obtener(int i ) {
+		return ordenes.get(i);
+	}
+	public OrdenP buscarNroOP (int nroOp) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getNroOp()==nroOp) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	public void adicionar (OrdenP o) {
+		ordenes.add(o);
+	}
+	public void eliminar(Orden o) {
+		ordenes.remove(o);
+	}
+	//metodos de grabar y cargar
+	public grabarOrdenes() {
+		
+	}
+}

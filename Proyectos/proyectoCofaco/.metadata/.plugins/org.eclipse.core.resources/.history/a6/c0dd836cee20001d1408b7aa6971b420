@@ -1,0 +1,95 @@
+package arreglos;
+
+import java.util.ArrayList;
+import clases.Ingresos;
+import java.io.*;
+
+public class ArregloIngresos {
+	//atributo privado 
+	ArrayList <Ingresos> ingresos;
+	//constructor 
+	public ArregloIngresos() {
+		ingresos= new ArrayList<Ingresos> ();
+		cargarIngresos();
+	}
+	//metodos de mantenimientos 
+	public int tamaño() {
+		return ingresos.size();
+	}
+	public void adicionar(Ingresos i) {
+		ingresos.add(i);
+	}
+	public void eliminar (Ingresos i) {
+		ingresos.remove(i);
+	}
+	public Ingresos obtener(int i) {
+		return ingresos.get(i);
+	}
+	public Ingresos buscarNroGuia(int nroGuia) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getNroGuia()==nroGuia) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	public Ingresos buscarNroOp(int nroOp) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getOrdenP()==nroOp) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	//metodos de grabar y cargar
+	public void grabarIngresos() {
+		PrintWriter pw;
+		String fila;
+		Ingresos in;
+		
+		try {
+			
+			pw=new PrintWriter(new FileWriter("ingresos.txt"));
+			
+			for(int i=0;i<tamaño();i++) {
+				in=obtener(i);
+				fila=  in.getNroGuia() + ";" +
+						in.getOrdenP() + ";" +
+						in.getColor() + ";" +
+						in.getMotivo();
+				pw.println(fila);
+			}
+			pw.close();
+			
+		}catch(Exception e) {
+			
+		}
+		
+	}
+	public void cargarIngresos() {
+		BufferedReader br;
+		String []s;
+		String fila;
+		int nroGuia, nroOp;
+		String color, motivo,fecha;
+		try {
+			br=new BufferedReader(new FileReader("ingresos.txt"));
+			while((fila=br.readLine())!=null) {
+				s=fila.split(";");
+				fecha=s[0];
+				nroGuia= Integer.parseInt(s[1]);
+				nroOp=Integer.parseInt(s[2]);
+				color=s[2];
+				motivo=s[3];
+				
+				adicionar(new Ingresos(s[0],s[1],s[2],s[3],s[4],s[5]));
+				
+			}
+			br.close();
+		}
+		catch (Exception e){
+			
+		}
+	}
+	
+}

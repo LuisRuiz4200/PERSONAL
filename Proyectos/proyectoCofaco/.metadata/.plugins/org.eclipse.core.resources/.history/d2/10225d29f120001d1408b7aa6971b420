@@ -1,0 +1,13 @@
+package clases;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Date {
+	public static  String fechaActual() {
+		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+	}
+	public  String horaActual() {
+		return new SimpleDateFormat("HH:mm:ss").format(new Date());
+	}
+}

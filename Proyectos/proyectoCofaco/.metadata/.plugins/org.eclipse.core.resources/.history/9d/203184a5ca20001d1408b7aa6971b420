@@ -1,0 +1,85 @@
+package arreglos;
+
+import java.util.ArrayList;
+import clases.OrdenP;
+import java.io.*;
+
+public class ArregloOrdenes {
+	//variable global
+	private ArrayList <OrdenP> ordenes;
+	//contructor 
+	public ArregloOrdenes() {
+		ordenes=new ArrayList<OrdenP>();
+	}
+	//metodos de mantenimiento
+	public int tamaño () {
+		return ordenes.size(); 
+	}
+	public OrdenP obtener(int i ) {
+		return ordenes.get(i);
+	}
+	public OrdenP buscarNroOP (int nroOp) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getNroOp()==nroOp) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	public void adicionar (OrdenP o) {
+		ordenes.add(o);
+	}
+	public void eliminar(OrdenP o) {
+		ordenes.remove(o);
+	}
+	//metodos de grabar y cargar
+	public void grabarOrdenes() {
+		PrintWriter pw;
+		String fila;
+		OrdenP o;
+		
+		try {
+			pw=new PrintWriter(new FileWriter("ordenes.txt"));
+
+			for(int i=0;i<tamaño();i++) {
+				
+				o=obtener(i);
+				
+				fila= o.getNroOp() + ";" +
+					  o.getColor() + ";" + 
+					  o.getCliente();
+				
+				pw.println(fila);
+			}
+			
+			pw.close();
+		}
+		catch (Exception e) {
+			
+		}
+		
+	}
+	
+	public void cargarOrdenes() {
+		BufferedReader br;
+		String [] s;
+		String fila;
+		int nroOp;
+		String cliente, color;
+		
+		try {
+			br= new BufferedReader(new FileReader("ordenes.txt"));
+			while((fila=br.readLine())!=null) {
+				s= fila.split(";");
+				nroOp=Integer.parseInt(s[0]);
+				cliente=s[1];
+				color=s[2];
+				
+				
+			}
+		}
+		catch (Exception e) {
+			
+		}
+	}
+}

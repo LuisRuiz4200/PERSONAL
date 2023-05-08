@@ -1,0 +1,8 @@
+C1001;Lululemon
+C1002;Stance
+C1003;NancyRouse
+C1004;Lacoste
+C1005;PublicRec
+C1006;Mitre
+C1007;AllBirds
+C1008;Dish&Duer

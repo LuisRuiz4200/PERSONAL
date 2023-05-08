@@ -1,0 +1,13 @@
+package clases;
+
+public class Ingresos {
+	///atributos privaddos
+	private  int OrdenP;
+	private String color;
+	private int nroGuia;
+	private String Motivo;
+	//constructor 
+	public Ingresos () {
+		
+	}
+}

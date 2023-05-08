@@ -1,0 +1,12 @@
+package clases;
+
+public class Confeccion {
+	//atributo privado
+	private String codigoCiti;
+	private String nombre;
+	//constructor
+	public Confeccion () {}
+	public Confeccion (String codigoCiti, String nombre) {
+		
+	}
+}
