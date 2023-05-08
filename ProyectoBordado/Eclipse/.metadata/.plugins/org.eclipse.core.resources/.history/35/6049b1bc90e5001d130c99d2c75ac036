@@ -1,0 +1,42 @@
+package vistas;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+
+@SuppressWarnings("serial")
+public class DlgConsultaIngresoAvio extends JFrame{
+	private JTable table;
+	
+	public static void main (String[] args) {
+		DlgConsultaIngresoAvio ventana = new DlgConsultaIngresoAvio();
+		ventana.setVisible(true);
+	}
+	
+	public DlgConsultaIngresoAvio() {
+		
+		this.setTitle("LISTA DE INGRESO DE AVIOS");
+		this.setBounds(0,0,673,442);
+		this.setLocationRelativeTo(this);
+		
+		table = new JTable();
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(table, GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(145, Short.MAX_VALUE)
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		getContentPane().setLayout(groupLayout);
+		
+		
+		
+	}
+}

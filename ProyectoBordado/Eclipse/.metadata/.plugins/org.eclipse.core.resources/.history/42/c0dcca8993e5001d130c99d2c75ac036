@@ -1,0 +1,69 @@
+package vistas;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JDateChooser;
+
+@SuppressWarnings("serial")
+public class DlgConsultaIngresoAvio extends JFrame {
+	public static void main(String[] args) {
+		DlgConsultaIngresoAvio ventana = new DlgConsultaIngresoAvio();
+		ventana.setVisible(true);
+	}
+
+	private JTable table;
+	private JButton btnConsultar;
+	private JDateChooser dcFecha;
+	private DefaultTableModel model;
+	private JLabel lblFecha;
+	private JScrollPane spTable;
+
+	public DlgConsultaIngresoAvio() {
+
+		this.setTitle("LISTA DE INGRESO DE AVIOS");
+		this.setBounds(0, 0, 622, 459);
+		this.setLocationRelativeTo(this);
+
+		table = new JTable();
+		
+		spTable = new JScrollPane();
+
+		btnConsultar = new JButton("CONSULTAR");
+
+		dcFecha = new JDateChooser();
+
+		lblFecha = new JLabel("Fecha");
+		
+		
+		model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("NRO OP");
+		model.addColumn("COD. AVIO");
+		model.addColumn("CANT");
+		model.addColumn("FECHA");
+		SpringLayout springLayout = new SpringLayout();
+		springLayout.putConstraint(SpringLayout.NORTH, lblFecha, 23, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, lblFecha, 10, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, lblFecha, 60, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, dcFecha, 43, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, dcFecha, 10, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, dcFecha, 133, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, btnConsultar, 81, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, btnConsultar, 443, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, table, 122, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, table, 10, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, table, 409, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, table, 596, SpringLayout.WEST, getContentPane());
+		getContentPane().setLayout(springLayout);
+		table.setModel(model);
+		getContentPane().add(table);
+		getContentPane().add(btnConsultar);
+		getContentPane().add(dcFecha);
+		getContentPane().add(lblFecha);
+		
+	}
+
+}

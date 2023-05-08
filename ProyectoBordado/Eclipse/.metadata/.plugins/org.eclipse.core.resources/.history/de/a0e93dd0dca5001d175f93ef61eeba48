@@ -1,0 +1,22 @@
+package vistas;
+
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class DlgConsultaOP extends JDialog{
+	
+	public static void main (String[] args) {
+		DlgConsultaOP ventana = new DlgConsultaOP();
+		ventana.setVisible(true);
+	}
+	
+	public DlgConsultaOP(Jframe ventana, boolean bandera) {
+		
+		this.setTitle("PLANTILLA");
+		this.setBounds(0,0,429,326);
+		this.setLocationRelativeTo(this);
+		this.getContentPane().setLayout(null);
+	}
+	
+	
+}

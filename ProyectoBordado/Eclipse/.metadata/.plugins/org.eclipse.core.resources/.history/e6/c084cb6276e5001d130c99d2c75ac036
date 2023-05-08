@@ -1,0 +1,96 @@
+package vistas;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import arreglos.ArregloOrdenProduccion;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+@SuppressWarnings("serial")
+public class BuscarOP extends JFrame implements ActionListener, KeyListener{
+	private JTable table;
+	private JTextField txtOP;
+	private JLabel lblOP;
+	private JButton btnElegir;
+	private DefaultTableModel model;
+	private JScrollPane spTable;
+	
+	private ArregloOrdenProduccion arrOP;
+	
+	
+	public static void main (String[] args) {
+		BuscarOP ventana = new BuscarOP();
+		ventana.setVisible(true);
+	}
+	
+	public BuscarOP() {
+		
+		this.setTitle("BUSCAR OP");
+		this.setBounds(0,0,429,326);
+		this.setLocationRelativeTo(this);
+		this.getContentPane().setLayout(null);
+		
+		arrOP = new ArregloOrdenProduccion();
+		
+		table = new JTable();
+		spTable = new JScrollPane();
+		spTable.setBounds(10, 105, 393, 171);
+		spTable.setViewportView(table);
+		getContentPane().add(spTable);
+		
+		txtOP = new JTextField();
+		txtOP.addKeyListener(this);
+		txtOP.setBounds(10, 51, 86, 20);
+		getContentPane().add(txtOP);
+		txtOP.setColumns(10);
+		
+		lblOP = new JLabel("Orden Pedido");
+		lblOP.setBounds(10, 26, 86, 14);
+		getContentPane().add(lblOP);
+		
+		btnElegir = new JButton("Elegir");
+		btnElegir.addActionListener(this);
+		btnElegir.setBounds(265, 71, 89, 23);
+		getContentPane().add(btnElegir);
+		
+		model = new DefaultTableModel();
+		model.addColumn("OP");
+		model.addColumn("ESTILO");
+		table.setModel(model);
+		
+	}
+	//BOTON SELECCIONAR
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnElegir) {
+			actionPerformedBtnElegir(e);
+		}
+	}
+	protected void actionPerformedBtnElegir(ActionEvent e) {
+	}
+
+	//CAJA DE TEXTO DE OP
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == txtOP) {
+			keyReleasedTxtOP(e);
+		}
+	}
+	public void keyTyped(KeyEvent e) {
+	}
+	protected void keyReleasedTxtOP(KeyEvent e) {
+	}
+	//METODOS VOID
+	
+	private void cargarTabla() {
+		
+		for(OrdenProduccion obj : arrOP.cargarOrdenProduccion())
+		
+	}
+	
+}	
+	

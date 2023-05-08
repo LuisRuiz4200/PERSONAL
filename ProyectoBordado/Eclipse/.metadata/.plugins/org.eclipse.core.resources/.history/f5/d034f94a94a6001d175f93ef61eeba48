@@ -1,0 +1,14 @@
+package vistas;
+
+import javax.swing.JApplet;
+
+public class PRINCIPAL extends JApplet {
+
+	/**
+	 * Create the applet.
+	 */
+	public PRINCIPAL() {
+
+	}
+
+}

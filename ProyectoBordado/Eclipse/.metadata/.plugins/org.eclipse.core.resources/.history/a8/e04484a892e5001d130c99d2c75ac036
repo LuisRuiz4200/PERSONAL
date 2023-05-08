@@ -1,0 +1,63 @@
+package vistas;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.toedter.calendar.JDateChooser;
+
+@SuppressWarnings("serial")
+public class DlgConsultaIngresoAvio extends JFrame {
+	public static void main(String[] args) {
+		DlgConsultaIngresoAvio ventana = new DlgConsultaIngresoAvio();
+		ventana.setVisible(true);
+	}
+
+	private JTable table;
+	private JButton btnConsultar;
+	private JDateChooser dcFecha;
+
+	private JLabel lblFecha;
+
+	public DlgConsultaIngresoAvio() {
+
+		this.setTitle("LISTA DE INGRESO DE AVIOS");
+		this.setBounds(0, 0, 622, 459);
+		this.setLocationRelativeTo(this);
+
+		table = new JTable();
+
+		btnConsultar = new JButton("CONSULTAR");
+
+		dcFecha = new JTextField();+
+
+		lblFecha = new JLabel("Fecha");
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(table, GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE).addContainerGap())
+						.addGroup(Alignment.TRAILING,
+								groupLayout.createSequentialGroup().addComponent(btnConsultar).addGap(70))
+						.addGroup(
+								groupLayout.createSequentialGroup()
+										.addComponent(dcFecha, GroupLayout.PREFERRED_SIZE, 123,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(lblFecha, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()))));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				groupLayout.createSequentialGroup().addContainerGap(23, Short.MAX_VALUE).addComponent(lblFecha)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(dcFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(18).addComponent(btnConsultar).addGap(18)
+						.addComponent(table, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		getContentPane().setLayout(groupLayout);
+
+	}
+
+}
