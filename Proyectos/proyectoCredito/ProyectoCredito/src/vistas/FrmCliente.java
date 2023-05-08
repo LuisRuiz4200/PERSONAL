@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import utils.Tool;
 
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
 import clases.*;
@@ -139,6 +140,7 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 			arrCliente.adicionar(new Cliente (codigo,nombre,apellido,dni));
 			arrCliente.grabarCliente();
 			Tool.mensajeExito(this, "Se registró el cliente con exito !");
+			arranque();
 			listar();
 		}
 		
@@ -203,8 +205,10 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 	
 	void arranque() {
 		
-		txtCodigo.setText("C" + correlativo());
-		
+		txtCodigo.setText("C" + new DecimalFormat("0000").format(correlativo()));
+		txtNombre.setText("");
+		txtApellido.setText("");
+		txtDni.setText("");
 		listar();
 	}
 	
@@ -215,10 +219,10 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 		for (int i=0;i<arrCliente.tamaño();i++) {
 			Cliente c =  arrCliente.obtener(i);
 			
-			String codigo =c.getCodigo();
-			String nombre = c.getNombre();
-			String apellido = c.getApellido();
-			String dni = c.getDni();
+			String codigo =c.getId_cliente();
+			String nombre = c.getNom_cliente();
+			String apellido = c.getApe_cliente();
+			String dni = c.getDni_cliente();
 			
 			Object [] x = {codigo,nombre,apellido,dni};
 			
@@ -233,7 +237,7 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 			return 1 ;
 		}else {
 			
-			String codigo = arrCliente.obtener(arrCliente.tamaño()-1).getCodigo();
+			String codigo = arrCliente.obtener(arrCliente.tamaño()-1).getId_cliente();
 			
 			return Integer.parseInt(codigo.substring(1))+1 ;
 		}

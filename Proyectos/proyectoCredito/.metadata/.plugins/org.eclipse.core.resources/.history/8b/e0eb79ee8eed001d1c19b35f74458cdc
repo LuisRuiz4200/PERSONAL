@@ -1,0 +1,8 @@
+package clases;
+
+public class MedioPago {
+	
+	private String id_medioPago;
+	private String des_medioPago;
+	
+}

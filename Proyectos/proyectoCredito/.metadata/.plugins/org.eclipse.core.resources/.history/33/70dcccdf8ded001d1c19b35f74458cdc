@@ -1,0 +1,14 @@
+package clases;
+
+import java.text.DecimalFormat;
+
+public class Deuda {
+	
+	private String id_deuda;
+	private String id_cliente;
+	private double monto_deuda;
+	private String cuota_deuda;
+	private 
+	
+	
+}

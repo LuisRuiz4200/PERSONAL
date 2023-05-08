@@ -1,59 +1,53 @@
 package clases;
 
 public class Cliente {
-	private String codigo;
-	private String nombre;
-	private String apellido;
-	private String dni;
 	
+	private String id_cliente;
+	private String nom_cliente;
+	private String ape_cliente;
+	private String dni_cliente;
 	
-	public Cliente(String codigo, String nombre, String apellido, String dni) {
-		
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
+	public Cliente() {}
+
+	public Cliente(String id_cliente, String nom_cliente, String ape_cliente, String dni_cliente) {
+		this.id_cliente = id_cliente;
+		this.nom_cliente = nom_cliente;
+		this.ape_cliente = ape_cliente;
+		this.dni_cliente = dni_cliente;
 	}
 
-
-	public String getCodigo() {
-		return codigo;
+	public String getId_cliente() {
+		return id_cliente;
 	}
 
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setId_cliente(String id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
-
-	public String getNombre() {
-		return nombre;
+	public String getNom_cliente() {
+		return nom_cliente;
 	}
 
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNom_cliente(String nom_cliente) {
+		this.nom_cliente = nom_cliente;
 	}
 
-
-	public String getApellido() {
-		return apellido;
+	public String getApe_cliente() {
+		return ape_cliente;
 	}
 
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApe_cliente(String ape_cliente) {
+		this.ape_cliente = ape_cliente;
 	}
 
-
-	public String getDni() {
-		return dni;
+	public String getDni_cliente() {
+		return dni_cliente;
 	}
 
-
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDni_cliente(String dni_cliente) {
+		this.dni_cliente = dni_cliente;
 	}
+	
 	
 	
 	

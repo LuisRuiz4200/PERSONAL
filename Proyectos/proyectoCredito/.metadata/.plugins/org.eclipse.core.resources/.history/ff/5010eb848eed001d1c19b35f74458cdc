@@ -1,0 +1,13 @@
+package clases;
+
+public class Pago {
+	
+	private String id_pago;
+	private String id_cliente;
+	private double monto_pago;
+	private String fecha_pago;
+	private String id_medioPago;
+	
+	
+	
+}

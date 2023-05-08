@@ -32,7 +32,7 @@ public class ArregloCliente {
 	
 	public Cliente buscar (String codigo) {
 		for (int i=0;i<tamaño();i++) {
-			if(obtener(i).getCodigo().equals(codigo)) {
+			if(obtener(i).getId_cliente().equals(codigo)) {
 				return obtener(i);
 			}
 		}
@@ -52,10 +52,10 @@ public class ArregloCliente {
 			for(int i=0;i<tamaño();i++) {
 				c = obtener(i);
 				
-				texto = c.getCodigo() + ";" +
-						c.getNombre() + ";" + 
-						c.getApellido() + ";" +
-						c.getDni();
+				texto = c.getId_cliente() + ";" +
+						c.getNom_cliente() + ";" + 
+						c.getApe_cliente() + ";" +
+						c.getDni_cliente();
 				
 				pw.println(texto);
 			}

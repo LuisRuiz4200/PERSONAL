@@ -1,0 +1,8 @@
+package clases;
+
+public class Pago {
+	
+	private String id_pago;
+	private String id_cliente;
+	
+}

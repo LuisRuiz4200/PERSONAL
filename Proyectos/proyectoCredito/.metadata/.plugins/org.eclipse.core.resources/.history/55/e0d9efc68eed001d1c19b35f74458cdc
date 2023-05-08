@@ -1,0 +1,16 @@
+package clases;
+
+public class Cliente {
+	
+	private String id_cliente;
+	private String nom_cliente;
+	private String ape_cliente;
+	private String dni_cliente;
+	
+	public Cliente() {}
+	
+	
+	
+	
+	
+}

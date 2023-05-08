@@ -14,9 +14,9 @@
     <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="arreglos.ArregloCliente"/>
     <fullyQualifiedTypeName name="utils.Tool"/>
-    <fullyQualifiedTypeName name="vistas.FrmPago"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+    <fullyQualifiedTypeName name="vistas.FrmPago"/>
 </qualifiedTypeNameHistroy>

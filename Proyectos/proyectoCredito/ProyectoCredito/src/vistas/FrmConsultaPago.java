@@ -55,8 +55,9 @@ public class FrmConsultaPago extends JInternalFrame implements ActionListener{
 		modelo = new DefaultTableModel();
 		modelo.addColumn("CODIGO");
 		modelo.addColumn("CLIENTE");
+		modelo.addColumn("MONTO");
 		modelo.addColumn("FECHA");
-		modelo.addColumn("ABONO");
+		modelo.addColumn("MEDIO DE PAGO");
 		table.setModel(modelo);
 		
 		arranque();
@@ -89,13 +90,14 @@ public class FrmConsultaPago extends JInternalFrame implements ActionListener{
 			
 			Pago p =  arrPago.obtener(i);
 			
-			Cliente c = arrCliente.buscar(p.getCliente());
+			Cliente c = arrCliente.buscar(p.getId_cliente());
 			
 			Object[] x = {
-					p.getCodigo(),
-					c.getNombre(),
-					p.getFecha(),
-					p.getAbono()
+					p.getId_pago(),
+					c.getNom_cliente(),
+					p.getMonto_pago(),
+					p.getFecha_pago(),
+					p.getId_medioPago()
 			};
 			
 			modelo.addRow(x);

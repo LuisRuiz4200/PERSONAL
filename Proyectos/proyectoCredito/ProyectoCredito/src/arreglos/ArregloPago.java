@@ -33,12 +33,12 @@ public class ArregloPago {
 		return arrPago.get(x);
 	}
 	
-	public Pago buscar (int codigo) {
+	public Pago buscar (String codigo) {
 		
 		Pago g= null;
 		
 		for(int i = 0 ; i<tamaño();i++) {
-			if(obtener(i).getCodigo()==codigo) {
+			if(obtener(i).getId_pago().equals(codigo)) {
 				g=obtener(i);
 			}
 		}
@@ -46,9 +46,35 @@ public class ArregloPago {
 		return g;
 	}
 	
+	public double pagoTotal (String idCliente) {
+		double res= -1;
+		
+		
+		for(int i = 0 ; i<tamaño();i++) {
+			if(obtener(i).getId_cliente().equals(idCliente)) {
+				res += obtener(i).getMonto_pago() ;
+			}
+		}
+		
+		return res;
+	}
+	
+	public void cargarEstado() {
+		
+		cargarPago();
+		
+		for(int i = 0 ; i<tamaño();i++) {
+			obtener(i).setEstado_pago("REGISTRADO");
+		}
+		
+		grabarPago();
+		
+	}
+	
+	
 	//Metodos de guardar y buscar 
 	
-	public void gabrarPago () {
+	public void grabarPago () {
 		
 		PrintWriter pw;
 		String texto;
@@ -59,10 +85,12 @@ public class ArregloPago {
 			
 			for(int i=0;i<tamaño();i++) {
 				p = obtener(i);
-				texto = p.getCodigo() + ";" +
-						p.getCliente() + ";" +
-						p.getFecha() + ";" + 
-						p.getAbono();
+				texto = p.getId_pago() + ";" +
+						p.getId_cliente() + ";" +
+						p.getMonto_pago() + ";" + 
+						p.getFecha_pago() + ";" +
+						p.getId_medioPago() + ";" +
+						p.getEstado_pago() + ";";
 				
 				pw.println(texto);
 				
@@ -86,12 +114,14 @@ public class ArregloPago {
 			while((texto=br.readLine())!=null) {
 				pos = texto.split(";");
 				
-				int codigo = Integer.parseInt(pos[0]);
+				String codigo = pos[0];
 				String cliente = pos[1];
-				String fecha= pos[2];
-				double abono= Double.parseDouble(pos[3]);
+				double monto= Double.parseDouble(pos[2]);
+				String fecha= pos[3];
+				String medioPago = pos[4];
+				String estado = pos[5];
 				
-				adicionar(new Pago(codigo, cliente,fecha,abono));
+				adicionar(new Pago(codigo, cliente,monto,fecha,medioPago,estado));
 			}
 			
 			br.close();

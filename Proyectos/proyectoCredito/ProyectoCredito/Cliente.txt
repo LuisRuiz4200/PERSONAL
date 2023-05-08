@@ -1,4 +1,3 @@
-C1;Gabriel;Machuca;777777
-C2;Luis ;Machaca;75963004
-C3;Gelydi;Fabiola Ruiz;777777
-C4;Daniel;Sanches;789654412
+C0001;Luis;Machaca Ruiz;75963004
+C0002;Gleydi;Ruiz Siancas;-
+C0003;Gabriel;Ruiz Siancas;-
