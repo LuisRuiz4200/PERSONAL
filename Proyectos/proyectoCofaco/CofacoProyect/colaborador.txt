@@ -1,0 +1,11 @@
+31495;Luis;Machaca ;Obrero
+30660;Wilson;Ponte;Obrero
+1111;Nelva;vacio;Supervisor
+2222;Manuela;vacio;Supervisor
+3333;Junior;vacio;Supervisor
+4444;Carmen;vacio;Supervisor
+5555;Keta;vacio;Supervisor
+6666;Melinda;vacio;Obrero
+7777;Maria;vacio;Obrero
+8888;Karen;Masgo;Obrero
+9999;Holinda;vacio;Supervisor

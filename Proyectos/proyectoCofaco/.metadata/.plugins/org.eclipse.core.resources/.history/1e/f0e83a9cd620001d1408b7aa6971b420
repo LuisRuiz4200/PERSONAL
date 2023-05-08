@@ -1,0 +1,45 @@
+package clases;
+
+public class Ingresos {
+	///atributos privaddos
+	private  int nroOp;
+	private String color;
+	private int nroGuia;
+	private String motivo;
+	//constructor 
+	public Ingresos () {
+		
+	}
+	public Ingresos(int nroGuia, int nroOp, String color, String motivo) {
+		this.nroGuia=nroGuia;
+		this.nroOp=nroOp;
+		this.color=color;
+		this.motivo=motivo;
+	}
+	//metodos set y get 
+	public int getOrdenP() {
+		return nroOp;
+	}
+	public void setOrdenP(int nroOp) {
+		this.nroOp = nroOp;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getNroGuia() {
+		return nroGuia;
+	}
+	public void setNroGuia(int nroGuia) {
+		this.nroGuia = nroGuia;
+	}
+	public String getmotivo() {
+		return motivo;
+	}
+	public void setMotivo(String motivo) {
+		Motivo = motivo;
+	}
+	
+}

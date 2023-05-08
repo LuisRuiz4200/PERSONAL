@@ -1,0 +1,157 @@
+package clases;
+
+import arreglos.ArregloIngresos;
+
+public abstract class Tallas {
+	//atributos privados
+	private int talla0;
+	private int talla2;
+	private int talla4;
+	private int talla6;
+	private int talla8;
+	private int talla10;
+	private int talla12;
+	private int talla14;
+	private int talla16;
+	private int talla18;
+	private int talla20;
+	//constructor 
+	
+	public Tallas(int talla0, int talla2, int talla4, int talla6, int talla8, int talla10, int talla12, int talla14,  int talla16, int talla18, int talla20) {
+		
+		this.talla0=talla0;
+		this.talla2=talla2;
+		this.talla4=talla4;
+		this.talla6=talla6;
+		this.talla8=talla8;
+		this.talla10=talla10;
+		this.talla12=talla12;
+		this.talla14=talla14;
+		this.talla16=talla16;
+		this.talla18=talla18;
+		this.talla20=talla20;
+	}
+	public Tallas() {
+
+		this(0,0,0,0,0,0,0,0,0,0,0);
+	}
+	
+	//metodos set y get 
+	public int getTalla0() {
+		return talla0;
+	}
+	public void setTalla0(int talla0) {
+		this.talla0 = talla0;
+	}
+	public int getTalla2() {
+		return talla2;
+	}
+	public void setTalla2(int talla2) {
+		this.talla2 = talla2;
+	}
+	public int getTalla4() {
+		return talla4;
+	}
+	public void setTalla4(int talla4) {
+		this.talla4 = talla4;
+	}
+	public int getTalla6() {
+		return talla6;
+	}
+	public void setTalla6(int talla6) {
+		this.talla6 = talla6;
+	}
+	public int getTalla8() {
+		return talla8;
+	}
+	public void setTalla8(int talla8) {
+		this.talla8 = talla8;
+	}
+	public int getTalla10() {
+		return talla10;
+	}
+	public void setTalla10(int talla10) {
+		this.talla10 = talla10;
+	}
+	public int getTalla12() {
+		return talla12;
+	}
+	public void setTalla12(int talla12) {
+		this.talla12 = talla12;
+	}
+	public int getTalla14() {
+		return talla14;
+	}
+	public void setTalla14(int talla14) {
+		this.talla14 = talla14;
+	}
+	public int getTalla16() {
+		return talla16;
+	}
+	public void setTalla16(int talla16) {
+		this.talla16 = talla16;
+	}
+	public int getTalla18() {
+		return talla18;
+	}
+	public void setTalla18(int talla18) {
+		this.talla18 = talla18;
+	}
+	public int getTalla20() {
+		return talla20;
+	}
+	public void setTalla20(int talla20) {
+		this.talla20 = talla20;
+	}
+	
+	//metodos adicionales 
+	
+	
+	public int total() {
+		return talla0 + 
+				talla2 +
+				talla4 + 
+				talla6 +
+				talla8 + 
+				talla10 +
+				talla12 +
+				talla14 +
+				talla16 +
+				talla18 +
+				talla20;
+	}
+	
+	public String tallasCompletas() {
+		
+		int c=0;
+		Stringtexto = null;
+		int []t= {talla0,talla2,talla4,talla6,talla8,talla10,talla12,talla14,talla16,talla18,talla20,};
+		
+		for(int i=0;i<t.length;i++) {
+			if(t[i]>0) {
+				texto[i]= "Talla " + c + "	: " + t[i] +"\n" ;
+			}
+			c+=2;
+		}
+		
+
+		return texto;
+		
+		/*/return " talla 0	: " +talla0 + "" + "\n" +
+				" talla 2	: " +talla2 + "" + "\n" +
+				" talla 4	: " + talla4 + "" + "\n" +
+				" talla 6	: " + talla6 + "" + "\n" +
+				" talla 8	: " + talla8 + "" + "\n" +
+				" talla 10	: " +talla10 + "" + "\n" +
+				" talla 12	: " +talla12 + "" + "\n" +
+				" talla 14	: " +talla14 + ""  + "\n" +
+				" talla 16	: " + talla16 + "" + "\n" +
+				" talla 18	: " +talla18 + "" + "\n" +
+				" talla 20	: " +talla20 + "\n" +
+				"=========================" + "\n" +
+				" TOTAL	: " + total();*/
+	}
+	
+	public abstract String datosCompletos();
+	
+}

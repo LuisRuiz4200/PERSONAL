@@ -1,0 +1,590 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import arreglos.ArregloIngresoSalida;
+import arreglos.ArregloLineas;
+import arreglos.ArregloNroOp;
+import arreglos.ArregloOrdenes;
+import clases.IngresoSalida;
+import clases.Linea;
+import clases.OrdenP;
+import jtable_a_excel.ExportarExcel;
+
+@SuppressWarnings("serial")
+public class DlgIngresoConfeccion extends JInternalFrame implements ActionListener, MouseListener {
+
+	private Container contentPanel;
+	private JLabel lblNroOp;
+	private JLabel lblColor;
+	private JComboBox<Object> cboLinea;
+	private JLabel lblCliente;
+	private JTextField txtCliente;
+	private JLabel lblSubCorte;
+	private JTextField txtSubCorte;
+	private JLabel lblSupervisor;
+	private JTextField txtSupervisor;
+	private JLabel lblIngreso;
+	private JTextField txtIngreso;
+	private JLabel lblLinea;
+	private JButton btnAdicionar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JButton btnGrabar;
+	private JButton btnCancelar;
+	private DefaultTableModel modelo;
+	private JButton btnLineas;
+	private int posicion=-1;
+	private JButton btnOrdenes;
+	private JButton btnActualizar;
+	private JComboBox<Object> cboNroOp;
+	private JComboBox<Object> cboColor;
+	ArregloIngresoSalida aip=new ArregloIngresoSalida();
+	private JButton btnSalidas;
+	private JButton btnExcel;
+	
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		
+		DlgIngresoConfeccion dialog = new DlgIngresoConfeccion();
+		dialog.setVisible(true);
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DlgIngresoConfeccion() {
+		
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		
+		setTitle("ingreso piezas");
+		setBounds(10, 10, 787, 435);
+		
+		contentPanel = this.getContentPane();
+		getContentPane().setLayout(null);
+		
+		lblNroOp = new JLabel("Nro de OP : ");
+		lblNroOp.setBounds(10, 12, 78, 13);
+		contentPanel.add(lblNroOp);
+		
+		lblColor = new JLabel("Color : ");
+		lblColor.setBounds(204, 11, 78, 13);
+		contentPanel.add(lblColor);
+		
+		cboLinea = new JComboBox<Object>();
+		cboLinea.addActionListener(this);
+		cboLinea.setBounds(98, 35, 96, 21);
+		contentPanel.add(cboLinea, BorderLayout.NORTH);
+		
+		lblCliente = new JLabel("Cliente :");
+		lblCliente.setBounds(397, 10, 78, 13);
+		contentPanel.add(lblCliente);
+		
+		txtCliente = new JTextField();
+		txtCliente.setBounds(485, 7, 96, 19);
+		contentPanel.add(txtCliente);
+		txtCliente.setColumns(10);
+		
+		lblSubCorte = new JLabel("SubCorte : ");
+		lblSubCorte.setBounds(10, 75, 78, 13);
+		contentPanel.add(lblSubCorte);
+		
+		txtSubCorte = new JTextField();
+		txtSubCorte.setBounds(98, 72, 70, 19);
+		contentPanel.add(txtSubCorte);
+		txtSubCorte.setColumns(10);
+		
+		lblSupervisor = new JLabel("Supervisor :");
+		lblSupervisor.setBounds(204, 38, 78, 13);
+		contentPanel.add(lblSupervisor);
+		
+		txtSupervisor = new JTextField();
+		txtSupervisor.setBounds(292, 35, 96, 19);
+		contentPanel.add(txtSupervisor);
+		txtSupervisor.setColumns(10);
+		
+		lblIngreso = new JLabel("Ingreso :");
+		lblIngreso.setBounds(10, 100, 78, 13);
+		contentPanel.add(lblIngreso);
+		
+		txtIngreso = new JTextField();
+		txtIngreso.setBounds(98, 97, 70, 19);
+		contentPanel.add(txtIngreso);
+		txtIngreso.setColumns(10);
+		
+		lblLinea = new JLabel("Linea :");
+		lblLinea.setBounds(10, 40, 78, 13);
+		contentPanel.add(lblLinea);
+		
+		btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(this);
+		btnAdicionar.setBounds(657, 12, 106, 21);
+		contentPanel.add(btnAdicionar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(657, 36, 106, 21);
+		contentPanel.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(657, 60, 106, 21);
+		contentPanel.add(btnEliminar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 189, 753, 199);
+		contentPanel.add(scrollPane);
+		
+		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setFillsViewportHeight(true);
+		table.addMouseListener(this);
+		scrollPane.setViewportView(table);
+		
+		btnGrabar = new JButton("Grabar");
+		btnGrabar.addActionListener(this);
+		btnGrabar.setBounds(131, 158, 85, 21);
+		contentPanel.add(btnGrabar);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setBounds(245, 158, 85, 21);
+		contentPanel.add(btnCancelar);
+		
+		modelo= new DefaultTableModel();
+		modelo.addColumn("FECHA");
+		modelo.addColumn("SUPERVISOR");
+		modelo.addColumn("LINEA");
+		modelo.addColumn("NRO. OP");
+		modelo.addColumn("SUB. CORTE");
+		modelo.addColumn("COLOR");
+		modelo.addColumn("CLIENTE");
+		modelo.addColumn("INGRESO");
+		modelo.addColumn("SALIDA");
+		modelo.addColumn("DEVOLUCION");
+		modelo.addColumn("FALTANTE");
+		table.setModel(modelo);
+		
+		btnLineas = new JButton("Lineas");
+		btnLineas.addActionListener(this);
+		btnLineas.setBounds(351, 119, 85, 21);
+		contentPanel.add(btnLineas);
+		
+		btnOrdenes = new JButton("Ordenes");
+		btnOrdenes.addActionListener(this);
+		btnOrdenes.setBounds(446, 119, 85, 21);
+		contentPanel.add(btnOrdenes);
+		
+		btnActualizar = new JButton("\u25BA");
+		btnActualizar.addActionListener(this);
+		btnActualizar.setBounds(10, 158, 60, 21);
+		contentPanel.add(btnActualizar);
+		
+		cboNroOp = new JComboBox<Object>();
+		cboNroOp.addActionListener(this);
+		cboNroOp.setBounds(98, 8, 96, 21);
+		contentPanel.add(cboNroOp, BorderLayout.NORTH);
+		
+		cboColor = new JComboBox<Object>();
+		cboColor.addActionListener(this);
+		cboColor.setBounds(292, 7, 96, 21);
+		contentPanel.add(cboColor);
+		
+		btnSalidas = new JButton("Salidas");
+		btnSalidas.addActionListener(this);
+		btnSalidas.setBounds(541, 119, 106, 21);
+		contentPanel.add(btnSalidas);
+		
+		btnExcel = new JButton("Exp Excel");
+		btnExcel.addActionListener(this);
+		btnExcel.setBounds(657, 158, 106, 21);
+		contentPanel.add(btnExcel);
+		
+		arranque();
+		
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnExcel) {
+			actionPerformedBtnExcel(e);
+		}
+		if (e.getSource() == btnSalidas) {
+			actionPerformedBtnSalidas(e);
+		}
+		if (e.getSource() == cboColor) {
+			actionPerformedCboColor(e);
+		}
+		if (e.getSource() == cboNroOp) {
+			actionPerformedCboNroOp(e);
+		}
+		if (e.getSource() == btnOrdenes) {
+			actionPerformedBtnOrdenes(e);
+		}
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnActualizar(e);
+		}
+		if (e.getSource() == cboLinea) {
+			actionPerformedCboLinea(e);
+		}
+		if (e.getSource() == btnLineas) {
+			actionPerformedBtnLineas(e);
+		}
+		if (e.getSource() == btnCancelar) {
+			actionPerformedBtnCancelar(e);
+		}
+		if (e.getSource() == btnGrabar) {
+			actionPerformedBtnGrabar(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnModificar) {
+			actionPerformedBtnModificar(e);
+		}
+		if (e.getSource() == btnAdicionar) {
+			actionPerformedBtnAdicionar(e);
+		}
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		consultar();
+	}
+	
+	protected void actionPerformedBtnExcel(ActionEvent e) {
+		ExportarExcel obj;
+		
+		try {
+			obj= new ExportarExcel();
+			obj.exportarExcel(table);
+		}catch (Exception ex) {
+			mensaje("algo salio mal" + ex) ;
+		}
+	}
+	
+	protected void actionPerformedBtnSalidas(ActionEvent e) {
+		DlgSalidaConfeccion dlgSalida= new DlgSalidaConfeccion();
+		dlgSalida.setVisible(true);
+		FrmPrincipal.escritorio.add(dlgSalida);
+		dlgSalida.toFront();
+	}
+	protected void actionPerformedBtnActualizar(ActionEvent e) {
+		DlgIngresoConfeccion dlgIngresoConfeccion = new DlgIngresoConfeccion();
+		dlgIngresoConfeccion.setVisible(true);
+		FrmPrincipal.escritorio.add(dlgIngresoConfeccion);
+		dlgIngresoConfeccion.toFront();
+		this.dispose();
+	}
+	protected void actionPerformedBtnOrdenes(ActionEvent e) {
+		DlgOrdenes dlgOrdenes=new DlgOrdenes();
+		dlgOrdenes.setVisible(true);
+		FrmPrincipal.escritorio.add(dlgOrdenes);
+		dlgOrdenes.toFront();
+	}
+	
+	protected void actionPerformedBtnLineas(ActionEvent e) {
+		DlgLineas dlgLineas=new DlgLineas();
+		dlgLineas.setVisible(true);
+		FrmPrincipal.escritorio.add(dlgLineas);
+		dlgLineas.toFront();
+	}
+	
+	protected void actionPerformedCboNroOp(ActionEvent e) {
+		
+		ArregloOrdenes ao=new ArregloOrdenes();
+
+		OrdenP op=ao.buscarNroOp(Integer.valueOf(leerCboNroOp()));
+		
+		txtCliente.setText(op.getCliente());
+		
+		llenarCboColor();
+		
+	}
+	protected void actionPerformedCboColor(ActionEvent e) {
+		
+	}
+	
+	protected void actionPerformedCboLinea(ActionEvent e) {
+		
+		ArregloLineas al= new ArregloLineas();
+		Linea ln=al.buscar(leerCboLinea());
+		
+		txtSupervisor.setText(ln.getSupervisor());
+	}
+	protected void actionPerformedBtnAdicionar(ActionEvent e) {
+		botonesActivos(true);
+		posicion=0;
+	}
+	protected void actionPerformedBtnModificar(ActionEvent e) {
+		botonesActivos(true);
+		posicion=1;
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+
+		String linea=leerCboLinea();
+		int nroOp=leerCboNroOp();
+		int subCorte=leerSubCorte();
+		
+		IngresoSalida ip=aip.buscar(linea,nroOp, subCorte);
+		
+		try {
+			if(subCorte!=0) {
+				if(ip!=null ) {
+					if(restringido("Escriba la contraseña :").equals("luis")) {
+						aip.eliminar(ip);
+					}
+				}else {
+					mensaje("registro no existe");
+				}
+			}
+		}catch (Exception el) {
+			mensaje ("Operacion cancelada");
+		}
+		
+		
+		
+		listar();
+		aip.grabarIngresoPiezas();
+	}
+	protected void actionPerformedBtnGrabar(ActionEvent e) {
+		String supervisor=leerSupervisor();
+		String linea=leerCboLinea();
+		int nroOp=leerCboNroOp();
+		String color=leerCboColor();
+		String cliente=leerCliente();
+		int subCorte=leerSubCorte();
+		int ingreso=leerIngreso();
+		
+		IngresoSalida ip=aip.buscar(linea,nroOp, subCorte);
+		
+		if(posicion==0) {
+			if(subCorte!=0) {
+				if(ip==null) {
+					IngresoSalida x=new IngresoSalida(aip.correlativo(),fechaActual(),supervisor,linea,nroOp,subCorte,color,cliente,ingreso, 0, 0);
+					aip.adicionar(x);
+				}else {
+					mensaje("op y sub-corte registrados !");
+				}
+			}
+			
+		}
+		if(posicion==1) {
+			if(ip!=null) {
+				ip.setFecha(fechaActual());
+				ip.setSupervisor(supervisor);
+				ip.setLinea(linea);
+				ip.setNroOp(nroOp);
+				ip.setSubCorte(subCorte);
+				ip.setColor(color);
+				ip.setCliente(cliente);
+				ip.setIngreso(ingreso);
+			}else {
+				mensaje("op y cub-corte no existen !");
+			}
+		}
+		
+		aip.ordenar();
+		aip.grabarIngresoPiezas();
+		botonesActivos(false);
+		listar();
+	}
+	protected void actionPerformedBtnCancelar(ActionEvent e) {
+		botonesActivos(false);
+	}
+	
+	//metodos con retorno 
+	
+	
+	
+	public String leerSupervisor() {
+		return txtSupervisor.getText();
+	}
+	
+	public String leerCliente() {
+		return txtCliente.getText();
+	}
+	public int leerSubCorte() {
+		if(txtSubCorte.getText().equals("")) {
+			mensaje("Ingresa el sub-corte");
+		}else {
+			return Integer.parseInt(txtSubCorte.getText());
+		}
+		return 0;
+		
+	}
+	public int leerIngreso() {
+		if(txtIngreso.getText().equals("")) {
+			return 0;
+		}else {
+			return Integer.parseInt(txtIngreso.getText());
+		}
+	}
+	//por motivo de posible error se coloca "" en vez de toString()
+	public String leerCboLinea() {
+		return cboLinea.getSelectedItem() + "";
+	}
+	public int leerCboNroOp() {
+		return (int) cboNroOp.getSelectedItem();
+	}
+	public String leerCboColor() {
+		return cboColor.getSelectedItem() + "";
+	}
+	public String fechaActual() {
+		return new SimpleDateFormat("dd/mm/yyyy").format(new Date());
+	}
+	public String restringido(String s) {
+		return JOptionPane.showInputDialog(this,s);
+	}
+	//metodos void 
+	public void mensaje(String s) {
+		JOptionPane.showMessageDialog(this, s,"Alerta",1);
+	}
+	
+	public void llenarCboLineas() {
+
+		ArregloLineas al=new ArregloLineas();
+		
+		cboLinea.removeAllItems();
+		
+		for(int i=0;i<al.tamaño();i++) {
+			Linea l=al.obtener(i);
+			cboLinea.addItem(l.getLinea());
+		}
+	}
+	
+	public void llenarCboNroOp() {
+		
+		ArregloNroOp op=new ArregloNroOp();
+		
+		cboNroOp.removeAllItems();
+		
+		for(int i=0;i<op.tamaño();i++) {
+			cboNroOp.addItem(op.obtener(i).getNroOp());
+		}
+
+	}
+	public void llenarCboColor() {
+		
+		ArregloOrdenes ao=new ArregloOrdenes();
+		
+		int nroOp=Integer.valueOf(leerCboNroOp());
+		
+		cboColor.removeAllItems();
+		
+		for(int i=0;i<ao.tamaño();i++) {
+			
+			if(ao.obtener(i).getNroOp()==nroOp) {
+				cboColor.addItem(ao.obtener(i).getColor());
+			}
+		}
+	}
+	public void quitarRepetidos() {
+		for(int x=0;x<cboNroOp.getItemCount();x++) {
+			
+			for(int y=0;y<cboNroOp.getItemCount();y++) {
+				if(x!=y) {
+					if(cboNroOp.getItemAt(x)==cboNroOp.getItemAt(y)) {
+						cboNroOp.removeItemAt(y);
+					}
+				}
+			}
+		}
+	}
+	
+	public void arranque() {
+		cuadrosActivos(false);
+		botonesActivos(false);
+		llenarCboNroOp();
+		llenarCboLineas();
+		listar();
+	}
+	public void listar() {
+		modelo.setRowCount(0);
+		for(int i=0;i<aip.tamaño();i++) {
+			IngresoSalida ip=aip.obtener(i);
+			Object[] x= {
+					ip.getFecha(),
+					ip.getSupervisor(),
+					ip.getLinea(),
+					ip.getNroOp(),
+					ip.getSubCorte(),
+					ip.getColor(),
+					ip.getCliente(),
+					ip.getIngreso(),
+					ip.getSalida(),
+					ip.getDevolucion(),
+					ip.faltante()
+			};
+			modelo.addRow(x);
+		}
+	}
+	public void cuadrosActivos(boolean x) {
+		txtSupervisor.setEditable(false);
+		txtCliente.setEditable(false);
+	}
+	public void consultar() {
+		int indice=table.getSelectedRow();
+		IngresoSalida ip=aip.obtener(indice);
+		
+		txtSupervisor.setText(ip.getSupervisor());
+		cboLinea.setSelectedItem(ip.getLinea());
+		cboNroOp.setSelectedItem(ip.getNroOp());
+		cboColor.setSelectedItem(ip.getColor());
+		txtSubCorte.setText(ip.getSubCorte()+"");
+		txtIngreso.setText(ip.getIngreso()+"");
+		
+		
+	}
+	public void correlativo() {
+		for(int i=0;i<aip.tamaño();i++) {
+			aip.obtener(i).setITem(aip.correlativo());
+		}
+	}
+	public void botonesActivos(boolean x) {
+		btnAdicionar.setEnabled(!x);
+		btnModificar.setEnabled(!x);
+		btnEliminar.setEnabled(!x);
+		btnGrabar.setEnabled(x);
+		btnCancelar.setEnabled(x);
+	}
+	
+	
+	
+}

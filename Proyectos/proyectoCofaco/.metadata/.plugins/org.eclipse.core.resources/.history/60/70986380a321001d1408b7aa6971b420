@@ -1,0 +1,81 @@
+package clases;
+
+public class  Ingresos extends Tallas{
+	///atributos privaddos
+	protected String fecha;
+	protected  int nroOp;
+	protected String color;
+	protected int nroGuia;
+	protected String motivo;
+	//constructor 
+	public Ingresos () {
+		
+	}
+	public Ingresos(String fecha,int nroGuia, int nroOp, String color, String motivo) {
+		this.fecha=fecha;
+		this.nroGuia=nroGuia;
+		this.nroOp=nroOp;
+		this.color=color;
+		this.motivo=motivo;
+	}
+	public Ingresos(String fecha,int nroGuia, int nroOp, String color, String motivo,int talla0, int talla2, int talla4, int talla6, int talla8, int talla10, int talla12, int talla14,  int talla16, int talla18, int talla20) {
+		super(talla0,talla2,talla4,talla6,talla8,talla10,talla12,talla14,talla16,talla18,talla20);
+		this.fecha=fecha;
+		this.nroGuia=nroGuia;
+		this.nroOp=nroOp;
+		this.color=color;
+		this.motivo=motivo;
+		
+	}
+	//metodos set y get 
+	public int getOrdenP() {
+		return nroOp;
+	}
+	public void setOrdenP(int nroOp) {
+		this.nroOp = nroOp;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getNroGuia() {
+		return nroGuia;
+	}
+	public void setNroGuia(int nroGuia) {
+		this.nroGuia = nroGuia;
+	}
+	public String getMotivo() {
+		return motivo;
+	}
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha= fecha;
+	}
+	//metodos adicionales
+	public String tallaCompletas() {
+		return  "Nro guia : " + getNroGuia() + "\n" +
+				"Nro Op : " + getOrdenP() + "\n" +
+				"Color : " + getColor() + "\n" +
+				"Motivo : " + getMotivo() + "\n" +
+				"talla 0: " +talla0 + "" + "\n" +
+				"talla 2: " +talla2 + "" + "\n" +
+				"talla 4: " + talla4 + "" + "\n" +
+				"talla 6: " + talla6 + "" + "\n" +
+				"talla 8: " + talla8 + "" + "\n" +
+				"talla 10: " +talla10 + "" + "\n" +
+				"talla 12: " +talla12 + "" + "\n" +
+				"talla 14: " +talla14 + ""  + "\n" +
+				"talla 16: " + talla16 + "" + "\n" +
+				"talla 18: " +talla18 + "" + "\n" +
+				"talla 20: " +talla20 + "\n" +
+				"total: " + total();
+	}
+	
+}

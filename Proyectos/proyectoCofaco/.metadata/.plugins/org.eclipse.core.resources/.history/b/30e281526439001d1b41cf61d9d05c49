@@ -1,0 +1,263 @@
+package gui;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import javax.swing.JDesktopPane;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
+@SuppressWarnings("serial")
+public class FrmPrincipal extends JFrame implements ActionListener,WindowListener {
+
+	private JPanel contentPane;
+	private JMenuBar menuBar;
+	private JMenu mnArchivo;
+	private JMenuItem mniSalir;
+	private JMenu mnTablas;
+	private JMenu mnRegistros;
+	private JMenuItem mniIngresoConfeccion;
+	private JMenuItem mniSalidaConfeccion;
+	private JMenuItem mniDefectos;
+	private JMenuItem mniColaboradores;
+	private JMenuItem mniOrdenes;
+	private JMenuItem mniLineas;
+	private JMenuItem mniCliente;
+	private JMenuItem mniConfeccion;
+	public static JDesktopPane escritorio;
+	private JLabel lblImgFondo;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmPrincipal frame = new FrmPrincipal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmPrincipal() {
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 985, 565);
+		setTitle("FrmPrincipal");
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 128, 0));
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		escritorio = new JDesktopPane();
+		escritorio.setBackground(new Color(0, 128, 128));
+		contentPane.add(escritorio, BorderLayout.CENTER);
+		
+		lblImgFondo = new JLabel("");
+		//lblImgFondo.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/imagenes/fondos/WhatsApp Image 2022-09-04 at 10.26.52 PM (1).jpeg")));
+		lblImgFondo.setBounds(0, 0, 975, 511);
+		escritorio.add(lblImgFondo);
+		
+		menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(240, 240, 240));
+		setJMenuBar(menuBar);
+		
+		mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
+		
+		mniSalir = new JMenuItem("Salir");
+		mniSalir.addActionListener(this);
+		mnArchivo.add(mniSalir);
+		
+		mnTablas = new JMenu("Tablas");
+		menuBar.add(mnTablas);
+		
+		mniColaboradores= new JMenuItem ("Colaboradores");
+		mniColaboradores.addActionListener(this);
+		mnTablas.add(mniColaboradores);
+		
+		mniOrdenes= new JMenuItem("Ordenes");
+		mniOrdenes.addActionListener(this);
+		mnTablas.add(mniOrdenes);
+		
+		mniLineas= new JMenuItem("Lineas");
+		mniLineas.addActionListener(this);
+		mnTablas.add(mniLineas);
+		
+		
+		mnRegistros = new JMenu("Registros ");
+		menuBar.add(mnRegistros);
+		
+		
+		mniIngresoConfeccion= new JMenuItem("Ingreso Confeccion");
+		mniIngresoConfeccion.addActionListener(this);
+		mnRegistros.add(mniIngresoConfeccion);
+		
+		mniSalidaConfeccion= new JMenuItem("Salida Confeccion");
+		mniSalidaConfeccion.addActionListener(this);
+		mnRegistros.add(mniSalidaConfeccion);
+		
+		mniDefectos = new JMenuItem("Defectos");
+		mniDefectos.addActionListener(this);
+		mnRegistros.add(mniDefectos);
+		
+		mniCliente = new JMenuItem("Clientes");
+		mniCliente.addActionListener(this);
+		mnTablas.add(mniCliente);
+		
+		mniConfeccion= new JMenuItem("Citis de Confeccion");
+		mniConfeccion.addActionListener(this);
+		mnTablas.add(mniConfeccion);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==mniOrdenes) {
+			actionPerformedMniOrdenes(e);
+		}
+		if (e.getSource()==mniLineas) {
+			actionPerformedMniLineas(e);
+		}
+		if (e.getSource()==mniColaboradores) {
+			actionPerformedMniColaboradores(e);
+			
+		}
+		if (e.getSource()==mniIngresoConfeccion) {
+			actionPerformedMniIngresoConfeccion(e);
+		}
+		if (e.getSource()==mniSalidaConfeccion) {
+			actionPerformedMniSalidaConfeccion(e);
+		}
+		if (e.getSource()==mniDefectos) {
+			actionPerformedMniDefectos(e);
+		}
+		if(e.getSource()==mniCliente) {
+			actionPerformedMniCliente(e);
+		}
+		if(e.getSource()==mniConfeccion) 
+		{
+			actionPerformedMniConfeccion(e);
+		}
+	}
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void actionPerformedMniConfeccion(ActionEvent e) {
+		DlgConfecciones dlgConfeccion = new DlgConfecciones();
+		dlgConfeccion.setVisible(true);
+		escritorio.add(dlgConfeccion);
+		dlgConfeccion.toFront();
+	}
+	
+	protected void actionPerformedMniCliente(ActionEvent e) {
+		DlgCliente dlgCliente= new DlgCliente();
+		dlgCliente.setVisible(true);
+		escritorio.add(dlgCliente);
+		dlgCliente.toFront();
+	}
+	
+	protected void actionPerformedMniOrdenes(ActionEvent e) {
+		DlgOrdenes dlgOrdenes = new DlgOrdenes();
+		dlgOrdenes.setVisible(true);
+		//dlgOrdenes.setLocationRelativeTo(this);
+		escritorio.add(dlgOrdenes);
+		dlgOrdenes.toFront();
+	}
+	protected void actionPerformedMniColaboradores(ActionEvent e) {
+		DlgColaborador dlgColaborador = new DlgColaborador();
+		dlgColaborador.setVisible(true);
+		//dlgColaborador.setLocationRelativeTo(this);
+		escritorio.add(dlgColaborador);
+		dlgColaborador.toFront();
+	}
+	protected void actionPerformedMniLineas(ActionEvent e) {
+		DlgLineas dlgLineas= new DlgLineas();
+		dlgLineas.setVisible(true);
+		//dlgLineas.setLocationRelativeTo(this);
+		escritorio.add(dlgLineas);
+		dlgLineas.toFront();
+		
+	}
+	protected void actionPerformedMniIngresoConfeccion(ActionEvent e) {
+		DlgIngresoConfeccion dlgIngresoConfeccion=new DlgIngresoConfeccion();
+		dlgIngresoConfeccion.setVisible(true);		
+		//dlgIngresoConfeccion.setLocationRelativeTo(this);
+		escritorio.add(dlgIngresoConfeccion);
+		dlgIngresoConfeccion.toFront();
+	}
+	protected void actionPerformedMniSalidaConfeccion(ActionEvent e) {
+		DlgSalidaConfeccion dlgSalidaConfeccion= new DlgSalidaConfeccion();
+		dlgSalidaConfeccion.setVisible(true);
+		//dlgSalidaConfeccion.setLocationRelativeTo(this);
+		escritorio.add(dlgSalidaConfeccion);
+		dlgSalidaConfeccion.toFront();
+	}
+	protected void actionPerformedMniDefectos(ActionEvent e){
+		
+		DlgIngresoDefectos dlgIngresoDefectos= new DlgIngresoDefectos();
+		dlgIngresoDefectos.setVisible(true);
+		//dlgIngresoDefectos.setLocationRelativeTo(this);
+		escritorio.add(dlgIngresoDefectos);
+		dlgIngresoDefectos.toFront();
+		
+	}
+}

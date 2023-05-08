@@ -1,0 +1,12 @@
+35572;Bone;NancyRouse
+35620;black;Lululemon
+35620;grey;Lululemon
+35620;green;Lululemon
+35620;especial;Lululemon
+35669;RedMerlot;AllBirds
+35669;DarkRed;AllBirds
+35669;Black;AllBirds
+35669;Blackl;AllBirds
+35669;RedMerlotjn;AllBirds
+35776;HTR Grey;Mitre
+35820;stripleWhite;Stance

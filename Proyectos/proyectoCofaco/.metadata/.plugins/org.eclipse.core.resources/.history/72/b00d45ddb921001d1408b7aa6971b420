@@ -1,0 +1,125 @@
+package arreglos;
+
+import java.util.ArrayList;
+import clases.Ingresos;
+import clases.Tallas;
+
+import java.io.*;
+
+public class ArregloIngresos {
+	//atributo privado 
+	ArrayList <Ingresos> ingresos;
+	//constructor 
+	public ArregloIngresos() {
+		ingresos= new ArrayList<Ingresos> ();
+		cargarIngresos();
+	}
+	//metodos de mantenimientos 
+	public int tamaño() {
+		return ingresos.size();
+	}
+	public void adicionar(Ingresos i) {
+		ingresos.add(i);
+	}
+	public void eliminar (Ingresos i) {
+		ingresos.remove(i);
+	}
+	public Ingresos obtener(int i) {
+		return ingresos.get(i);
+	}
+	public Ingresos buscarNroGuia(int nroGuia) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getNroGuia()==nroGuia) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	public Ingresos buscarNroOp(int nroOp) {
+		for(int i=0;i<tamaño();i++) {
+			if(obtener(i).getOrdenP()==nroOp) {
+				return obtener(i);
+			}
+		}
+		return null;
+	}
+	//metodos de grabar y cargar
+	public void grabarIngresos() {
+		PrintWriter pw;
+		String fila;
+		Ingresos in;
+		
+		
+		try {
+			
+			pw=new PrintWriter(new FileWriter("ingresos.txt"));
+			
+			for(int i=0;i<tamaño();i++) {
+				in=obtener(i);
+				fila=  in.getFecha() + ";"+
+						in.getConfeccion() + ";" +
+						in.getNroGuia() + ";" +
+						in.getOrdenP() + ";" +
+						in.getColor() + ";" +
+						in.getMotivo() +";"+
+						in.getTalla0() +";"+
+						in.getTalla2() +";"+
+						in.getTalla4() +";"+
+						in.getTalla6() +";"+
+						in.getTalla8() +";"+
+						in.getTalla10() +";"+
+						in.getTalla12() +";"+
+						in.getTalla14() +";"+
+						in.getTalla16() +";"+
+						in.getTalla18() +";"+
+						in.getTalla20();
+				pw.println(fila);
+			}
+			pw.close();
+			
+		}catch(Exception e) {
+			
+		}
+		
+	}
+	public void cargarIngresos() {
+		BufferedReader br;
+		String []s;
+		String fila;
+		int nroGuia, nroOp;
+		String color,confeccion, motivo,fecha;
+		int talla0,talla2,talla4,talla6,talla8,talla10,talla12,talla14,talla16,talla18,talla20;
+		try {
+			br=new BufferedReader(new FileReader("ingresos.txt"));
+			while((fila=br.readLine())!=null) {
+				s=fila.split(";");
+				fecha=s[0];
+				confeccion= s[1];
+				nroGuia= Integer.parseInt(s[2]);
+				nroOp=Integer.parseInt(s[3]);
+				color=s[4];
+				motivo=s[5];
+				talla0=Integer.parseInt(s[6]);
+				talla2=Integer.parseInt(s[7]);
+				talla4=Integer.parseInt(s[8]);
+				talla6=Integer.parseInt(s[9]);
+				talla8=Integer.parseInt(s[10]);
+				talla10=Integer.parseInt(s[12]);
+				talla12=Integer.parseInt(s[13]);
+				talla14=Integer.parseInt(s[14]);
+				talla16=Integer.parseInt(s[15]);
+				talla18=Integer.parseInt(s[16]);
+				talla20=Integer.parseInt(s[17]);
+				
+				
+				adicionar(new Ingresos(fecha,confeccion, nroGuia,nroOp,color,motivo,talla0,talla2,talla4,talla6,talla8,talla10,talla12,talla14,talla16,talla18,talla20));
+				
+			}
+			br.close();
+		}
+		catch (Exception e){
+			
+		}
+	}
+	
+}

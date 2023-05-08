@@ -1,0 +1,314 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import arreglos.ArregloOrdenes;
+import clases.OrdenP;
+
+
+@SuppressWarnings("serial")
+public class DlgOrdenes extends JDialog implements ActionListener, MouseListener {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtNroOp;
+	private JTextField txtColor;
+	private JTextField txtCliente;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JButton btnAdicionar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JButton btnGrabar;
+	private JButton btnCancelar;
+	private DefaultTableModel modelo;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			DlgOrdenes dialog = new DlgOrdenes();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public DlgOrdenes() {
+		setTitle("Ordene Produccion");
+		setBounds(100, 100, 584, 380);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			JLabel lblNroOp = new JLabel("Nro Op:");
+			lblNroOp.setBounds(10, 22, 45, 13);
+			contentPanel.add(lblNroOp);
+		}
+		{
+			JLabel lblColor = new JLabel("Color:");
+			lblColor.setBounds(10, 45, 45, 13);
+			contentPanel.add(lblColor);
+		}
+		{
+			JLabel lblCliente = new JLabel("Cliente:");
+			lblCliente.setBounds(10, 75, 45, 13);
+			contentPanel.add(lblCliente);
+		}
+		{
+			txtNroOp = new JTextField();
+			txtNroOp.setBounds(92, 19, 96, 19);
+			contentPanel.add(txtNroOp);
+			txtNroOp.setColumns(10);
+		}
+		{
+			txtColor = new JTextField();
+			txtColor.setBounds(92, 42, 96, 19);
+			contentPanel.add(txtColor);
+			txtColor.setColumns(10);
+		}
+		{
+			txtCliente = new JTextField();
+			txtCliente.setBounds(92, 72, 96, 19);
+			contentPanel.add(txtCliente);
+			txtCliente.setColumns(10);
+		}
+		{
+			btnAdicionar = new JButton("Adicionar");
+			btnAdicionar.addActionListener(this);
+			btnAdicionar.setBounds(423, 10, 121, 21);
+			contentPanel.add(btnAdicionar);
+		}
+		{
+			btnModificar = new JButton("Modificar");
+			btnModificar.addActionListener(this);
+			btnModificar.setBounds(423, 41, 121, 21);
+			contentPanel.add(btnModificar);
+		}
+		{
+			btnEliminar = new JButton("Eliminar");
+			btnEliminar.addActionListener(this);
+			btnEliminar.setBounds(423, 71, 121, 21);
+			contentPanel.add(btnEliminar);
+		}
+		{
+			btnGrabar = new JButton("Grabar");
+			btnGrabar.addActionListener(this);
+			btnGrabar.setBounds(224, 104, 85, 21);
+			contentPanel.add(btnGrabar);
+		}
+		{
+			btnCancelar = new JButton("Cancelar");
+			btnCancelar.addActionListener(this);
+			btnCancelar.setBounds(319, 104, 85, 21);
+			contentPanel.add(btnCancelar);
+		}
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 154, 550, 179);
+		contentPanel.add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(this);
+		scrollPane.setViewportView(table);
+		
+		modelo= new DefaultTableModel();
+		modelo.addColumn("Nro Op");
+		modelo.addColumn("Color");
+		modelo.addColumn("Cliente");
+		table.setModel(modelo);
+		
+		//arranques
+		botonesActivos(false);
+		listar();
+	}
+	
+	//variable global 
+	
+	ArregloOrdenes ao=new ArregloOrdenes();
+	int posicion=-1;
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancelar) {
+			actionPerformedBtnCancelar(e);
+		}
+		if (e.getSource() == btnGrabar) {
+			actionPerformedBtnGrabar(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnModificar) {
+			actionPerformedBtnModificar(e);
+		}
+		if (e.getSource() == btnAdicionar) {
+			actionPerformedBtnAdicionar(e);
+		}
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		consultar();
+	}
+	
+	
+	protected void actionPerformedBtnAdicionar(ActionEvent e) {
+		posicion=0;
+		botonesActivos(true);
+	}
+	protected void actionPerformedBtnModificar(ActionEvent e) {
+		posicion=1;
+		botonesActivos(true);
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		
+		int nroOp=leerNroOp();
+		OrdenP x=ao.buscarNroOP(nroOp);
+		
+		
+		if(restringido("contraseña").equals("luis")) {
+			if(x!=null) {
+				ao.eliminar(x);
+			}else {
+				mensaje ("op no encontrada!");
+			}
+		}else {
+			mensaje("contraseña incorrecta");
+		}
+
+		listar();
+		ao.grabarOrdenes();
+		
+		
+	}
+	@SuppressWarnings("unused")
+	protected void actionPerformedBtnGrabar(ActionEvent e) {
+		
+		
+		try {
+			
+			int nroOp=leerNroOp();
+
+			String color=leerColor();
+			String cliente=leerCliente();
+			
+			
+			OrdenP x=ao.buscarNroOP(nroOp);
+			OrdenP y=ao.buscarColor(color);
+			
+			if(posicion==0) {
+				
+				if(x!=null) {
+					for(int i=0;i<ao.tamaño();i++) {
+						
+					}
+				}
+	        	OrdenP o=new OrdenP(nroOp,color,cliente);
+				ao.adicionar(o);
+				
+			} 
+			
+			if(posicion==1) {
+				if(x!=null) {
+					x.setNroOp(nroOp);
+					x.setColor(color);
+					x.setCliente(cliente);
+				}else {
+					mensaje ("op no encontrado");
+				}
+			}
+		}
+		catch (Exception el) {
+			mensaje("Valores invalidos!");
+		}
+		
+		
+		listar();
+		ao.grabarOrdenes();
+		botonesActivos(false);
+	}
+	protected void actionPerformedBtnCancelar(ActionEvent e) {
+		botonesActivos(false);
+	}
+	
+	//metodos get
+	public int leerNroOp() {
+		return Integer.parseInt(txtNroOp.getText());
+	}
+	public String leerColor() {
+		return txtColor.getText();
+	}
+	public String leerCliente() {
+		return txtCliente.getText();
+	}
+	public String restringido(String s) {
+		return JOptionPane.showInputDialog(this,s);
+	}
+	
+	//metodos void 
+	public void mensaje(String s) {
+		JOptionPane.showMessageDialog(this,s);
+	}
+	
+	public void listar() {
+		
+		OrdenP o;
+		
+		modelo.setRowCount(0);
+		for(int i=0;i<ao.tamaño();i++) {
+			o=ao.obtener(i);
+			Object [] fila= {
+				o.getNroOp(),
+				o.getColor(),
+				o.getCliente()
+			};
+			modelo.addRow(fila);
+		}
+	}
+	public void consultar() {
+		OrdenP o=ao.obtener(table.getSelectedRow());
+		
+		txtNroOp.setText(""+o.getNroOp());
+		txtColor.setText(o.getColor());
+		txtCliente.setText(o.getCliente());
+	}
+	public void botonesActivos(boolean b) {
+		btnGrabar.setEnabled(b);
+		btnCancelar.setEnabled(b);
+		btnAdicionar.setEnabled(!b);
+		btnModificar.setEnabled(!b);
+		btnEliminar.setEnabled(!b);
+	}
+
+}

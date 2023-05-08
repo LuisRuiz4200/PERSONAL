@@ -1,0 +1,9 @@
+INDEX VERSION 1.131+C:\Users\lr270\Desktop\ECLIPSES\proyectoCofaco\.metadata\.plugins\org.eclipse.jdt.core
+3573682984.index
+2469242682.index
+1947661776.index
+591889177.index
+3103202385.index
+1399578453.index
+1865797976.index
+2589105401.index

@@ -1,0 +1,12 @@
+11 B;Nelva
+12 B;Junior
+15 B;Manuela
+18 B;Keta
+19 B;Keta
+2 B;Junior
+3 B;Junior
+4 B;Carmen
+5 B;Carmen
+6 B;Nelva
+8 B;Nelva
+9 B;Manuela

@@ -1,0 +1,55 @@
+package clases;
+
+public abstract class  Ingresos {
+	///atributos privaddos
+	protected String fecha;
+	protected  int nroOp;
+	protected String color;
+	protected int nroGuia;
+	protected String motivo;
+	//constructor 
+	public Ingresos () {
+		
+	}
+	public Ingresos(String fecha,int nroGuia, int nroOp, String color, String motivo) {
+		this.fecha=fecha;
+		this.nroGuia=nroGuia;
+		this.nroOp=nroOp;
+		this.color=color;
+		this.motivo=motivo;
+	}
+	//metodos set y get 
+	public int getOrdenP() {
+		return nroOp;
+	}
+	public void setOrdenP(int nroOp) {
+		this.nroOp = nroOp;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getNroGuia() {
+		return nroGuia;
+	}
+	public void setNroGuia(int nroGuia) {
+		this.nroGuia = nroGuia;
+	}
+	public String getMotivo() {
+		return motivo;
+	}
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha= fecha;
+	}
+	//metodos adicionales
+	public abstract String tallaCompletas();
+	
+}
