@@ -1,0 +1,22 @@
+package vistas;
+
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class FrmColorOP extends JFrame{
+	
+	public static void main (String[] args) {
+		FrmColorOP ventana = new FrmColorOP();
+		ventana.setVisible(true);
+	}
+	
+	public FrmColorOP() {
+		
+		this.setTitle("PLANTILLA");
+		this.setBounds(0,0,429,326);
+		this.setLocationRelativeTo(this);
+		this.getContentPane().setLayout(null);
+	}
+	
+	
+}

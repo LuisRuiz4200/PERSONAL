@@ -1,0 +1,344 @@
+package vistas;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import arreglos.*;
+import clases.*;
+import java.awt.Window.Type;
+import javax.swing.border.TitledBorder;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
+@SuppressWarnings("serial")
+public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListener{
+	private JPanel panleOrdenProduccion;
+	private JLabel lblNroVale;
+	private JTextField txtNroVale;
+	private JPanel PanelAvio;
+	private JTextField txtNroOP;
+	private JLabel lblNroOP;
+	private JTextField textField_2;
+	private JLabel lblClienteOP;
+	private JTextField txtEstiloOP;
+	private JLabel lblEstiloOP;
+	private JTextField txtColorOP;
+	private JLabel lblColorOP;
+	private JButton btnBuscarOP;
+	private JTextField txtFechaAvio;
+	private JLabel lblFechaAvio;
+	private JTextField txtCodAvio;
+	private JLabel lblCodAvio;
+	private JButton btnBuscarAvio;
+	private JTextField txtDesAvio;
+	private JLabel lblDesAvio;
+	private JTextField txtMedidaAvio;
+	private JLabel lblMedidaAvio;
+	private JTextField txtCantAvio;
+	private JLabel lblCantAvio;
+	private JTable table;
+	private JScrollPane scrollPane;
+	private JPanel panelBtnMantener;
+	private JButton btnAgregar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	
+	private DefaultTableModel modelo;
+	private ArregloIngresoAvio arrIngresoAvio;
+	
+	
+	public static void main (String[] args) {
+		FrmIngresoAvio ventana = new FrmIngresoAvio();
+		ventana.setVisible(true);
+	}
+	
+	public FrmIngresoAvio() {
+		
+		this.setTitle("INGRESO AVIOS");
+		this.setBounds(0,0,747,540);
+		this.setLocationRelativeTo(this);
+		this.getContentPane().setLayout(null);
+		
+		panleOrdenProduccion = new JPanel();
+		panleOrdenProduccion.setBorder(new TitledBorder(null, "Orden de Produccion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panleOrdenProduccion.setBounds(238, 11, 306, 127);
+		getContentPane().add(panleOrdenProduccion);
+		panleOrdenProduccion.setLayout(null);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(10, 45, 86, 20);
+		panleOrdenProduccion.add(textField_2);
+		
+		lblClienteOP = new JLabel("Cliente");
+		lblClienteOP.setBounds(10, 25, 46, 14);
+		panleOrdenProduccion.add(lblClienteOP);
+		
+		txtEstiloOP = new JTextField();
+		txtEstiloOP.setColumns(10);
+		txtEstiloOP.setBounds(124, 45, 163, 20);
+		panleOrdenProduccion.add(txtEstiloOP);
+		
+		lblEstiloOP = new JLabel("Estilo");
+		lblEstiloOP.setBounds(124, 25, 46, 14);
+		panleOrdenProduccion.add(lblEstiloOP);
+		
+		txtColorOP = new JTextField();
+		txtColorOP.setColumns(10);
+		txtColorOP.setBounds(10, 96, 116, 20);
+		panleOrdenProduccion.add(txtColorOP);
+		
+		lblColorOP = new JLabel("Color");
+		lblColorOP.setBounds(10, 76, 46, 14);
+		panleOrdenProduccion.add(lblColorOP);
+		
+		lblNroVale = new JLabel("Nro  Vale");
+		lblNroVale.setBounds(572, 11, 86, 14);
+		getContentPane().add(lblNroVale);
+		
+		txtNroVale = new JTextField();
+		txtNroVale.setBounds(572, 31, 136, 20);
+		getContentPane().add(txtNroVale);
+		txtNroVale.setColumns(10);
+		
+		PanelAvio = new JPanel();
+		PanelAvio.setBorder(new TitledBorder(null, "Avio", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		PanelAvio.setBounds(238, 145, 483, 91);
+		getContentPane().add(PanelAvio);
+		PanelAvio.setLayout(null);
+		
+		txtDesAvio = new JTextField();
+		txtDesAvio.setColumns(10);
+		txtDesAvio.setBounds(10, 45, 267, 20);
+		PanelAvio.add(txtDesAvio);
+		
+		lblDesAvio = new JLabel("Descripcion");
+		lblDesAvio.setBounds(10, 25, 96, 14);
+		PanelAvio.add(lblDesAvio);
+		
+		txtMedidaAvio = new JTextField();
+		txtMedidaAvio.setColumns(10);
+		txtMedidaAvio.setBounds(302, 45, 108, 20);
+		PanelAvio.add(txtMedidaAvio);
+		
+		lblMedidaAvio = new JLabel("Medida");
+		lblMedidaAvio.setBounds(302, 25, 46, 14);
+		PanelAvio.add(lblMedidaAvio);
+		
+		txtNroOP = new JTextField();
+		txtNroOP.setBounds(10, 31, 86, 20);
+		getContentPane().add(txtNroOP);
+		txtNroOP.setColumns(10);
+		
+		lblNroOP = new JLabel("Nro OP");
+		lblNroOP.setBounds(10, 11, 46, 14);
+		getContentPane().add(lblNroOP);
+		
+		btnBuscarOP = new JButton("Buscar OP");
+		btnBuscarOP.addActionListener(this);
+		btnBuscarOP.setBounds(105, 30, 123, 23);
+		getContentPane().add(btnBuscarOP);
+		
+		txtFechaAvio = new JTextField();
+		txtFechaAvio.setColumns(10);
+		txtFechaAvio.setBounds(572, 79, 136, 20);
+		getContentPane().add(txtFechaAvio);
+		
+		lblFechaAvio = new JLabel("Fecha ingreso");
+		lblFechaAvio.setBounds(572, 59, 107, 14);
+		getContentPane().add(lblFechaAvio);
+		
+		txtCodAvio = new JTextField();
+		txtCodAvio.setColumns(10);
+		txtCodAvio.setBounds(10, 82, 86, 20);
+		getContentPane().add(txtCodAvio);
+		
+		lblCodAvio = new JLabel("Cod. Avio");
+		lblCodAvio.setBounds(10, 62, 86, 14);
+		getContentPane().add(lblCodAvio);
+		
+		btnBuscarAvio = new JButton("Buscar Avio");
+		btnBuscarAvio.addActionListener(this);
+		btnBuscarAvio.setBounds(105, 81, 123, 23);
+		getContentPane().add(btnBuscarAvio);
+		
+		txtCantAvio = new JTextField();
+		txtCantAvio.setColumns(10);
+		txtCantAvio.setBounds(10, 153, 86, 20);
+		getContentPane().add(txtCantAvio);
+		
+		lblCantAvio = new JLabel("Cantidad");
+		lblCantAvio.setBounds(10, 133, 86, 14);
+		getContentPane().add(lblCantAvio);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 258, 711, 232);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(this);
+		scrollPane.setViewportView(table);
+		
+		panelBtnMantener = new JPanel();
+		panelBtnMantener.setLayout(null);
+		panelBtnMantener.setBackground(SystemColor.activeCaption);
+		panelBtnMantener.setBounds(117, 133, 111, 106);
+		getContentPane().add(panelBtnMantener);
+		
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(this);
+		btnAgregar.setBounds(10, 11, 89, 23);
+		panelBtnMantener.add(btnAgregar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(10, 39, 89, 23);
+		panelBtnMantener.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(10, 68, 89, 23);
+		panelBtnMantener.add(btnEliminar);
+		
+		modelo = new DefaultTableModel();
+		modelo.addColumn("NRO VALE");
+		modelo.addColumn("FECHA INGRESO");
+		modelo.addColumn("NRO OP");
+		modelo.addColumn("CLIENTE");
+		modelo.addColumn("ESTILO");
+		modelo.addColumn("COLOR");
+		modelo.addColumn("COD AVIO");
+		modelo.addColumn("DESCRIPCION");
+		modelo.addColumn("MEDIDA");
+		modelo.addColumn("CANTIDAD");
+		table.setModel(modelo);
+		
+		arrIngresoAvio = new ArregloIngresoAvio();
+		
+		arranque();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscarAvio) {
+			actionPerformedBtnBuscarAvio(e);
+		}
+		if (e.getSource() == btnBuscarOP) {
+			actionPerformedBtnBuscarOP(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnModificar) {
+			actionPerformedBtnModificar(e);
+		}
+		if (e.getSource() == btnAgregar) {
+			actionPerformedBtnAgregar(e);
+		}
+	}
+	protected void actionPerformedBtnAgregar(ActionEvent e) {
+		String nroVale= leerNroVale();
+		int nroOP = leerNroOP();
+		int codAvio= leerCodAvio();
+		int cantAvio = leerCantAvio();
+		String fechaAvio = leerFechaAvio();
+		
+		IngresoAvio ingresoAvio = new IngresoAvio(nroVale,nroOP,codAvio,fechaAvio,cantAvio);
+		
+		arrIngresoAvio.adicionar(ingresoAvio);
+		arrIngresoAvio.grabarIngresoAvios();
+		listarIngresoAvio();
+		
+	}
+	protected void actionPerformedBtnModificar(ActionEvent e) {
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+	}
+	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
+	}
+	protected void actionPerformedBtnBuscarAvio(ActionEvent e) {
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+	}
+	
+	//METODOS DE ENTRADA
+	
+	private String leerNroVale() {
+		String res = null;
+		
+		res = txtNroVale.getText().trim();
+		
+		return res;
+	}
+	
+	private int leerNroOP() {
+		int res = -1;
+		
+		res = Integer.parseInt(txtNroOP.getText().trim());
+		
+		return res;
+	}
+	
+	private int leerCodAvio() {
+		int res = -1;
+		
+		res = Integer.parseInt(txtCodAvio.getText().trim());
+		
+		return res;
+	}
+	
+	private int leerCantAvio() {
+		int res = -1;
+		
+		res = Integer.parseInt(txtCantAvio.getText().trim());
+		
+		return res;
+	}
+	
+	private String leerFechaAvio() {
+		String res = null;
+		
+		res = txtFechaAvio.getText().trim();
+		
+		return res;
+	}
+	
+	//METODOS ADICIONALES
+	
+	private void arranque() {
+		listarIngresoAvio();
+	}
+	
+	private void listarIngresoAvio(){
+		
+		ArregloAvio arrAvio = new ArregloAvio();
+		ArregloOrdenProduccion arrOrdenProd = new ArregloOrdenProduccion();
+		ArregloUniMed arrUM = new ArregloUniMed();
+		
+		modelo.setRowCount(0);
+		for (int i=0;i<arrIngresoAvio.tamaño();i++) {
+			Object []x = {
+					arrIngresoAvio.obtener(i).getNroVale(),
+					arrIngresoAvio.obtener(i).getNroOp(),
+					arrIngresoAvio.obtener(i).getCodAvio(),
+					arrAvio.obtener(arrIngresoAvio.obtener(i).getCodAvio()).getDesAvio(),
+					arrAvio.obtener(arrIngresoAvio.obtener(i).getCodAvio()).getMedidaAvio() + arrUM.obtener(arrAvio.obtener(arrIngresoAvio.obtener(i).getCodAvio()).getCodUM()).getDesUM(),
+
+					arrIngresoAvio.obtener(i).getFechaAvio(),
+			};
+		}
+	}	
+}

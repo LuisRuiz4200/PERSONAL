@@ -1,0 +1,9 @@
+Requerimientos
+
+-Ingresar vale de avios
+-Consultar avios (ver faltantes, por colores)
+-Importar y exportar datos.
+-Crear reportes
+-Registrar estilos
+-Registrar OP
+-Mantener fechas de despachos de OP

@@ -1,0 +1,80 @@
+package arreglos;
+
+import java.util.*;
+import java.io.*;
+import clases.*;
+import reuzables.Custom;
+
+public class ArregloColorOP {
+
+	private ArrayList<ColorOp> arrColorOp;
+	
+	public ArregloColorOP() {
+		arrColorOp = new ArrayList<ColorOp>();
+		cargarColorOP();
+	}
+	
+	//METODOS BASICOS
+	
+	public int tamaño() {
+		return arrColorOp.size();
+	}
+	
+	public ColorOp obtener(int i) {
+		return arrColorOp.get(i);
+	}
+	
+	public void adicionar (ColorOp colorOp) {
+		arrColorOp.add(colorOp);
+	}
+	
+	public void eliminar (ColorOp colorOp) {
+		arrColorOp.remove(colorOp);
+	}
+	
+	//METODOS DE LECTURA Y ESCRITURA
+	
+	public void grabarColorOP() {
+		PrintWriter pw = null;
+		String texto;
+		
+		try {
+			pw= new PrintWriter (new FileWriter("colorOp.txt"));
+			for (ColorOp ordenProd:arrColorOp) {
+				texto = ordenProd.getNroOp() + ";" +
+						ordenProd.getCodColorOp() + ";" +
+						ordenProd.getDesColorOp();
+				
+				pw.println(texto);
+			}
+		}catch(Exception e) {
+			Custom.mensajeError(null, "Error al grabar contenido");
+		}finally {
+			pw.close();
+		}
+	}
+	
+	public void cargarColorOP() {
+		BufferedReader br;
+		String linea;
+		String[] texto;
+		
+		try {
+			br = new BufferedReader (new FileReader("colorOp.txt"));
+			while((linea=br.readLine())!=null) {
+				texto = linea.split(";");
+				ColorOp colorOp = new ColorOp(
+						Integer.parseInt(texto[0]),
+						Integer.parseInt(texto[1]),
+						texto[2]
+						);
+				arrColorOp.add(colorOp);
+			}
+			br.close();
+		}catch (Exception e) {
+			Custom.mensajeError(null, "Error al cargar contenido");
+		}
+		
+		
+	}
+}

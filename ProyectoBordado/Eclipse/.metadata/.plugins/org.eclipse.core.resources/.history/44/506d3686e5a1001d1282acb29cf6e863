@@ -1,0 +1,39 @@
+package clases;
+
+public class ColorOP{
+
+	//Estoy pensando si hacerlo con el extendido o dejarlo asi
+	
+	private int nroOp;
+	private int codColorOp;
+	private String desColorOp;
+	
+	public ColorOP(int nroOp, int codColorOp, String desColorOp) {
+		super();
+		this.nroOp = nroOp;
+		this.codColorOp = codColorOp;
+		this.desColorOp = desColorOp;
+	}
+	
+	public int getNroOp() {
+		return nroOp;
+	}
+	public void setNroOp(int nroOp) {
+		this.nroOp = nroOp;
+	}
+	public int getCodColorOp() {
+		return codColorOp;
+	}
+	public void setCodColorOp(int codColorOp) {
+		this.codColorOp = codColorOp;
+	}
+	public String getDesColorOp() {
+		return desColorOp;
+	}
+	public void setDesColorOp(String desColorOp) {
+		this.desColorOp = desColorOp;
+	}
+
+	
+	
+}
