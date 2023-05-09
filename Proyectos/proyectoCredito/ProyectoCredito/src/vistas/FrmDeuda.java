@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import arreglos.*;
 import clases.*;
 import utils.Tool;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 
 @SuppressWarnings("serial")
-public class FrmDeuda extends JInternalFrame implements ActionListener {
+public class FrmDeuda extends JInternalFrame implements ActionListener, MouseListener {
 	private JLabel lblCodigo;
 	private JTextField txtCodigo;
 	private JTextField txtMonto;
@@ -31,10 +33,11 @@ public class FrmDeuda extends JInternalFrame implements ActionListener {
 	private JButton btnEliminar;
 	private ArregloDeuda arrGasto;
 	private JLabel lblCliente;
-	private JComboBox<Object> cboCliente;
+	public static JComboBox<Object> cboCliente;
 	private ArregloCliente arrCliente;
 	private JTextField txtEstado;
 	private JLabel lblEstado;
+	private JLabel lblLupa;
 	
 	
 	
@@ -133,7 +136,7 @@ public class FrmDeuda extends JInternalFrame implements ActionListener {
 		getContentPane().add(lblCliente);
 		
 		cboCliente = new JComboBox<Object>();
-		cboCliente.setBounds(111, 28, 151, 22);
+		cboCliente.setBounds(111, 28, 100, 22);
 		getContentPane().add(cboCliente);
 		
 		txtEstado = new JTextField();
@@ -144,6 +147,12 @@ public class FrmDeuda extends JInternalFrame implements ActionListener {
 		lblEstado = new JLabel("Estado");
 		lblEstado.setBounds(452, 11, 72, 14);
 		getContentPane().add(lblEstado);
+		
+		lblLupa = new JLabel("");
+		lblLupa.addMouseListener(this);
+		lblLupa.setIcon(new ImageIcon(FrmDeuda.class.getResource("/img/lupa.png")));
+		lblLupa.setBounds(221, 29, 24, 20);
+		getContentPane().add(lblLupa);
 		
 		arranque();		
 	}
@@ -308,6 +317,7 @@ public class FrmDeuda extends JInternalFrame implements ActionListener {
 		for (int i = 0 ;i<arrCliente.tamaño();i++) {
 			cboCliente.addItem(arrCliente.obtener(i).getNom_cliente());
 		}
+		
 	}
 	
 	void limpiar() {
@@ -322,5 +332,25 @@ public class FrmDeuda extends JInternalFrame implements ActionListener {
 		txtInteres.setText("");
 		txtInteres.setEditable(false);
 		cboCliente.setSelectedIndex(0);
+	}
+	
+	//MOUSE CLIKED
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == lblLupa) {
+			mouseClickedLblLupa(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedLblLupa(MouseEvent e) {
+		BuscarCliente frame = new BuscarCliente();
+		BuscarCliente.frame = "FrmDeuda";
+		frame.setVisible(true);
 	}
 }

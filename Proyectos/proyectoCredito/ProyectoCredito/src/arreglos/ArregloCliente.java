@@ -23,9 +23,11 @@ public class ArregloCliente {
 	public void adicionar(Cliente c) {
 		arrCliente.add(c);
 	}
+	
 	public void eliminar (Cliente c) {
 		arrCliente.remove(c);
 	}
+	
 	public Cliente obtener(int x) {
 		return arrCliente.get(x);
 	}
@@ -64,7 +66,6 @@ public class ArregloCliente {
 		}catch (Exception e) {
 			
 		}
-		
 	}
 	
 	public void cargarCliente() {
@@ -85,13 +86,10 @@ public class ArregloCliente {
 				
 				adicionar(new Cliente(codigo,nombre,apellido,dni));
 			}
-			br.close();
-			
+			br.close();	
 		}catch(Exception e) {
 			
 		}
-		
-		
 	}
 	
 	

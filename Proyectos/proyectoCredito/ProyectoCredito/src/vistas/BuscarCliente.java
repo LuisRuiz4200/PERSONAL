@@ -1,7 +1,5 @@
 package vistas;
 
-import java.util.List;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,15 +9,22 @@ import arreglos.ArregloPago;
 import clases.Cliente;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class BuscarCliente extends JFrame implements KeyListener{
+public class BuscarCliente extends JFrame implements KeyListener, ActionListener, MouseListener{
 	private JTable tbCliente;
 	private JScrollPane spCliente;
 	private JTextField txtNombre;
 	private JLabel lblNombre;
 	private JButton btnElegir;
 	private DefaultTableModel modelCliente;
+	public static String frame;
+	private JTextField txtIdCliente;
+	private JLabel lblIdCliente;
 	
 	
 	public static void main(String [] args) {
@@ -42,6 +47,7 @@ public class BuscarCliente extends JFrame implements KeyListener{
 		getContentPane().add(spCliente);
 		
 		tbCliente = new JTable();
+		tbCliente.addMouseListener(this);
 		spCliente.setViewportView(tbCliente);
 		
 		txtNombre = new JTextField();
@@ -55,7 +61,8 @@ public class BuscarCliente extends JFrame implements KeyListener{
 		getContentPane().add(lblNombre);
 		
 		btnElegir = new JButton("ELEGIR");
-		btnElegir.setBounds(215, 32, 89, 23);
+		btnElegir.addActionListener(this);
+		btnElegir.setBounds(373, 29, 89, 23);
 		getContentPane().add(btnElegir);
 		
 		modelCliente = new DefaultTableModel();
@@ -64,6 +71,15 @@ public class BuscarCliente extends JFrame implements KeyListener{
 		modelCliente.addColumn("APELLIDO");
 		modelCliente.addColumn("DEUDA");
 		tbCliente.setModel(modelCliente);
+		
+		txtIdCliente = new JTextField();
+		txtIdCliente.setBounds(260, 32, 86, 20);
+		getContentPane().add(txtIdCliente);
+		txtIdCliente.setColumns(10);
+		
+		lblIdCliente = new JLabel("ID CLIENTE");
+		lblIdCliente.setBounds(260, 11, 86, 14);
+		getContentPane().add(lblIdCliente);
 		
 		arranque();
 		
@@ -94,6 +110,10 @@ public class BuscarCliente extends JFrame implements KeyListener{
 		
 	}
 	
+	private void exportarDatos() {
+		
+	}
+	
 	private void cargarClientePorNombre() {
 		modelCliente.setRowCount(0);
 		
@@ -104,7 +124,18 @@ public class BuscarCliente extends JFrame implements KeyListener{
 			String nombreCliente = txtNombre.getText().trim();
 			double deudaTotal= new ArregloDeuda().deudaTotal(obj.getId_cliente())-new ArregloPago().pagoTotal(obj.getId_cliente());
 			
-			if (obj.getNom_cliente().matches("["+nombreCliente+"].*")) {
+			
+			if (nombreCliente.length()==0){
+				
+				Object[]x = new Object[] {
+						obj.getId_cliente(),
+						obj.getNom_cliente(),
+						obj.getApe_cliente(),
+						"S/."  + deudaTotal
+				};
+			
+				modelCliente.addRow(x);
+			}else if (obj.getNom_cliente().matches("("+nombreCliente+").*")) {
 
 				Object[]x = new Object[] {
 					obj.getId_cliente(),
@@ -114,16 +145,7 @@ public class BuscarCliente extends JFrame implements KeyListener{
 				};
 				
 				modelCliente.addRow(x);
-			}
-			
-			/*Object[]x = new Object[] {
-				obj.getId_cliente(),
-				obj.getNom_cliente(),
-				obj.getApe_cliente(),
-				"S/."  + deudaTotal
-			};
-			
-			modelCliente.addRow(x);*/
+			}	
 		}
 	}
 	//LLAVE LIBERADA TXT NOMBRE
@@ -139,5 +161,55 @@ public class BuscarCliente extends JFrame implements KeyListener{
 	protected void keyReleasedTxtNombre(KeyEvent e) {
 		
 		cargarClientePorNombre();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnElegir) {
+			actionPerformedBtnElegir(e);
+		}
+	}
+	//ACTION PERFORMET DEL BOTON ELEGIR
+	protected void actionPerformedBtnElegir(ActionEvent e) {
+		
+		String idCliente = tbCliente.getValueAt(tbCliente.getSelectedRow(),0).toString();
+		
+		Cliente objCliente = new ArregloCliente().buscar(idCliente);
+		
+		switch(frame){
+		case "FrmCliente":
+			
+			break;
+		case "FrmDeuda":
+			FrmDeuda.cboCliente.setSelectedItem(objCliente.getNom_cliente());
+			break;
+		case "FrmPago":
+			FrmPago.cboCliente.setSelectedItem(objCliente.getNom_cliente());
+			break;
+		default:
+			
+		}
+		
+	}
+	
+	//MOUSE CLIKED DE LA TABLA CLIENTE
+	
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tbCliente) {
+			mouseClickedTbCliente(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTbCliente(MouseEvent e) {
+		String idCliente = tbCliente.getValueAt(tbCliente.getSelectedRow(),0).toString();
+		String nomCliente = tbCliente.getValueAt(tbCliente.getSelectedRow(),1).toString();
+		
+		txtIdCliente.setText(idCliente);
+		txtNombre.setText(nomCliente);
 	}
 }

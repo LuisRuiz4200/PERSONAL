@@ -18,13 +18,13 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class FrmPago extends JInternalFrame implements ActionListener, KeyListener, ItemListener{
+public class FrmPago extends JInternalFrame implements ActionListener, KeyListener, ItemListener, MouseListener{
 	private JLabel lblCodigo;
 	private JTextField txtCodigo;
 	private JTextField txtMonto;
 	private JLabel lblMonto;
 	private JLabel lblCliente;
-	private JComboBox <Object> cboCliente;
+	public static JComboBox <Object> cboCliente;
 	private JDateChooser dcFecha;
 	private JLabel lblFecha;
 	private JButton btnAgregar;
@@ -42,6 +42,7 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 	private JLabel lblDeuda;
 	private JTextField txtEstado;
 	private JLabel lblEstado;
+	private JLabel lblLupa;
 	
 	
 	
@@ -107,7 +108,7 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 		cboCliente = new JComboBox<Object>();
 		cboCliente.addItemListener(this);
 		cboCliente.addKeyListener(this);
-		cboCliente.setBounds(117, 34, 160, 22);
+		cboCliente.setBounds(117, 34, 86, 22);
 		panelPago.add(cboCliente);
 		
 		dcFecha = new JDateChooser();
@@ -134,6 +135,12 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 		lblEstado = new JLabel("ESTADO");
 		lblEstado.setBounds(435, 18, 77, 14);
 		panelPago.add(lblEstado);
+		
+		lblLupa = new JLabel("");
+		lblLupa.addMouseListener(this);
+		lblLupa.setIcon(new ImageIcon(FrmPago.class.getResource("/img/lupa.png")));
+		lblLupa.setBounds(211, 36, 24, 20);
+		panelPago.add(lblLupa);
 		
 		panelCliente = new JPanel();
 		panelCliente.setBounds(10, 134, 437, 84);
@@ -288,7 +295,7 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 		
 		String[] medioPago = {"EFECTIVO","YAPE","PLIN","TRANFERENCIA"};
 		
-		cboMedioPago.setModel(new DefaultComboBoxModel(medioPago));
+		cboMedioPago.setModel(new DefaultComboBoxModel<Object>(medioPago));
 		
 	}
 	
@@ -326,14 +333,35 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 		mostrarCliente();
 	}
 	
-	//MOUSE CLIKED DEL COMBO CLIENTE
+	//ITEM CHANGED DEL COMBO CLIENTE
 	
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == cboCliente) {
 			itemStateChangedCboCliente(e);
 		}
 	}
+	
 	protected void itemStateChangedCboCliente(ItemEvent e) {
 		mostrarCliente();
+	}
+	
+	//MOUSE CLICKED DE LA LUPA BUSCAR CLIENTE
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == lblLupa) {
+			mouseClickedLblLupa(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedLblLupa(MouseEvent e) {
+		BuscarCliente frame = new BuscarCliente();
+		frame.frame = "FrmPago";
+		frame.setVisible(true);
 	}
 }
