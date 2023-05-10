@@ -1,5 +1,6 @@
 # Compiled class file
 
+
 # Log file
 *.log
 *.lock
@@ -8,15 +9,10 @@
 # BlueJ files
 *.ctxt
 
-# otros
-*.index
-
 # carpetas
 
-.metadata/
-bin/
-*.snap
-.cache/
+**/.metadata/
+**/bin/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
