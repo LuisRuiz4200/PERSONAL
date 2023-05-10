@@ -3,11 +3,16 @@
 
 # Log file
 *.log
+*.lock
+*.tmp
 
 # BlueJ files
 *.ctxt
 
+# carpetas
 
+**/metadata
+**/bin
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
