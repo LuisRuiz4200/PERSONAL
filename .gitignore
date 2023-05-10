@@ -1,35 +1,9 @@
-# Compiled class file
-
 
 # Log file
 *.log
 *.lock
 *.tmp
 
-# BlueJ files
-*.ctxt
-
-# carpetas / otros / personalizado
-
-**/.metadata/
-**/bin/
-Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/
-
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.war
-*.nar
-*.ear
-*.tar.gz
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
-#Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.egit.core.cmp/.markers.snap
-#Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.egit.core.cmp/.syncinfo.snap
-#Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/ProyectoCredito/.indexes/e4/b7/history.index
-#Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/ProyectoCredito/.markers
-#Proyectos/proyectoCredito/.metadata/.plugins/org.eclipse.core.resources/.projects/ProyectoCredito/.markers.snap
+#personalizado / varios
+bin/
+.metadata/
