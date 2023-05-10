@@ -349,8 +349,8 @@ public class FrmDeuda extends JInternalFrame implements ActionListener, MouseLis
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseClickedLblLupa(MouseEvent e) {
-		DlgBuscarCliente frame = new DlgBuscarCliente();
-		DlgBuscarCliente.frame = "FrmDeuda";
+		BuscarCliente frame = new BuscarCliente();
+		BuscarCliente.frame = "FrmDeuda";
 		frame.setVisible(true);
 	}
 }

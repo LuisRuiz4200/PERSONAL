@@ -360,10 +360,8 @@ public class FrmPago extends JInternalFrame implements ActionListener, KeyListen
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseClickedLblLupa(MouseEvent e) {
-
-		DlgBuscarCliente.frame = "FrmPago";
-		DlgBuscarCliente frame = new DlgBuscarCliente();
+		BuscarCliente frame = new BuscarCliente();
+		BuscarCliente.frame = "FrmPago";
 		frame.setVisible(true);
-		
 	}
 }

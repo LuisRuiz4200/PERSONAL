@@ -123,7 +123,7 @@ public class Deuda {
 		
 		if (cuota>1) {
 			//
-			nuevoInteres = (nuevoMontoMensual - (monto/cuota))/(monto/cuota)*100;
+			nuevoInteres = (nuevoMontoMensual - (monto/cuota))/monto;
 		}
 		
 		return nuevoInteres;

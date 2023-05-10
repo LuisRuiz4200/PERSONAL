@@ -51,7 +51,7 @@ public class ArregloDeuda {
 		
 		for(int i = 0 ; i<tamaño();i++) {
 			if(obtener(i).getId_cliente().equals(idCliente)) {
-				res += obtener(i).getMonto_deuda() * (obtener(i).getInteres_deuda()/100) + obtener(i).getMonto_deuda();
+				res += obtener(i).getMonto_deuda() * obtener(i).getInteres_deuda() + obtener(i).getMonto_deuda();
 			}
 		}
 		
