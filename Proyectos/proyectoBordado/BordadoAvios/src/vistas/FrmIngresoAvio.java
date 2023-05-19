@@ -413,7 +413,6 @@ public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListe
 	}
 	
 	//METODOS ADICIONALES
-	
 	private void arranque() {
 		listarIngresoAvio();
 		correlativo();

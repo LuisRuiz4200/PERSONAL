@@ -43,7 +43,6 @@ public class ArregloOrdenProduccion {
 	}
 	
 	//METODOS DE LECTURA Y ESCRITURA
-	
 	public void grabarOrdenProduccion() {
 		PrintWriter pw = null;
 		String texto;
