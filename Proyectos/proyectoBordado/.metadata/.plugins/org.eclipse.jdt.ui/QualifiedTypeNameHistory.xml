@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableColumnModel"/>
     <fullyQualifiedTypeName name="reuzables.Custom"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
@@ -15,10 +14,22 @@
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="clases.CitiConfeccion"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
-    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
     <fullyQualifiedTypeName name="arreglos.ArregloCitiAcabado"/>
     <fullyQualifiedTypeName name="clases.CitiAcabado"/>
+    <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloOrdenProduccion"/>
+    <fullyQualifiedTypeName name="clases.OrdenProduccion"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloCliente"/>
+    <fullyQualifiedTypeName name="clases.Cliente"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloEstiloOP"/>
+    <fullyQualifiedTypeName name="clases.EstiloOP"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloProgramaAcabado"/>
+    <fullyQualifiedTypeName name="clases.ProgramaAcabado"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloColorOP"/>
+    <fullyQualifiedTypeName name="clases.ColorOP"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 </qualifiedTypeNameHistroy>

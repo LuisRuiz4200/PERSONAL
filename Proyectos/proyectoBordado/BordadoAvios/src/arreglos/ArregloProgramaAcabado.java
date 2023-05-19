@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -77,6 +78,8 @@ public class ArregloProgramaAcabado {
 						obj.getCod_colorOP() + ";" +
 						obj.getCantPed_programaAcabado() +  ";" + 
 						obj.getCantProg_programaAcabado() + ";" + 
+						obj.getCod_citiConfeccion() + ";" +
+						obj.getCod_citiAcabado() + ";" +
 						obj.getObs_programaAcabado() + ";" + 
 						obj.getFechaAct_programaAcabado() +";" +
 						obj.getEstado_programaAcabado() + ";" 
@@ -107,8 +110,11 @@ public class ArregloProgramaAcabado {
 				 citiConfeccion.setCod_colorOP(Integer.parseInt(n[2]));
 				 citiConfeccion.setCantPed_programaAcabado(Integer.parseInt(n[3]));
 				 citiConfeccion.setCantProg_programaAcabado(Integer.parseInt(n[4]));
-				 citiConfeccion.setFechaAct_programaAcabado(new SimpleDateFormat().parse(n[5]));
-				 citiConfeccion.setObs_programaAcabado(n[6]);
+				 citiConfeccion.setCod_citiConfeccion(n[5]);
+				 citiConfeccion.setCod_citiAcabado(n[6]);
+				 citiConfeccion.setObs_programaAcabado(n[7]);
+				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[8]).getTime()));
+				 citiConfeccion.setEstado_programaAcabado(n[9]);
 				 
 				 adicionar(citiConfeccion);
 				

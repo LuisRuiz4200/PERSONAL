@@ -32,10 +32,10 @@ public class ArregloColorOP {
 		arrColorOP.remove(colorOP);
 	}
 	
-	public ColorOP buscar(int nroOP , String desColorOP) {
+	public ColorOP buscar(int nroOP , int  codColorOP) {
 		
 		for (ColorOP color : arrColorOP) {
-			if(nroOP == color.getNroOP() && desColorOP.equals(color.getDesColorOP())) {
+			if(nroOP == color.getNroOP() && codColorOP == color.getCodColorOP()) {
 				return color;
 			}
 		}
@@ -60,7 +60,7 @@ public class ArregloColorOP {
 				pw.println(texto);
 			}
 		}catch(Exception e) {
-			Custom.mensajeError(null, "Error al grabar contenido");
+			Custom.mensajeError(null, e.getMessage());
 		}finally {
 			pw.close();
 		}
@@ -84,7 +84,7 @@ public class ArregloColorOP {
 			}
 			br.close();
 		}catch (Exception e) {
-			Custom.mensajeError(null, "Error al cargar contenido");
+			Custom.mensajeError(null, e.getMessage() + " " + e.getLocalizedMessage() + e.getCause());
 		}
 		
 		

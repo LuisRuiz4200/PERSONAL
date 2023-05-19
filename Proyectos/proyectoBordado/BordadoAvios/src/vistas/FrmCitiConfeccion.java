@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import arreglos.ArregloCitiAcabado;
-import clases.CitiAcabado;
+import arreglos.ArregloCitiConfeccion;
+import clases.CitiConfeccion;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListener{
+public class FrmCitiConfeccion extends JFrame implements ActionListener, MouseListener{
 	private JPanel panel;
 	private JTextField txtCodCiti;
 	private JLabel lblCodCiti;
@@ -28,24 +28,24 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 	private JScrollPane spCitiAcabado;
 	private DefaultTableModel modelo;
 	
-	private ArregloCitiAcabado arrCitiAcabado = new ArregloCitiAcabado();
+	private ArregloCitiConfeccion arrCitiConfeccion = new ArregloCitiConfeccion();
 	private JButton btnNuevo;
 	
 	public static void main (String[] args) {
-		FrmCitiAcabado ventana = new FrmCitiAcabado();
+		FrmCitiConfeccion ventana = new FrmCitiConfeccion();
 		ventana.setVisible(true);
 	}
 	
-	public FrmCitiAcabado() {
+	public FrmCitiConfeccion() {
 		
-		this.setTitle("CITI ACABADO");
+		this.setTitle("CITI CONFECCION");
 		this.setBounds(0,0,488,392);
 		this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
 		panel.setBounds(10, 27, 434, 108);
-		panel.setBorder(new TitledBorder("CITI ACABADO"));
+		panel.setBorder(new TitledBorder("CITI CONFECCION"));
 		panel.setLayout(null);
 		getContentPane().add(panel);
 		
@@ -186,11 +186,11 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 		String descripcion = leerDesCiti();
 		String estado = leerEstadoCiti();
 		
-		CitiAcabado obj = new CitiAcabado(codigo,descripcion,estado);
+		CitiConfeccion obj = new CitiConfeccion(codigo,descripcion,estado);
 		
-		arrCitiAcabado.adicionar(obj);
+		arrCitiConfeccion.adicionar(obj);
 		
-		arrCitiAcabado.grabarCitiAcabado();
+		arrCitiConfeccion.grabarCitiConfeccion();
 		
 		limpiar();
 		listarCitiAcabado();
@@ -201,10 +201,10 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 		String descripcion = leerDesCiti();
 		String estado = leerEstadoCiti();
 		
-		CitiAcabado obj = new CitiAcabado(codigo,descripcion,estado);
+		CitiConfeccion obj = new CitiConfeccion(codigo,descripcion,estado);
 		
-		arrCitiAcabado.editar(obj);
-		arrCitiAcabado.grabarCitiAcabado();
+		arrCitiConfeccion.editar(obj);
+		arrCitiConfeccion.grabarCitiConfeccion();
 		
 		listarCitiAcabado();
 	}
@@ -214,14 +214,14 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 		String descripcion = leerDesCiti();
 		String estado = leerEstadoCiti();
 		
-		CitiAcabado obj = new CitiAcabado(codigo,descripcion,estado);
+		CitiConfeccion obj = new CitiConfeccion(codigo,descripcion,estado);
 		
 		int res = JOptionPane.showConfirmDialog(this, "SEGURO QUIERE ELIMINAR","MENSAJE", JOptionPane.YES_OPTION,0);
 		
 		if(res == 0) {
-			arrCitiAcabado.eliminar(obj);
+			arrCitiConfeccion.eliminar(obj);
 			
-			arrCitiAcabado.grabarCitiAcabado();
+			arrCitiConfeccion.grabarCitiConfeccion();
 			
 			listarCitiAcabado();
 		}else {
@@ -235,11 +235,11 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
 			Object[] x = new Object[] {
-				arrCitiAcabado.obtener(i).getCod_citiAcabado(),
-				arrCitiAcabado.obtener(i).getDes_citiAcabado(),
-				arrCitiAcabado.obtener(i).getEstado_citiAcabado()
+				arrCitiConfeccion.obtener(i).getCod_citiConfeccion(),
+				arrCitiConfeccion.obtener(i).getDes_citiConfeccion(),
+				arrCitiConfeccion.obtener(i).getEstado_citiConfeccion()
 			};
 			
 			modelo.addRow(x);
