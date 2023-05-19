@@ -63,6 +63,21 @@ public class ArregloProgramaAcabado {
 		return null;
 	}
 	
+	public int correlativo () {
+		
+		int res=0 ;
+		
+		if (arrProgramaAcabado.size()==0) {
+			res = 1;
+		}else {
+			for(ProgramaAcabado obj:arrProgramaAcabado) {
+				res = obj.getCod_programaAcabado() + 1;
+			}
+		}
+		
+		return res;
+	}
+	
 	//METODOS PARA GRABAR Y CARGAR DATA
 	
 	public void grabarProgramaAcabado() {
@@ -113,7 +128,7 @@ public class ArregloProgramaAcabado {
 				 citiConfeccion.setCod_citiConfeccion(n[5]);
 				 citiConfeccion.setCod_citiAcabado(n[6]);
 				 citiConfeccion.setObs_programaAcabado(n[7]);
-				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[8]).getTime()));
+				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat().parse(n[8]).getTime()));
 				 citiConfeccion.setEstado_programaAcabado(n[9]);
 				 
 				 adicionar(citiConfeccion);

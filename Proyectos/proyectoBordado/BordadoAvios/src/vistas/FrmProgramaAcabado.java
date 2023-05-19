@@ -26,6 +26,9 @@ import java.beans.PropertyChangeEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 import javax.swing.event.CaretListener;
+
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.event.CaretEvent;
 
 @SuppressWarnings("serial")
@@ -61,7 +64,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private JTextField txtCantPrograma;
 	private JLabel lblCantPrograma;
 	private JButton btnLista;
-	private JTextField txtFechaActualizada;
+	private JDateChooser txtFechaActualizada;
 	private JLabel lblFechaActualizada;
 	private JTextField txtEstadoPrograma;
 	private JLabel lblEstadoPrograma;
@@ -258,10 +261,9 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		btnLista.setBounds(417, 416, 89, 23);
 		getContentPane().add(btnLista);
 		
-		txtFechaActualizada = new JTextField();
+		txtFechaActualizada = new JDateChooser();
 		txtFechaActualizada.setBounds(479, 31, 100, 20);
 		getContentPane().add(txtFechaActualizada);
-		txtFechaActualizada.setColumns(10);
 		
 		lblFechaActualizada = new JLabel("ACTUALIZACION");
 		lblFechaActualizada.setBounds(479, 11, 100, 14);
@@ -417,12 +419,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private Date leerFechaActualizada() {
 		Date res = null;
 		
-		try {
-			res = new SimpleDateFormat("dd/MM/yyy").parse(this.txtFechaActualizada.getText().trim());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		res = this.txtFechaActualizada.getDate();
 		
 		return res;
 	}
@@ -449,8 +446,11 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		limpiar();
 	}
 	private void limpiar() {
-		this.txtNroOP.setText("");
-		this.txtNroOP.requestFocus();
+		
+		this.txtCodPrograma.setText(arrProgramaAcabado.correlativo()+"");
+		this.txtCodPrograma.setEditable(false);
+		FrmProgramaAcabado.txtNroOP.setText("");
+		FrmProgramaAcabado.txtNroOP.requestFocus();
 		this.txtCantPedido.setText("");
 		this.txtCantPrograma.setText("");
 		this.txtClienteOP.setText("");
@@ -462,9 +462,10 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		this.txtEstadoCitiConfeccion.setText("");
 		this.txtEstadoCitiAcabado.setText("");
 		this.txtEstadoPrograma.setText("REGISTRADO");
-		this.txtFechaActualizada.setText(new SimpleDateFormat("dd/MM/yyy ").format(new Date())+"");
+		this.txtFechaActualizada.setDate(new Date());
 		
 	}
+	
 	
 	private void adicionar() {
 		
