@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.lang.Iterable"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableColumnModel"/>
-    <fullyQualifiedTypeName name="reuzables.Custom"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
@@ -12,12 +11,7 @@
     <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="clases.CitiConfeccion"/>
-    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloCitiAcabado"/>
-    <fullyQualifiedTypeName name="clases.CitiAcabado"/>
     <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
     <fullyQualifiedTypeName name="arreglos.ArregloOrdenProduccion"/>
     <fullyQualifiedTypeName name="clases.OrdenProduccion"/>
@@ -27,9 +21,20 @@
     <fullyQualifiedTypeName name="clases.EstiloOP"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="arreglos.ArregloProgramaAcabado"/>
-    <fullyQualifiedTypeName name="clases.ProgramaAcabado"/>
     <fullyQualifiedTypeName name="arreglos.ArregloColorOP"/>
     <fullyQualifiedTypeName name="clases.ColorOP"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="clases.ProgramaAcabado"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="com.toedter.calendar.JDateChooser"/>
+    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="reuzables.Custom"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloCitiConfeccion"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloCitiAcabado"/>
+    <fullyQualifiedTypeName name="clases.CitiConfeccion"/>
+    <fullyQualifiedTypeName name="clases.CitiAcabado"/>
+    <fullyQualifiedTypeName name="javax.swing.JDesktopPane"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="vistas.FrmCitiConfeccion"/>
 </qualifiedTypeNameHistroy>

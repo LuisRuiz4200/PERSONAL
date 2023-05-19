@@ -125,6 +125,15 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		}
 	}
 	protected void actionPerformedBtnEditar(ActionEvent e) {
+		
+		int n = table.getSelectedRow();
+		
+		FrmProgramaAcabado.txtCodPrograma.setText(table.getValueAt(n,0).toString());
+		FrmProgramaAcabado.btnGrabar.setEnabled(false);
+		FrmProgramaAcabado.btnEditar.setEnabled(true);
+		FrmProgramaAcabado.txtNroOP.setEditable(false);
+		this.dispose();
+		
 	}
 	//METODOS VOID
 	private void arranque() {

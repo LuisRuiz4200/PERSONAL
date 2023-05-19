@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListener{
+public class FrmCitiAcabado extends JInternalFrame implements ActionListener, MouseListener{
 	private JPanel panel;
 	private JTextField txtCodCiti;
 	private JLabel lblCodCiti;
@@ -40,8 +40,12 @@ public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListe
 		
 		this.setTitle("CITI ACABADO");
 		this.setBounds(0,0,488,392);
-		this.setLocationRelativeTo(this);
+		//this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
+		
+		this.setIconifiable(true);
+		this.setMaximizable(true);
+		this.setClosable(true);
 		
 		panel = new JPanel();
 		panel.setBounds(10, 27, 434, 108);

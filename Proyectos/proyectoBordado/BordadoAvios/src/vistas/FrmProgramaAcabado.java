@@ -4,13 +4,18 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import arreglos.ArregloCitiAcabado;
+import arreglos.ArregloCitiConfeccion;
 import arreglos.ArregloCliente;
 import arreglos.ArregloColorOP;
 import arreglos.ArregloOrdenProduccion;
 import arreglos.ArregloProgramaAcabado;
+import clases.CitiAcabado;
+import clases.CitiConfeccion;
 import clases.Cliente;
 import clases.OrdenProduccion;
 import clases.ProgramaAcabado;
+import reuzables.Custom;
 
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -22,11 +27,11 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.event.CaretEvent;
 
 @SuppressWarnings("serial")
-public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretListener{
+public class FrmProgramaAcabado extends JInternalFrame implements ActionListener, CaretListener{
 	private JPanel panelCitiConfeccion;
 	private JPanel panelCitiAcabado;
 	private JPanel panelOP;
-	private JTextField txtCodCitiConfeccion;
+	public static JTextField txtCodCitiConfeccion;
 	private JLabel lblCodCitiConfeccion;
 	private JTextField txtDesCitiConfeccion;
 	private JLabel lblDesCitiConfeccion;
@@ -36,22 +41,18 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private JLabel lblClienteOP;
 	private JComboBox<Object> cboColorOP;
 	private JLabel lblColorOP;
-	private JTextField txtEstadoCitiConfeccion;
-	private JLabel lblEstadoCitiConfeccion;
-	private JTextField txtCodCitiAcabado;
+	public static JTextField txtCodCitiAcabado;
 	private JLabel lblCodCitiAcabado;
 	private JTextField txtDesCitiAcabado;
 	private JLabel lblDesCitiAcabado;
-	private JTextField txtEstadoCitiAcabado;
-	private JLabel lblEstadoCitiAcabado;
-	private JButton btnGrabar;
-	private JButton btnEliminar;
-	private JButton btnEditar;
+	public static JButton btnGrabar;
+	public static JButton btnEliminar;
+	public static JButton btnEditar;
 	private JButton btnNuevo;
 	private JPanel panelPrograma;
 	private JTextField txtCantPedido;
 	private JLabel lblCantPedido;
-	private JTextField txtCantPrograma;
+	private JTextField txtCantProgramada;
 	private JLabel lblCantPrograma;
 	private JButton btnLista;
 	private JDateChooser txtFechaActualizada;
@@ -65,7 +66,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	public static JTextField txtCodPrograma;
 	
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
-	private JTextArea txtObsPrograma;
+	public static JTextArea txtObsPrograma;
 	private JLabel lblObsPrograma;
 	
 	public static void main (String[] args) {
@@ -76,17 +77,22 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	public FrmProgramaAcabado() {
 		
 		this.setTitle("PROGRAMA ACABADO");
-		this.setBounds(0,0,706,509);
-		this.setLocationRelativeTo(this);
+		this.setBounds(0,0,702,516);
+		//this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
 		
+		this.setIconifiable(true);
+		this.setMaximizable(true);
+		this.setClosable(true);
+		
 		panelCitiConfeccion = new JPanel();
-		panelCitiConfeccion.setBounds(20, 183, 409, 89);
+		panelCitiConfeccion.setBounds(10, 183, 333, 89);
 		panelCitiConfeccion.setBorder(new TitledBorder("CITI CONFECCION"));
 		panelCitiConfeccion.setLayout(null);
 		getContentPane().add(panelCitiConfeccion);
 		
 		txtCodCitiConfeccion = new JTextField();
+		txtCodCitiConfeccion.addCaretListener(this);
 		txtCodCitiConfeccion.setBounds(10, 45, 86, 20);
 		panelCitiConfeccion.add(txtCodCitiConfeccion);
 		txtCodCitiConfeccion.setColumns(10);
@@ -104,60 +110,43 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		lblDesCitiConfeccion.setBounds(153, 25, 86, 14);
 		panelCitiConfeccion.add(lblDesCitiConfeccion);
 		
-		txtEstadoCitiConfeccion = new JTextField();
-		txtEstadoCitiConfeccion.setColumns(10);
-		txtEstadoCitiConfeccion.setBounds(313, 45, 86, 20);
-		panelCitiConfeccion.add(txtEstadoCitiConfeccion);
-		
-		lblEstadoCitiConfeccion = new JLabel("ESTADO");
-		lblEstadoCitiConfeccion.setBounds(313, 25, 86, 14);
-		panelCitiConfeccion.add(lblEstadoCitiConfeccion);
-		
 		btnBuscarCitiConfeccion = new JButton("New button");
 		btnBuscarCitiConfeccion.addActionListener(this);
 		btnBuscarCitiConfeccion.setBounds(106, 44, 37, 23);
 		panelCitiConfeccion.add(btnBuscarCitiConfeccion);
 		
 		panelCitiAcabado = new JPanel();
-		panelCitiAcabado.setBounds(20, 283, 409, 89);
+		panelCitiAcabado.setBounds(353, 183, 319, 89);
 		panelCitiAcabado.setBorder(new TitledBorder("CITI ACABADO"));
 		panelCitiAcabado.setLayout(null);
 		getContentPane().add(panelCitiAcabado);
 		
 		txtCodCitiAcabado = new JTextField();
+		txtCodCitiAcabado.addCaretListener(this);
 		txtCodCitiAcabado.setColumns(10);
-		txtCodCitiAcabado.setBounds(10, 55, 86, 20);
+		txtCodCitiAcabado.setBounds(10, 43, 86, 20);
 		panelCitiAcabado.add(txtCodCitiAcabado);
 		
 		lblCodCitiAcabado = new JLabel("CODIGO");
-		lblCodCitiAcabado.setBounds(10, 35, 86, 14);
+		lblCodCitiAcabado.setBounds(10, 23, 86, 14);
 		panelCitiAcabado.add(lblCodCitiAcabado);
 		
 		txtDesCitiAcabado = new JTextField();
 		txtDesCitiAcabado.setColumns(10);
-		txtDesCitiAcabado.setBounds(153, 55, 150, 20);
+		txtDesCitiAcabado.setBounds(153, 43, 150, 20);
 		panelCitiAcabado.add(txtDesCitiAcabado);
 		
 		lblDesCitiAcabado = new JLabel("DESCRIPCION");
-		lblDesCitiAcabado.setBounds(153, 35, 86, 14);
+		lblDesCitiAcabado.setBounds(153, 23, 86, 14);
 		panelCitiAcabado.add(lblDesCitiAcabado);
-		
-		txtEstadoCitiAcabado = new JTextField();
-		txtEstadoCitiAcabado.setColumns(10);
-		txtEstadoCitiAcabado.setBounds(313, 55, 86, 20);
-		panelCitiAcabado.add(txtEstadoCitiAcabado);
-		
-		lblEstadoCitiAcabado = new JLabel("ESTADO");
-		lblEstadoCitiAcabado.setBounds(313, 35, 86, 14);
-		panelCitiAcabado.add(lblEstadoCitiAcabado);
 		
 		btnBuscarCitiAcabado = new JButton("New button");
 		btnBuscarCitiAcabado.addActionListener(this);
-		btnBuscarCitiAcabado.setBounds(106, 54, 37, 23);
+		btnBuscarCitiAcabado.setBounds(106, 42, 37, 23);
 		panelCitiAcabado.add(btnBuscarCitiAcabado);
 		
 		panelOP = new JPanel();
-		panelOP.setBounds(22, 72, 407, 100);
+		panelOP.setBounds(10, 72, 662, 100);
 		panelOP.setBorder(new TitledBorder("ORDEN PROUDCCION"));
 		panelOP.setLayout(null);
 		getContentPane().add(panelOP);
@@ -175,7 +164,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		
 		txtClienteOP = new JTextField();
 		txtClienteOP.setColumns(10);
-		txtClienteOP.setBounds(163, 53, 102, 20);
+		txtClienteOP.setBounds(163, 53, 130, 20);
 		panelOP.add(txtClienteOP);
 		
 		lblClienteOP = new JLabel("CLIENTE");
@@ -183,11 +172,11 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		panelOP.add(lblClienteOP);
 		
 		cboColorOP = new JComboBox<Object>();
-		cboColorOP.setBounds(275, 53, 122, 20);
+		cboColorOP.setBounds(338, 53, 189, 20);
 		panelOP.add(cboColorOP);
 		
 		lblColorOP = new JLabel("COLOR");
-		lblColorOP.setBounds(275, 33, 86, 14);
+		lblColorOP.setBounds(338, 33, 86, 14);
 		panelOP.add(lblColorOP);
 		
 		btnBuscarOP = new JButton("New button");
@@ -197,77 +186,77 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		
 		btnGrabar = new JButton("GRABAR");
 		btnGrabar.addActionListener(this);
-		btnGrabar.setBounds(10, 416, 89, 23);
+		btnGrabar.setBounds(10, 447, 89, 23);
 		getContentPane().add(btnGrabar);
 		
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(219, 416, 89, 23);
+		btnEliminar.setBounds(219, 447, 89, 23);
 		getContentPane().add(btnEliminar);
 		
 		btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(this);
-		btnEditar.setBounds(109, 416, 89, 23);
+		btnEditar.setBounds(109, 447, 89, 23);
 		getContentPane().add(btnEditar);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(318, 416, 89, 23);
+		btnNuevo.setBounds(318, 447, 89, 23);
 		getContentPane().add(btnNuevo);
 		
 		panelPrograma = new JPanel();
-		panelPrograma.setBounds(439, 72, 241, 233);
+		panelPrograma.setBounds(10, 283, 452, 153);
 		getContentPane().add(panelPrograma);
 		panelPrograma.setLayout(null);
 		
 		txtCantPedido = new JTextField();
 		txtCantPedido.setColumns(10);
-		txtCantPedido.setBounds(10, 53, 86, 20);
+		txtCantPedido.setBounds(10, 31, 86, 20);
 		panelPrograma.add(txtCantPedido);
 		
 		lblCantPedido = new JLabel("PEDIDO");
-		lblCantPedido.setBounds(10, 33, 86, 14);
+		lblCantPedido.setBounds(10, 11, 86, 14);
 		panelPrograma.add(lblCantPedido);
 		
-		txtCantPrograma = new JTextField();
-		txtCantPrograma.setColumns(10);
-		txtCantPrograma.setBounds(106, 53, 86, 20);
-		panelPrograma.add(txtCantPrograma);
+		txtCantProgramada = new JTextField();
+		txtCantProgramada.setColumns(10);
+		txtCantProgramada.setBounds(106, 31, 86, 20);
+		panelPrograma.add(txtCantProgramada);
 		
 		lblCantPrograma = new JLabel("PROGRAMA");
-		lblCantPrograma.setBounds(106, 33, 86, 14);
+		lblCantPrograma.setBounds(106, 11, 86, 14);
 		panelPrograma.add(lblCantPrograma);
 		
 		txtObsPrograma = new JTextArea();
-		txtObsPrograma.setBounds(10, 105, 221, 117);
+		txtObsPrograma.setBounds(10, 83, 416, 59);
 		txtObsPrograma.setLineWrap(true);
 		txtObsPrograma.setBorder(new EmptyBorder(4,4,4,4));
 		panelPrograma.add(txtObsPrograma);
 		
 		lblObsPrograma = new JLabel("OBSERVACION");
-		lblObsPrograma.setBounds(10, 80, 86, 14);
+		lblObsPrograma.setBounds(10, 58, 86, 14);
 		panelPrograma.add(lblObsPrograma);
 		
 		btnLista = new JButton("LISTA");
 		btnLista.addActionListener(this);
-		btnLista.setBounds(417, 416, 89, 23);
+		btnLista.setBounds(417, 447, 89, 23);
 		getContentPane().add(btnLista);
 		
 		txtFechaActualizada = new JDateChooser();
-		txtFechaActualizada.setBounds(439, 31, 118, 20);
+		txtFechaActualizada.setBounds(431, 31, 118, 20);
 		getContentPane().add(txtFechaActualizada);
 		
 		lblFechaActualizada = new JLabel("ACTUALIZACION");
-		lblFechaActualizada.setBounds(439, 11, 100, 14);
+		lblFechaActualizada.setBounds(431, 11, 100, 14);
 		getContentPane().add(lblFechaActualizada);
 		
 		txtEstadoPrograma = new JTextField();
-		txtEstadoPrograma.setBounds(594, 31, 86, 20);
+		txtEstadoPrograma.setBounds(586, 31, 86, 20);
 		getContentPane().add(txtEstadoPrograma);
 		txtEstadoPrograma.setColumns(10);
 		
 		lblEstadoPrograma = new JLabel("ESTADO");
-		lblEstadoPrograma.setBounds(594, 11, 86, 14);
+		lblEstadoPrograma.setBounds(586, 11, 86, 14);
 		getContentPane().add(lblEstadoPrograma);
 		
 		lblCodPrograma = new JLabel("ID PROGRAMA");
@@ -275,6 +264,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		getContentPane().add(lblCodPrograma);
 		
 		txtCodPrograma = new JTextField();
+		txtCodPrograma.addCaretListener(this);
 		txtCodPrograma.setColumns(10);
 		txtCodPrograma.setBounds(13, 31, 86, 20);
 		getContentPane().add(txtCodPrograma);
@@ -328,17 +318,34 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
 
 		DlgBuscarOP.frame = "FrmProgramaAcabado";
-		DlgBuscarOP buscarOP = new DlgBuscarOP (this,true);
+		DlgBuscarOP buscarOP = new DlgBuscarOP (new FrmPrincipal(),true);
 		buscarOP.setVisible(true);
 	}
 
 	protected void actionPerformedBtnBuscarCitiConfeccion(ActionEvent e) {
+		
+		DlgBuscarCitiConfeccion.frame = "FrmProgramaAcabado";
+		DlgBuscarCitiConfeccion dlg = new DlgBuscarCitiConfeccion(new FrmPrincipal(),true);
+		dlg.setVisible(true);
 	}
 
 	protected void actionPerformedBtnBuscarCitiAcabado(ActionEvent e) {
+		
+		DlgBuscarCitiAcabado.frame = "FrmProgramaAcabado";
+		DlgBuscarCitiAcabado dlg = new DlgBuscarCitiAcabado(new FrmPrincipal(),true);
+		dlg.setVisible(true);
 	}
-	//CARET CHANGED PARA TXT NRO_OP
+	//CARET CHANGED PARA TXT NRO_OP, COD_CITIS
 	public void caretUpdate(CaretEvent e) {
+		if (e.getSource() == txtCodCitiAcabado) {
+			caretUpdateTxtCodCitiAcabado(e);
+		}
+		if (e.getSource() == txtCodCitiConfeccion) {
+			caretUpdateTxtCodCitiConfeccion(e);
+		}
+		if (e.getSource() == txtCodPrograma) {
+			caretUpdateTxtCodPrograma(e);
+		}
 		if (e.getSource() == txtNroOP) {
 			caretUpdateTxtNroOP(e);
 		}
@@ -350,8 +357,36 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 			
 		}
 	}
+
+	protected void caretUpdateTxtCodPrograma(CaretEvent e) {
+		try {
+			mostrarPrograma();
+		}catch(Exception ex) {
+			
+		}
+	}
+	
+
+	protected void caretUpdateTxtCodCitiConfeccion(CaretEvent e) {
+		try {
+			mostrarCitiConfeccion();
+		}catch(Exception ex) {
+			
+		}
+	}
+	
+	protected void caretUpdateTxtCodCitiAcabado(CaretEvent e) {
+		try {
+			mostratCitiAcabado();
+		}catch(Exception ex) {
+			
+		}
+	}
+	
 	//METODOS GET
 	
+	
+
 	private int leerCodPrograma() {
 		int res = -1;
 		
@@ -371,7 +406,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private int leerCantPrograma() {
 		int res = -1;
 		
-		res = Integer.parseInt(this.txtCantPrograma.getText().trim());
+		res = Integer.parseInt(this.txtCantProgramada.getText().trim());
 		
 		return res;
 	}	
@@ -400,7 +435,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private String leerObservacion () {
 		String res = "NINGUNA";
 		
-		res = this.txtObsPrograma.getText();
+		res = FrmProgramaAcabado.txtObsPrograma.getText();
 		
 		return res ;
 	}
@@ -424,7 +459,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private String leerCitiConfeccion() {
 		String res = null;
 		
-		res = this.txtCodCitiConfeccion.getText().trim();
+		res = FrmProgramaAcabado.txtCodCitiConfeccion.getText().trim();
 		
 		return res;
 	}
@@ -432,7 +467,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private String leerCitiAcabado() {
 		String res = null;
 		
-		res = this.txtCodCitiAcabado.getText().trim();
+		res = FrmProgramaAcabado.txtCodCitiAcabado.getText().trim();
 		
 		return res;
 	}
@@ -448,25 +483,31 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		FrmProgramaAcabado.txtCodPrograma.setEditable(false);
 		FrmProgramaAcabado.txtNroOP.setText("");
 		FrmProgramaAcabado.txtNroOP.requestFocus();
+		FrmProgramaAcabado.txtNroOP.setEditable(false);
+		FrmProgramaAcabado.txtCodCitiConfeccion.setEditable(false);
+		FrmProgramaAcabado.txtCodCitiAcabado.setEditable(false);
+		FrmProgramaAcabado.txtCodCitiAcabado.setText("");
+		FrmProgramaAcabado.txtCodCitiConfeccion.setText("");
+		
 		this.txtCantPedido.setText("");
-		this.txtCantPrograma.setText("");
+		this.txtCantProgramada.setText("");
 		this.txtClienteOP.setText("");
 		this.txtClienteOP.setEditable(false);
-		this.txtCodCitiAcabado.setText("");
-		this.txtCodCitiConfeccion.setText("");
+		
 		this.cboColorOP.setSelectedIndex(-1);
 		this.txtDesCitiConfeccion.setText("");
 		this.txtDesCitiConfeccion.setEditable(false);
 		this.txtDesCitiAcabado.setText("");
 		this.txtDesCitiAcabado.setEditable(false);
-		this.txtEstadoCitiConfeccion.setText("");
-		this.txtEstadoCitiConfeccion.setEditable(false);
-		this.txtEstadoCitiAcabado.setText("");
-		this.txtEstadoCitiAcabado.setEditable(false);
 		this.txtEstadoPrograma.setText("REGISTRADO");
 		this.txtEstadoPrograma.setEditable(false);
 		this.txtFechaActualizada.setDate(new Date());
 		this.txtFechaActualizada.setEnabled(false);
+		
+		
+		btnEditar.setEnabled(false);
+		btnGrabar.setEnabled(true);
+		btnEliminar.setEnabled(false);
 		
 	}
 	
@@ -497,11 +538,16 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		arrProgramaAcabado.adicionar(obj);
-		arrProgramaAcabado.grabarProgramaAcabado();
-		limpiar();
-		
-		
+		if (codPrograma==-1 || nroOP==-1 || codColorOP==-1 || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
+			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
+			return;
+		}else {
+			arrProgramaAcabado.adicionar(obj);
+			arrProgramaAcabado.grabarProgramaAcabado();
+			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
+			limpiar();
+		}
 	}
 	
 	private void editar() {
@@ -530,8 +576,16 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		arrProgramaAcabado.editar(obj);
-		arrProgramaAcabado.grabarProgramaAcabado();
+		if (codPrograma==-1 || nroOP==-1 || codColorOP==-1 || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
+			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
+			return;
+		}else {
+			arrProgramaAcabado.editar(obj);
+			arrProgramaAcabado.grabarProgramaAcabado();
+			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
+			limpiar();
+		}
 	}
 	
 	private void eliminar() {
@@ -590,6 +644,33 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 			}
 		}
 		
+	}
+	
+	private void mostrarPrograma() {
+		ProgramaAcabado obj = arrProgramaAcabado.buscar(leerCodPrograma());
+		txtNroOP.setText(obj.getNro_OP()+"");
+		cboColorOP.setSelectedIndex(obj.getCod_colorOP());
+		txtCodCitiConfeccion.setText(obj.getCod_citiConfeccion());
+		txtCodCitiAcabado.setText(obj.getCod_citiAcabado());
+		txtCantPedido.setText(obj.getCantPed_programaAcabado()+"");
+		txtCantProgramada.setText(obj.getCantProg_programaAcabado()+"");
+		txtFechaActualizada.setDate(obj.getFechaAct_programaAcabado());
+		txtEstadoPrograma.setText(obj.getEstado_programaAcabado());
+		txtObsPrograma.setText(obj.getObs_programaAcabado());
+	}
+	private void mostrarCitiConfeccion() {
+		ArregloCitiConfeccion arrCitiConfeccion = new ArregloCitiConfeccion();
+		CitiConfeccion obj=arrCitiConfeccion.buscar(leerCitiConfeccion());
+		
+		txtDesCitiConfeccion.setText(obj.getDes_citiConfeccion());
+		
+	}
+	private void mostratCitiAcabado() {
+		ArregloCitiAcabado arrCitiAcabado = new ArregloCitiAcabado();
+		CitiAcabado obj = arrCitiAcabado.buscar(leerCitiAcabado());
+		
+		
+		txtDesCitiAcabado.setText(obj.getDes_citiAcabado());
 	}
 	
 	
