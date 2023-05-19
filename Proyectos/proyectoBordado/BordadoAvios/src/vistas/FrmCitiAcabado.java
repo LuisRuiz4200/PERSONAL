@@ -9,9 +9,11 @@ import clases.CitiAcabado;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class FrmCitiAcabado extends JFrame implements ActionListener{
+public class FrmCitiAcabado extends JFrame implements ActionListener, MouseListener{
 	private JPanel panel;
 	private JTextField txtCodCiti;
 	private JLabel lblCodCiti;
@@ -93,6 +95,7 @@ public class FrmCitiAcabado extends JFrame implements ActionListener{
 		getContentPane().add(spCitiAcabado);
 		
 		table = new JTable();
+		table.addMouseListener(this);
 		spCitiAcabado.setViewportView(table);
 		
 		modelo = new DefaultTableModel();
@@ -154,6 +157,7 @@ public class FrmCitiAcabado extends JFrame implements ActionListener{
 	//METODOS VOID
 	private void arranque() {
 		limpiar();
+		listarCitiAcabado();
 	}
 	
 	private void limpiar() {
@@ -219,8 +223,34 @@ public class FrmCitiAcabado extends JFrame implements ActionListener{
 			modelo.addRow(x);
 		}
 		
-		listarCitiAcabado();
-		
 	}
 	
+	private void mostrarCitiAcabado () {
+		int n = table.getSelectedRow();
+		
+		String codigo = table.getValueAt(n, 0).toString();
+		String descripcion = table.getValueAt(n, 1).toString();
+		String estado = table.getValueAt(n, 2).toString();
+		
+		txtCodCiti.setText(codigo);
+		txtDesCiti.setText(descripcion);
+		txtEstadoCiti.setText(estado);
+	}
+	//MOUSE CLICKE DE LA TABLA CITI
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		mostrarCitiAcabado();
+	}
 }

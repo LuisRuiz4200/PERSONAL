@@ -85,7 +85,6 @@ public class ArregloCitiAcabado {
 		
 		try {
 			br = new BufferedReader(new FileReader("citiAcabado.txt"));
-			citiAcabado = new CitiAcabado();
 			
 			while((line=br.readLine())!=null) {
 				 String [] n=line.split(";");
