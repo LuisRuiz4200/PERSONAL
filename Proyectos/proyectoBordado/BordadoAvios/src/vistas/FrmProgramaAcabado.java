@@ -1,30 +1,20 @@
 package vistas;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import arreglos.ArregloCliente;
 import arreglos.ArregloColorOP;
-import arreglos.ArregloEstiloOP;
 import arreglos.ArregloOrdenProduccion;
 import arreglos.ArregloProgramaAcabado;
 import clases.Cliente;
-import clases.ColorOP;
-import clases.EstiloOP;
 import clases.OrdenProduccion;
 import clases.ProgramaAcabado;
 
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
 import javax.swing.event.CaretListener;
 
 import com.toedter.calendar.JDateChooser;
@@ -72,7 +62,7 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private JButton btnBuscarCitiConfeccion;
 	private JButton btnBuscarCitiAcabado;
 	private JLabel lblCodPrograma;
-	private JTextField txtCodPrograma;
+	public static JTextField txtCodPrograma;
 	
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
 	private JTextArea txtObsPrograma;
@@ -250,9 +240,11 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		
 		txtObsPrograma = new JTextArea();
 		txtObsPrograma.setBounds(10, 105, 221, 117);
+		txtObsPrograma.setLineWrap(true);
+		txtObsPrograma.setBorder(new EmptyBorder(4,4,4,4));
 		panelPrograma.add(txtObsPrograma);
 		
-		lblObsPrograma = new JLabel("PROGRAMA");
+		lblObsPrograma = new JLabel("OBSERVACION");
 		lblObsPrograma.setBounds(10, 80, 86, 14);
 		panelPrograma.add(lblObsPrograma);
 		
@@ -262,11 +254,11 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 		getContentPane().add(btnLista);
 		
 		txtFechaActualizada = new JDateChooser();
-		txtFechaActualizada.setBounds(479, 31, 100, 20);
+		txtFechaActualizada.setBounds(439, 31, 118, 20);
 		getContentPane().add(txtFechaActualizada);
 		
 		lblFechaActualizada = new JLabel("ACTUALIZACION");
-		lblFechaActualizada.setBounds(479, 11, 100, 14);
+		lblFechaActualizada.setBounds(439, 11, 100, 14);
 		getContentPane().add(lblFechaActualizada);
 		
 		txtEstadoPrograma = new JTextField();
@@ -395,7 +387,12 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	private int leerColorOP () {
 		int res = -1;
 		
-		res = this.cboColorOP.getSelectedIndex();
+		if(cboColorOP.getSelectedIndex()==0) {
+			JOptionPane.showMessageDialog(this, "ELIGA UN COLOR");
+		}else {
+			res = this.cboColorOP.getSelectedIndex();
+		}
+		
 		
 		return res;
 	}
@@ -447,22 +444,29 @@ public class FrmProgramaAcabado extends JFrame implements ActionListener, CaretL
 	}
 	private void limpiar() {
 		
-		this.txtCodPrograma.setText(arrProgramaAcabado.correlativo()+"");
-		this.txtCodPrograma.setEditable(false);
+		FrmProgramaAcabado.txtCodPrograma.setText(arrProgramaAcabado.correlativo()+"");
+		FrmProgramaAcabado.txtCodPrograma.setEditable(false);
 		FrmProgramaAcabado.txtNroOP.setText("");
 		FrmProgramaAcabado.txtNroOP.requestFocus();
 		this.txtCantPedido.setText("");
 		this.txtCantPrograma.setText("");
 		this.txtClienteOP.setText("");
+		this.txtClienteOP.setEditable(false);
 		this.txtCodCitiAcabado.setText("");
 		this.txtCodCitiConfeccion.setText("");
 		this.cboColorOP.setSelectedIndex(-1);
 		this.txtDesCitiConfeccion.setText("");
+		this.txtDesCitiConfeccion.setEditable(false);
 		this.txtDesCitiAcabado.setText("");
+		this.txtDesCitiAcabado.setEditable(false);
 		this.txtEstadoCitiConfeccion.setText("");
+		this.txtEstadoCitiConfeccion.setEditable(false);
 		this.txtEstadoCitiAcabado.setText("");
+		this.txtEstadoCitiAcabado.setEditable(false);
 		this.txtEstadoPrograma.setText("REGISTRADO");
+		this.txtEstadoPrograma.setEditable(false);
 		this.txtFechaActualizada.setDate(new Date());
+		this.txtFechaActualizada.setEnabled(false);
 		
 	}
 	

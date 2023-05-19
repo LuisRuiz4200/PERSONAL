@@ -96,7 +96,7 @@ public class ArregloProgramaAcabado {
 						obj.getCod_citiConfeccion() + ";" +
 						obj.getCod_citiAcabado() + ";" +
 						obj.getObs_programaAcabado() + ";" + 
-						obj.getFechaAct_programaAcabado() +";" +
+						new SimpleDateFormat("dd/MM/yyyy").format(obj.getFechaAct_programaAcabado()) +";" +
 						obj.getEstado_programaAcabado() + ";" 
 						;
 				pw.println(line);
@@ -128,7 +128,7 @@ public class ArregloProgramaAcabado {
 				 citiConfeccion.setCod_citiConfeccion(n[5]);
 				 citiConfeccion.setCod_citiAcabado(n[6]);
 				 citiConfeccion.setObs_programaAcabado(n[7]);
-				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat().parse(n[8]).getTime()));
+				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[8]).getTime()));
 				 citiConfeccion.setEstado_programaAcabado(n[9]);
 				 
 				 adicionar(citiConfeccion);

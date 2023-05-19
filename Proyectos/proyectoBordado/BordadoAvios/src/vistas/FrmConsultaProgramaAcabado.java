@@ -13,15 +13,18 @@ import java.text.SimpleDateFormat;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, MouseListener{
+public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, MouseListener, ActionListener{
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTextField txtNroOP;
 	private JLabel lblNroOP;
 	private DefaultTableModel modelo;
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
+	private JButton btnEditar;
 	
 	public static void main (String[] args) {
 		FrmConsultaProgramaAcabado ventana = new FrmConsultaProgramaAcabado();
@@ -67,6 +70,11 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		table.setModel(modelo);
 		
 		table.setAutoResizeMode(0);
+		
+		btnEditar = new JButton("EDITAR");
+		btnEditar.addActionListener(this);
+		btnEditar.setBounds(165, 44, 89, 23);
+		getContentPane().add(btnEditar);
 		table.getColumn("ID").setPreferredWidth(40);
 		table.getColumn("COLOR").setPreferredWidth(200);
 		table.getColumn("CONFECCION").setPreferredWidth(100);
@@ -109,6 +117,14 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 	}
 	protected void mouseClickedTable(MouseEvent e) {
 		cargarPrograma();
+	}
+	//ACTION PERFORMED
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEditar) {
+			actionPerformedBtnEditar(e);
+		}
+	}
+	protected void actionPerformedBtnEditar(ActionEvent e) {
 	}
 	//METODOS VOID
 	private void arranque() {
@@ -187,7 +203,5 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		
 		txtNroOP.setText(nroOP);
 	}
-	
-	
 	
 }
