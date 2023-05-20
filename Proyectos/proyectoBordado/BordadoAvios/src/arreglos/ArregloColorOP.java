@@ -16,7 +16,7 @@ public class ArregloColorOP {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrColorOP.size();
 	}
 	

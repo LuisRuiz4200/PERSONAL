@@ -28,8 +28,8 @@ import javax.swing.event.CaretEvent;
 
 @SuppressWarnings("serial")
 public class FrmProgramaAcabado extends JInternalFrame implements ActionListener, CaretListener{
-	private JPanel panelCitiConfeccion;
-	private JPanel panelCitiAcabado;
+	private JPanel panelConfeccion;
+	private JPanel panelAcabado;
 	private JPanel panelOP;
 	public static JTextField txtCodCitiConfeccion;
 	private JLabel lblCodCitiConfeccion;
@@ -39,7 +39,6 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private JLabel lblNroOP;
 	private JTextField txtClienteOP;
 	private JLabel lblClienteOP;
-	private JComboBox<Object> cboColorOP;
 	private JLabel lblColorOP;
 	public static JTextField txtCodCitiAcabado;
 	private JLabel lblCodCitiAcabado;
@@ -68,6 +67,12 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
 	public static JTextArea txtObsPrograma;
 	private JLabel lblObsPrograma;
+	public static JTextField txtColorOP;
+	public static JTextField txtEstiloOP;
+	private JLabel lblEstiloOP;
+	public static JTextField txtPrendaOP;
+	private JLabel lblPrendaOP;
+	public static JTextField txtIdF10;
 	
 	public static void main (String[] args) {
 		FrmProgramaAcabado ventana = new FrmProgramaAcabado();
@@ -85,68 +90,68 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		this.setMaximizable(true);
 		this.setClosable(true);
 		
-		panelCitiConfeccion = new JPanel();
-		panelCitiConfeccion.setBounds(10, 183, 333, 89);
-		panelCitiConfeccion.setBorder(new TitledBorder("CITI CONFECCION"));
-		panelCitiConfeccion.setLayout(null);
-		getContentPane().add(panelCitiConfeccion);
+		panelConfeccion = new JPanel();
+		panelConfeccion.setBounds(10, 213, 319, 89);
+		panelConfeccion.setBorder(new TitledBorder("CONFECCION"));
+		panelConfeccion.setLayout(null);
+		getContentPane().add(panelConfeccion);
 		
 		txtCodCitiConfeccion = new JTextField();
 		txtCodCitiConfeccion.addCaretListener(this);
 		txtCodCitiConfeccion.setBounds(10, 45, 86, 20);
-		panelCitiConfeccion.add(txtCodCitiConfeccion);
+		panelConfeccion.add(txtCodCitiConfeccion);
 		txtCodCitiConfeccion.setColumns(10);
 		
 		lblCodCitiConfeccion = new JLabel("CODIGO");
 		lblCodCitiConfeccion.setBounds(10, 25, 86, 14);
-		panelCitiConfeccion.add(lblCodCitiConfeccion);
+		panelConfeccion.add(lblCodCitiConfeccion);
 		
 		txtDesCitiConfeccion = new JTextField();
 		txtDesCitiConfeccion.setColumns(10);
 		txtDesCitiConfeccion.setBounds(153, 45, 150, 20);
-		panelCitiConfeccion.add(txtDesCitiConfeccion);
+		panelConfeccion.add(txtDesCitiConfeccion);
 		
 		lblDesCitiConfeccion = new JLabel("DESCRIPCION");
 		lblDesCitiConfeccion.setBounds(153, 25, 86, 14);
-		panelCitiConfeccion.add(lblDesCitiConfeccion);
+		panelConfeccion.add(lblDesCitiConfeccion);
 		
 		btnBuscarCitiConfeccion = new JButton("New button");
 		btnBuscarCitiConfeccion.addActionListener(this);
 		btnBuscarCitiConfeccion.setBounds(106, 44, 37, 23);
-		panelCitiConfeccion.add(btnBuscarCitiConfeccion);
+		panelConfeccion.add(btnBuscarCitiConfeccion);
 		
-		panelCitiAcabado = new JPanel();
-		panelCitiAcabado.setBounds(353, 183, 319, 89);
-		panelCitiAcabado.setBorder(new TitledBorder("CITI ACABADO"));
-		panelCitiAcabado.setLayout(null);
-		getContentPane().add(panelCitiAcabado);
+		panelAcabado = new JPanel();
+		panelAcabado.setBounds(10, 315, 319, 89);
+		panelAcabado.setBorder(new TitledBorder("ACABADO"));
+		panelAcabado.setLayout(null);
+		getContentPane().add(panelAcabado);
 		
 		txtCodCitiAcabado = new JTextField();
 		txtCodCitiAcabado.addCaretListener(this);
 		txtCodCitiAcabado.setColumns(10);
 		txtCodCitiAcabado.setBounds(10, 43, 86, 20);
-		panelCitiAcabado.add(txtCodCitiAcabado);
+		panelAcabado.add(txtCodCitiAcabado);
 		
 		lblCodCitiAcabado = new JLabel("CODIGO");
 		lblCodCitiAcabado.setBounds(10, 23, 86, 14);
-		panelCitiAcabado.add(lblCodCitiAcabado);
+		panelAcabado.add(lblCodCitiAcabado);
 		
 		txtDesCitiAcabado = new JTextField();
 		txtDesCitiAcabado.setColumns(10);
 		txtDesCitiAcabado.setBounds(153, 43, 150, 20);
-		panelCitiAcabado.add(txtDesCitiAcabado);
+		panelAcabado.add(txtDesCitiAcabado);
 		
 		lblDesCitiAcabado = new JLabel("DESCRIPCION");
 		lblDesCitiAcabado.setBounds(153, 23, 86, 14);
-		panelCitiAcabado.add(lblDesCitiAcabado);
+		panelAcabado.add(lblDesCitiAcabado);
 		
 		btnBuscarCitiAcabado = new JButton("New button");
 		btnBuscarCitiAcabado.addActionListener(this);
 		btnBuscarCitiAcabado.setBounds(106, 42, 37, 23);
-		panelCitiAcabado.add(btnBuscarCitiAcabado);
+		panelAcabado.add(btnBuscarCitiAcabado);
 		
 		panelOP = new JPanel();
-		panelOP.setBounds(10, 72, 662, 100);
+		panelOP.setBounds(10, 72, 662, 130);
 		panelOP.setBorder(new TitledBorder("ORDEN PROUDCCION"));
 		panelOP.setLayout(null);
 		getContentPane().add(panelOP);
@@ -155,34 +160,58 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		txtNroOP.addCaretListener(this);
 		txtNroOP.addActionListener(this);
 		txtNroOP.setColumns(10);
-		txtNroOP.setBounds(10, 53, 86, 20);
+		txtNroOP.setBounds(10, 44, 86, 20);
 		panelOP.add(txtNroOP);
 		
 		lblNroOP = new JLabel("OP");
-		lblNroOP.setBounds(10, 33, 86, 14);
+		lblNroOP.setBounds(10, 24, 86, 14);
 		panelOP.add(lblNroOP);
 		
 		txtClienteOP = new JTextField();
 		txtClienteOP.setColumns(10);
-		txtClienteOP.setBounds(163, 53, 130, 20);
+		txtClienteOP.setBounds(163, 44, 130, 20);
 		panelOP.add(txtClienteOP);
 		
 		lblClienteOP = new JLabel("CLIENTE");
-		lblClienteOP.setBounds(163, 33, 86, 14);
+		lblClienteOP.setBounds(163, 24, 86, 14);
 		panelOP.add(lblClienteOP);
 		
-		cboColorOP = new JComboBox<Object>();
-		cboColorOP.setBounds(338, 53, 189, 20);
-		panelOP.add(cboColorOP);
-		
 		lblColorOP = new JLabel("COLOR");
-		lblColorOP.setBounds(338, 33, 86, 14);
+		lblColorOP.setBounds(338, 24, 86, 14);
 		panelOP.add(lblColorOP);
 		
 		btnBuscarOP = new JButton("New button");
 		btnBuscarOP.addActionListener(this);
-		btnBuscarOP.setBounds(106, 52, 37, 23);
+		btnBuscarOP.setBounds(106, 43, 37, 23);
 		panelOP.add(btnBuscarOP);
+		
+		txtColorOP = new JTextField();
+		txtColorOP.setBounds(338, 44, 184, 20);
+		panelOP.add(txtColorOP);
+		txtColorOP.setColumns(10);
+		
+		txtEstiloOP = new JTextField();
+		txtEstiloOP.setColumns(10);
+		txtEstiloOP.setBounds(10, 95, 184, 20);
+		panelOP.add(txtEstiloOP);
+		
+		lblEstiloOP = new JLabel("ESTILO");
+		lblEstiloOP.setBounds(10, 75, 86, 14);
+		panelOP.add(lblEstiloOP);
+		
+		txtPrendaOP = new JTextField();
+		txtPrendaOP.setColumns(10);
+		txtPrendaOP.setBounds(222, 95, 121, 20);
+		panelOP.add(txtPrendaOP);
+		
+		lblPrendaOP = new JLabel("PRENDA");
+		lblPrendaOP.setBounds(222, 75, 86, 14);
+		panelOP.add(lblPrendaOP);
+		
+		txtIdF10 = new JTextField();
+		txtIdF10.setBounds(584, 99, 68, 20);
+		panelOP.add(txtIdF10);
+		txtIdF10.setColumns(10);
 		
 		btnGrabar = new JButton("GRABAR");
 		btnGrabar.addActionListener(this);
@@ -205,7 +234,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		getContentPane().add(btnNuevo);
 		
 		panelPrograma = new JPanel();
-		panelPrograma.setBounds(10, 283, 452, 153);
+		panelPrograma.setBounds(339, 221, 256, 170);
 		getContentPane().add(panelPrograma);
 		panelPrograma.setLayout(null);
 		
@@ -228,13 +257,13 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		panelPrograma.add(lblCantPrograma);
 		
 		txtObsPrograma = new JTextArea();
-		txtObsPrograma.setBounds(10, 83, 416, 59);
+		txtObsPrograma.setBounds(10, 100, 198, 59);
 		txtObsPrograma.setLineWrap(true);
 		txtObsPrograma.setBorder(new EmptyBorder(4,4,4,4));
 		panelPrograma.add(txtObsPrograma);
 		
 		lblObsPrograma = new JLabel("OBSERVACION");
-		lblObsPrograma.setBounds(10, 58, 86, 14);
+		lblObsPrograma.setBounds(10, 75, 86, 14);
 		panelPrograma.add(lblObsPrograma);
 		
 		btnLista = new JButton("LISTA");
@@ -312,13 +341,18 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		limpiar();
 	}
 	protected void actionPerformedBtnLista(ActionEvent e) {
-		FrmConsultaProgramaAcabado consultaProgramaAcabado = new FrmConsultaProgramaAcabado();
-		consultaProgramaAcabado.setVisible(true);
+		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
+		this.dispose();
+		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
+		FrmPrincipal.escritorio.add(frame);
+		
 	}
 	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
 
-		DlgBuscarOP.frame = "FrmProgramaAcabado";
-		DlgBuscarOP buscarOP = new DlgBuscarOP (new FrmPrincipal(),true);
+		DlgListaF10.frame = "FrmProgramaAcabado";
+		DlgListaF10 buscarOP = new DlgListaF10 ();
 		buscarOP.setVisible(true);
 	}
 
@@ -406,7 +440,11 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private int leerCantPrograma() {
 		int res = -1;
 		
-		res = Integer.parseInt(this.txtCantProgramada.getText().trim());
+		if(txtCantProgramada.getText().trim().length()==0) {
+			res = 0;
+		}else {
+			res = Integer.parseInt(this.txtCantProgramada.getText().trim());
+		}
 		
 		return res;
 	}	
@@ -414,20 +452,20 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private int leerCantPedido() {
 		int res = -1;
 		
-		res = Integer.parseInt(this.txtCantPedido.getText().trim());
+		if(txtCantPedido.getText().trim().length()==0) {
+			res = 0;
+		}else {
+			res = Integer.parseInt(this.txtCantPedido.getText().trim());
+		}
+		
 		
 		return res;
 	}
 	
-	private int leerColorOP () {
-		int res = -1;
+	private String leerColorOP () {
+		String res = null;
 		
-		if(cboColorOP.getSelectedIndex()==0) {
-			JOptionPane.showMessageDialog(this, "ELIGA UN COLOR");
-		}else {
-			res = this.cboColorOP.getSelectedIndex();
-		}
-		
+		res = txtColorOP.getText().trim();
 		
 		return res;
 	}
@@ -480,30 +518,38 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private void limpiar() {
 		
 		FrmProgramaAcabado.txtCodPrograma.setText(arrProgramaAcabado.correlativo()+"");
-		FrmProgramaAcabado.txtCodPrograma.setEditable(false);
 		FrmProgramaAcabado.txtNroOP.setText("");
 		FrmProgramaAcabado.txtNroOP.requestFocus();
-		FrmProgramaAcabado.txtNroOP.setEditable(false);
-		FrmProgramaAcabado.txtCodCitiConfeccion.setEditable(false);
-		FrmProgramaAcabado.txtCodCitiAcabado.setEditable(false);
 		FrmProgramaAcabado.txtCodCitiAcabado.setText("");
 		FrmProgramaAcabado.txtCodCitiConfeccion.setText("");
+		FrmProgramaAcabado.txtColorOP.setText("");
+		FrmProgramaAcabado.txtEstiloOP.setText("");
+		FrmProgramaAcabado.txtPrendaOP.setText("");
+		FrmProgramaAcabado.txtIdF10.setText("");
 		
 		this.txtCantPedido.setText("");
 		this.txtCantProgramada.setText("");
 		this.txtClienteOP.setText("");
-		this.txtClienteOP.setEditable(false);
-		
-		this.cboColorOP.setSelectedIndex(-1);
 		this.txtDesCitiConfeccion.setText("");
-		this.txtDesCitiConfeccion.setEditable(false);
 		this.txtDesCitiAcabado.setText("");
-		this.txtDesCitiAcabado.setEditable(false);
 		this.txtEstadoPrograma.setText("REGISTRADO");
-		this.txtEstadoPrograma.setEditable(false);
 		this.txtFechaActualizada.setDate(new Date());
-		this.txtFechaActualizada.setEnabled(false);
 		
+
+		this.txtDesCitiAcabado.setEditable(false);
+		this.txtFechaActualizada.setEnabled(false);
+		this.txtDesCitiConfeccion.setEditable(false);
+		this.txtEstadoPrograma.setEditable(false);
+		this.txtClienteOP.setEditable(false);
+		FrmProgramaAcabado.txtNroOP.setEditable(false);
+		FrmProgramaAcabado.txtEstiloOP.setEditable(false);
+		FrmProgramaAcabado.txtColorOP.setEditable(false);
+		FrmProgramaAcabado.txtPrendaOP.setEditable(false);
+		FrmProgramaAcabado.txtIdF10.setEditable(false);
+		FrmProgramaAcabado.txtCodCitiConfeccion.setEditable(false);
+		FrmProgramaAcabado.txtCodCitiAcabado.setEditable(false);		
+		FrmProgramaAcabado.txtCodPrograma.setEditable(false);
+
 		
 		btnEditar.setEnabled(false);
 		btnGrabar.setEnabled(true);
@@ -516,7 +562,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		int codColorOP = leerColorOP();
+		String codColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
@@ -538,7 +584,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		if (codPrograma==-1 || nroOP==-1 || codColorOP==-1 || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+		if (codPrograma==-1 || nroOP==-1 || codColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
 				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
 			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
 			return;
@@ -554,7 +600,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		int codColorOP = leerColorOP();
+		String codColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
@@ -576,7 +622,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		if (codPrograma==-1 || nroOP==-1 || codColorOP==-1 || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+		if (codPrograma==-1 || nroOP==-1 || codColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
 				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
 			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
 			return;
@@ -591,7 +637,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private void eliminar() {
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		int codColorOP = leerColorOP();
+		String codColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
@@ -627,29 +673,14 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		
 		txtClienteOP.setText(cliente.getDesCliente());
-		cargarColor();
 		
 	}
-	
-	private void cargarColor() {
 
-		ArregloColorOP arrColorOP = new ArregloColorOP();
-		
-		cboColorOP.removeAllItems();
-		cboColorOP.addItem("ELIGE COLOR");
-		
-		for (int i =0;i<arrColorOP.tamaño();i++) {
-			if (arrColorOP.obtener(i).getNroOP()==leerNroOP()) {
-				cboColorOP.addItem(arrColorOP.obtener(i).getDesColorOP());
-			}
-		}
-		
-	}
 	
 	private void mostrarPrograma() {
 		ProgramaAcabado obj = arrProgramaAcabado.buscar(leerCodPrograma());
 		txtNroOP.setText(obj.getNro_OP()+"");
-		cboColorOP.setSelectedIndex(obj.getCod_colorOP());
+		txtColorOP.setText(obj.getCod_colorOP());
 		txtCodCitiConfeccion.setText(obj.getCod_citiConfeccion());
 		txtCodCitiAcabado.setText(obj.getCod_citiAcabado());
 		txtCantPedido.setText(obj.getCantPed_programaAcabado()+"");

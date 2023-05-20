@@ -167,7 +167,7 @@ public class FrmUnidadMedida extends JFrame implements MouseListener, ActionList
 	private void listarUM() {
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrUM.tamaño();i++) {
+		for(int i=0;i<arrUM.tamaÃ±o();i++) {
 			Object[]x= {
 					arrUM.obtener(i).getCodUM(),
 					arrUM.obtener(i).getDesUM()

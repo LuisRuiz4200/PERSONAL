@@ -7,6 +7,7 @@ import arreglos.ArregloColorOP;
 import arreglos.ArregloProgramaAcabado;
 import clases.ColorOP;
 import clases.ProgramaAcabado;
+import reuzables.Custom;
 
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, MouseListener, ActionListener{
+public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyListener, MouseListener, ActionListener{
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTextField txtNroOP;
@@ -25,6 +26,7 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 	private DefaultTableModel modelo;
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
 	private JButton btnEditar;
+	private JButton btnAgregar;
 	
 	public static void main (String[] args) {
 		FrmConsultaProgramaAcabado ventana = new FrmConsultaProgramaAcabado();
@@ -35,7 +37,12 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		
 		this.setTitle("CONSULTA DEL PROGRAMA DE ACABADOS");
 		this.setBounds(0,0,879,467);
-		this.setLocationRelativeTo(this);
+		//this.setLocationRelativeTo(this);
+		
+		this.setClosable(true);
+		this.setIconifiable(true);
+		this.setMaximizable(true);
+		
 		this.getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
@@ -75,6 +82,12 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		btnEditar.addActionListener(this);
 		btnEditar.setBounds(165, 44, 89, 23);
 		getContentPane().add(btnEditar);
+		
+		btnAgregar = new JButton("AGREGAR");
+		btnAgregar.addActionListener(this);
+		btnAgregar.setBounds(272, 44, 89, 23);
+		getContentPane().add(btnAgregar);
+		
 		table.getColumn("ID").setPreferredWidth(40);
 		table.getColumn("COLOR").setPreferredWidth(200);
 		table.getColumn("CONFECCION").setPreferredWidth(100);
@@ -123,15 +136,40 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		if (e.getSource() == btnEditar) {
 			actionPerformedBtnEditar(e);
 		}
+		if(e.getSource()== btnAgregar) {
+			actionPerformedBtnAgregar(e);
+		}
 	}
+	private void actionPerformedBtnAgregar(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmProgramaAcabado frame = new FrmProgramaAcabado();
+		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
+		this.dispose();
+		FrmPrincipal.escritorio.add(frame);
+		
+	}
+
 	protected void actionPerformedBtnEditar(ActionEvent e) {
 		
 		int n = table.getSelectedRow();
+		
+		if(n==-1) {
+			Custom.mensajeAdvertencia(this, "ELIGA UNA FILA DE LA TABLA");
+			return;
+		}
+		
+		FrmProgramaAcabado frame = new FrmProgramaAcabado();
+		frame.setVisible(true);
+		frame.setLocation(40,40);
+		FrmPrincipal.escritorio.add(frame);
 		
 		FrmProgramaAcabado.txtCodPrograma.setText(table.getValueAt(n,0).toString());
 		FrmProgramaAcabado.btnGrabar.setEnabled(false);
 		FrmProgramaAcabado.btnEditar.setEnabled(true);
 		FrmProgramaAcabado.txtNroOP.setEditable(false);
+		
 		this.dispose();
 		
 	}
@@ -142,19 +180,17 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 	
 	private void listarProgramaAcabado() {
 		
-		ArregloColorOP arrColor = new ArregloColorOP();
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrProgramaAcabado.tamaño();i++) {
+		for(int i=0;i<arrProgramaAcabado.tamaÃ±o();i++) {
 			
 			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
-			ColorOP color = arrColor.buscar(obj.getNro_OP(),obj.getCod_colorOP());
 			
 			Object[] x = new Object[] {
 					obj.getCod_programaAcabado(),
 					obj.getNro_OP(),
-					color.getDesColorOP(),
+					obj.getCod_colorOP(),
 					obj.getCantPed_programaAcabado(),
 					obj.getCantProg_programaAcabado(),
 					obj.getCod_citiConfeccion(),
@@ -171,22 +207,19 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 	}
 	
 	private void filtrarOP() {
-		ArregloColorOP arrColor = new ArregloColorOP();
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrProgramaAcabado.tamaño();i++) {
+		for(int i=0;i<arrProgramaAcabado.tamaÃ±o();i++) {
 
 			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
 			
 			if (String.valueOf(obj.getNro_OP()).startsWith(txtNroOP.getText().trim())) {
 				
-				ColorOP color = arrColor.buscar(obj.getNro_OP(),obj.getCod_colorOP());
-				
 				Object[] x = new Object[] {
 						obj.getCod_programaAcabado(),
 						obj.getNro_OP(),
-						color.getDesColorOP(),
+						obj.getCod_colorOP(),
 						obj.getCantPed_programaAcabado(),
 						obj.getCantProg_programaAcabado(),
 						obj.getCod_citiConfeccion(),
@@ -212,5 +245,4 @@ public class FrmConsultaProgramaAcabado extends JFrame implements KeyListener, M
 		
 		txtNroOP.setText(nroOP);
 	}
-	
 }

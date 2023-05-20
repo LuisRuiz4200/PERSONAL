@@ -16,7 +16,7 @@ public class ArregloCliente {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrCliente.size();
 	}
 	

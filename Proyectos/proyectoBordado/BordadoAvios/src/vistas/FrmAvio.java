@@ -234,7 +234,7 @@ public class FrmAvio extends JFrame implements ActionListener, MouseListener{
 		ArregloUniMed arrUnidadMedida = new ArregloUniMed();
 		
 		modelo.setRowCount(0);
-		for(int i=0;i<arrAvio.tamaño();i++) {
+		for(int i=0;i<arrAvio.tamaÃ±o();i++) {
 			Object[] x = {
 				arrAvio.obtener(i).getCodAvio(),
 				arrTipoAvio.buscar(arrAvio.obtener(i).getCodTipoAvio()).getDesTipoAvio(),
@@ -253,7 +253,7 @@ public class FrmAvio extends JFrame implements ActionListener, MouseListener{
 		
 		cboCodTipoAvio.setSelectedIndex(-1);
 		
-		for (int i=0;i<arrTipoAvio.tamaño();i++) {
+		for (int i=0;i<arrTipoAvio.tamaÃ±o();i++) {
 			cboCodTipoAvio.addItem(arrTipoAvio.obtener(i).getDesTipoAvio());
 		}
 	}
@@ -263,7 +263,7 @@ public class FrmAvio extends JFrame implements ActionListener, MouseListener{
 		
 		cboCodUnidadMedida.setSelectedIndex(-1);
 		
-		for(int i=0;i<arrUM.tamaño();i++) {
+		for(int i=0;i<arrUM.tamaÃ±o();i++) {
 			cboCodUnidadMedida.addItem(arrUM.obtener(i).getDesUM());
 		}
 	}

@@ -69,8 +69,8 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		
 		table.getTableHeader().setBackground(Color.BLACK);
 		table.getTableHeader().setForeground(Color.white);
-		table.getColumn("CITI").setMaxWidth(50);
-		table.getColumn("DESCRIPCION").setMaxWidth(70);
+		table.getColumn("CITI").setPreferredWidth(70);
+		table.getColumn("DESCRIPCION").setPreferredWidth(200);
 		
 		arranque();
 		
@@ -128,7 +128,7 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiAcabado.tamaÃ±o();i++) {
 			
 			Object[] x = new Object[] {
 					arrCitiAcabado.obtener(i).getCod_citiAcabado(),
@@ -145,7 +145,7 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiAcabado.tamaÃ±o();i++) {
 			
 			String codCiti = String.valueOf(arrCitiAcabado.obtener(i).getCod_citiAcabado());
 			

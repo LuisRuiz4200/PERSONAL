@@ -134,7 +134,7 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamaÃ±o();i++) {
 			
 			Object[] x = new Object[] {
 					arrOP.obtener(i).getNroOp(),
@@ -153,7 +153,7 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamaÃ±o();i++) {
 			
 			String nroOp = String.valueOf(arrOP.obtener(i).getNroOp());
 			

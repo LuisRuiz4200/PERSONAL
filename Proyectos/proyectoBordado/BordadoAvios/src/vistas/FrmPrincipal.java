@@ -1,6 +1,9 @@
 package vistas;
 
 import javax.swing.*;
+
+import arreglos.*;
+
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,11 +23,18 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	private JMenu mnAcabado;
 	private JMenuItem mniProgramaAcabado;
 	private JMenuItem mniConsultaProgramaAcabado;
-	private JDesktopPane escritorio;
+	public static JDesktopPane escritorio;
 	private JMenu mnCitis;
 	private JMenuItem mniCitiConfeccion;
 	private JMenuItem mniCitiAcabado;
 	private JMenu mnAvios;
+	private JMenuItem mniEstiloOP;
+	private JMenu mnDataBase;
+	private JMenuItem mniColorOP;
+	private JMenuItem mniOrdenProduccion;
+	private JMenuItem mniPrenda;
+	private JMenuItem mniCliente;
+	private JMenuItem mniActualizar;
 	
 	public static void main (String[] args) {
 		FrmPrincipal ventana = new FrmPrincipal();
@@ -48,8 +58,35 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
 		
+		mniActualizar = new JMenuItem("ACTUALIZAR");
+		mniActualizar.addActionListener(this);
+		mnArchivo.add(mniActualizar);
+		
 		mnMantenimiento = new JMenu("Mantenimiento");
 		menuBar.add(mnMantenimiento);
+		
+		mnDataBase = new JMenu("DATA BASE");
+		mnMantenimiento.add(mnDataBase);
+		
+		mniEstiloOP = new JMenuItem("ESTILO OP");
+		mniEstiloOP.addActionListener(this);
+		mnDataBase.add(mniEstiloOP);
+		
+		mniColorOP = new JMenuItem("COLOR OP");
+		mniColorOP.addActionListener(this);
+		mnDataBase.add(mniColorOP);
+		
+		mniOrdenProduccion = new JMenuItem("ORDEN PRODUCCION");
+		mniOrdenProduccion.addActionListener(this);
+		mnDataBase.add(mniOrdenProduccion);
+		
+		mniPrenda = new JMenuItem("PRENDA");
+		mniPrenda.addActionListener(this);
+		mnDataBase.add(mniPrenda);
+		
+		mniCliente = new JMenuItem("CLIENTE");
+		mniCliente.addActionListener(this);
+		mnDataBase.add(mniCliente);
 		
 		mnAvios = new JMenu("AVIOS");
 		mnMantenimiento.add(mnAvios);
@@ -100,6 +137,25 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		menuBar.add(mnAyuda);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.mniActualizar) {
+			actionPerformedMniActualizar(e);
+		}
+		if (e.getSource() == this.mniCliente) {
+			actionPerformedMniCliente(e);
+		}
+		if (e.getSource() == this.mniEstiloOP) {
+			actionPerformedMniEstiloOP(e);
+		}
+		if (e.getSource() == this.mniColorOP) {
+			actionPerformedMniColorOP(e);
+		}
+		if (e.getSource() == this.mniOrdenProduccion) {
+			actionPerformedMniOrdenProduccion(e);
+		}
+		if (e.getSource() == this.mniPrenda) {
+			actionPerformedMniPrenda(e);
+		}
+		//
 		if (e.getSource() == mniCitiAcabado) {
 			actionPerformedMniCitiAcabado(e);
 		}
@@ -119,6 +175,20 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 			actionPerformedMniIngresoAvio(e);
 		}
 	}
+	
+	
+
+	//ARCHIVO
+	
+	private void actionPerformedMniActualizar(ActionEvent e) {
+		// TODO Auto-generated method stub
+		new ArregloPrenda();
+		new ArregloCliente();
+		new ArregloEstiloOP();
+		new ArregloOrdenProduccion();
+		new ArregloColorOP();
+	}
+
 	//TRANSACCION
 	protected void actionPerformedMniIngresoAvio(ActionEvent e) {
 		FrmIngresoAvio ventana = new FrmIngresoAvio();
@@ -133,23 +203,60 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	protected void actionPerformedMniProgramaAcabado(ActionEvent e) {
 		FrmProgramaAcabado frame = new FrmProgramaAcabado();
 		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
 		escritorio.add(frame);
 	}
 	protected void actionPerformedMniConsultaProgramaAcabado(ActionEvent e) {
 		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
 		frame.setVisible(true);
-		frame.setLocationRelativeTo(this);
+		frame.setLocation(40,40);
+		frame.toFront();
 		escritorio.add(frame);
 	}
 	//MANTENIMIENTO - CITIS
 	protected void actionPerformedMniCitiConfeccion(ActionEvent e) {
 		FrmCitiConfeccion frame = new FrmCitiConfeccion();
 		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
 		escritorio.add(frame);
 	}
 	protected void actionPerformedMniCitiAcabado(ActionEvent e) {
 		FrmCitiAcabado frame = new FrmCitiAcabado();
 		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
 		escritorio.add(frame);
 	}
+	//MANTENIMIENTO - DATA BASE
+	private void actionPerformedMniPrenda(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmPrenda frame = new FrmPrenda();
+		frame.setVisible(true);
+	}
+
+	private void actionPerformedMniOrdenProduccion(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmOrdenProd frame = new FrmOrdenProd();
+		frame.setVisible(true);
+	}
+
+	private void actionPerformedMniColorOP(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmColorOP frame = new FrmColorOP();
+		frame.setVisible(true);
+	}
+
+	private void actionPerformedMniEstiloOP(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmEstiloOP frame = new FrmEstiloOP();
+		frame.setVisible(true);
+	}
+	private void actionPerformedMniCliente(ActionEvent e) {
+		// TODO Auto-generated method stub
+		FrmCliente frame = new FrmCliente();
+		frame.setVisible(true);
+	}
+
 }

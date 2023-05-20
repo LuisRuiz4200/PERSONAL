@@ -6,6 +6,8 @@ public class EstiloOP {
 	private String desEstiloOp;
 	private int codPrenda;
 	
+	public EstiloOP() {}
+	
 	public EstiloOP(int codEstiloOp, String desEstiloOp, int codPrenda) {
 		super();
 		this.codEstiloOp = codEstiloOp;

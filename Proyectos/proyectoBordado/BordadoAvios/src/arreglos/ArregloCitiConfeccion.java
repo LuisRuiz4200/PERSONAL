@@ -19,7 +19,7 @@ private ArrayList<CitiConfeccion> arrCitiConfeccion;
 		cargarCitiConfeccion();
 	}
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrCitiConfeccion.size();
 	}
 	

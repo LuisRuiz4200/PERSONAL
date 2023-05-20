@@ -117,7 +117,7 @@ public class FrmPrenda extends JFrame implements ActionListener{
 		int codPrenda = leerCodPrenda();
 		String desPrenda = leerDesPrenda();
 		
-		for(int i=0; i<arrPrenda.tamaño();i++) {
+		for(int i=0; i<arrPrenda.tamaÃ±o();i++) {
 			if(codPrenda == arrPrenda.obtener(i).getCodPrenda()) {
 				arrPrenda.obtener(i).setDesPrenda(desPrenda);
 				Custom.mensajeExito(this, "Modificado con exito");
@@ -129,7 +129,7 @@ public class FrmPrenda extends JFrame implements ActionListener{
 	protected void actionPerformedBtnEliminar(ActionEvent e) {
 		int codPrenda = leerCodPrenda();
 		
-		for(int i=0; i<arrPrenda.tamaño();i++) {
+		for(int i=0; i<arrPrenda.tamaÃ±o();i++) {
 			if(codPrenda == arrPrenda.obtener(i).getCodPrenda()) {
 				if(Custom.mensajeConfirmacion(this, "SEGURO QUIERE ELIMINAR ESTA FILA")==0) {
 					arrPrenda.eliminar(arrPrenda.obtener(i));
@@ -169,7 +169,7 @@ public class FrmPrenda extends JFrame implements ActionListener{
 	
 	private void listarPrenda() {
 		model.setRowCount(0);
-		for(int i=0;i<arrPrenda.tamaño();i++) {
+		for(int i=0;i<arrPrenda.tamaÃ±o();i++) {
 			Object[] x = {
 				arrPrenda.obtener(i).getCodPrenda(),
 				arrPrenda.obtener(i).getDesPrenda()

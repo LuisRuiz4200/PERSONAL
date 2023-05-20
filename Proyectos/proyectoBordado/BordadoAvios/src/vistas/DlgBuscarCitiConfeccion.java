@@ -33,7 +33,7 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 	public DlgBuscarCitiConfeccion(JFrame frame, boolean x) {
 		super(frame,x);
 		
-		this.setTitle("BUSCAR OP");
+		this.setTitle("BUSCAR CITI CONFECCION");
 		this.setBounds(0,0,429,326);
 		this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
@@ -70,8 +70,8 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 		
 		table.getTableHeader().setBackground(Color.BLACK);
 		table.getTableHeader().setForeground(Color.white);
-		table.getColumn("CITI").setMaxWidth(50);
-		table.getColumn("DESCRIPCION").setMaxWidth(70);
+		table.getColumn("CITI").setPreferredWidth(70);
+		table.getColumn("DESCRIPCION").setPreferredWidth(200);
 		
 		arranque();
 		
@@ -129,7 +129,7 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamaÃ±o();i++) {
 			
 			Object[] x = new Object[] {
 					arrCitiConfeccion.obtener(i).getCod_citiConfeccion(),
@@ -146,7 +146,7 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamaÃ±o();i++) {
 			
 			String codCiti = String.valueOf(arrCitiConfeccion.obtener(i).getCod_citiConfeccion());
 			

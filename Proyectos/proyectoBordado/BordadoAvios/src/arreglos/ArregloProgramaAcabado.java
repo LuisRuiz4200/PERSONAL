@@ -22,7 +22,7 @@ public class ArregloProgramaAcabado {
 		cargarProgramaAcabado();
 	}
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrProgramaAcabado.size();
 	}
 	
@@ -122,7 +122,7 @@ public class ArregloProgramaAcabado {
 				 
 				 citiConfeccion.setCod_programaAcabado(Integer.parseInt(n[0]));
 				 citiConfeccion.setNro_OP(Integer.parseInt(n[1]));
-				 citiConfeccion.setCod_colorOP(Integer.parseInt(n[2]));
+				 citiConfeccion.setCod_colorOP(n[2]);
 				 citiConfeccion.setCantPed_programaAcabado(Integer.parseInt(n[3]));
 				 citiConfeccion.setCantProg_programaAcabado(Integer.parseInt(n[4]));
 				 citiConfeccion.setCod_citiConfeccion(n[5]);

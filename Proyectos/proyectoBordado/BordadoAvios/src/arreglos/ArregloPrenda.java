@@ -17,7 +17,7 @@ public class ArregloPrenda {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrPrenda.size();
 	}
 	
@@ -59,7 +59,7 @@ public class ArregloPrenda {
 			}
 			
 		}catch(Exception e) {
-			Custom.mensajeError(null, "Error de grabación");
+			Custom.mensajeError(null, "Error de grabaciï¿½n");
 		}finally {
 			pw.close();
 		}

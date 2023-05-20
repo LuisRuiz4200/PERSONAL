@@ -428,7 +428,7 @@ public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListe
 		ArregloCliente arrCliente = new ArregloCliente();
 		
 		modelo.setRowCount(0);
-		for (int i=0;i<arrIngresoAvio.tamaño();i++) {
+		for (int i=0;i<arrIngresoAvio.tamaÃ±o();i++) {
 			
 			Object []x = {
 					arrIngresoAvio.obtener(i).getNroVale(),
@@ -460,10 +460,10 @@ public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListe
 		
 		String nroVale = "001-";
 		
-		if(arrIngresoAvio.tamaño()==0) {
+		if(arrIngresoAvio.tamaÃ±o()==0) {
 			txtNroVale.setText(nroVale + ft.format(1));
 		}else {
-			txtNroVale.setText(nroVale + ft.format(Integer.parseInt(arrIngresoAvio.obtener(arrIngresoAvio.tamaño()-1).getNroVale().substring(4)) + 1));
+			txtNroVale.setText(nroVale + ft.format(Integer.parseInt(arrIngresoAvio.obtener(arrIngresoAvio.tamaÃ±o()-1).getNroVale().substring(4)) + 1));
 		}
 
 		

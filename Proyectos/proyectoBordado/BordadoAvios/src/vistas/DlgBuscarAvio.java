@@ -158,7 +158,7 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 		
 		cboTipoAvio.setSelectedIndex(-1);
 		
-		for (int i=0;i<arrTipoAvio.tamaño();i++) {
+		for (int i=0;i<arrTipoAvio.tamaÃ±o();i++) {
 			
 			cboTipoAvio.addItem(arrTipoAvio.obtener(i).getDesTipoAvio());
 			
@@ -173,7 +173,7 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 		
 		modelo.setRowCount(0);
 		
-		for (int i=0;i<arrAvio.tamaño();i++) {
+		for (int i=0;i<arrAvio.tamaÃ±o();i++) {
 			
 			Object[] x = {
 					arrAvio.obtener(i).getCodAvio(),

@@ -239,7 +239,7 @@ public class FrmCitiConfeccion extends JInternalFrame implements ActionListener,
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamaÃ±o();i++) {
 			Object[] x = new Object[] {
 				arrCitiConfeccion.obtener(i).getCod_citiConfeccion(),
 				arrCitiConfeccion.obtener(i).getDes_citiConfeccion(),

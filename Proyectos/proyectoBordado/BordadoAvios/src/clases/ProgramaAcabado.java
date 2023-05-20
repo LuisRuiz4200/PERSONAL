@@ -6,7 +6,7 @@ public class ProgramaAcabado {
 	
 	private int cod_programaAcabado;
 	private int nro_OP;
-	private int cod_colorOP;
+	private String cod_colorOP;
 	private int cantPed_programaAcabado;
 	private int cantProg_programaAcabado;
 	private String cod_citiConfeccion;
@@ -19,7 +19,7 @@ public class ProgramaAcabado {
 		
 	}
 
-	public ProgramaAcabado(int cod_programaAcabado, int nro_OP, int cod_colorOP, int cantPed_programaAcabado,
+	public ProgramaAcabado(int cod_programaAcabado, int nro_OP, String cod_colorOP, int cantPed_programaAcabado,
 			int cantProg_programaAcabado, String cod_citiConfeccion, String cod_citiAcabado, String obs_programaAcabado,
 			Date fechaAct_programaAcabado, String estado_programaAcabado) {
 		super();
@@ -51,11 +51,11 @@ public class ProgramaAcabado {
 		this.nro_OP = nro_OP;
 	}
 
-	public int getCod_colorOP() {
+	public String getCod_colorOP() {
 		return cod_colorOP;
 	}
 
-	public void setCod_colorOP(int cod_colorOP) {
+	public void setCod_colorOP(String cod_colorOP) {
 		this.cod_colorOP = cod_colorOP;
 	}
 

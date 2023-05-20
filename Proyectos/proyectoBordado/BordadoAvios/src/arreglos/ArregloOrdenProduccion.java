@@ -16,7 +16,7 @@ public class ArregloOrdenProduccion {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamaÃ±o() {
 		return arrOrdenProd.size();
 	}
 	
@@ -57,7 +57,7 @@ public class ArregloOrdenProduccion {
 				pw.println(texto);
 			}
 		}catch(Exception e) {
-			Custom.mensajeError(null, "Error al grabar contenido");
+			Custom.mensajeError(null, e.getMessage());
 		}finally {
 			pw.close();
 		}
@@ -81,7 +81,7 @@ public class ArregloOrdenProduccion {
 			}
 			br.close();
 		}catch (Exception e) {
-			Custom.mensajeError(null, "Error al cargar contenido");
+			Custom.mensajeError(null, e.getMessage());
 		}
 		
 		

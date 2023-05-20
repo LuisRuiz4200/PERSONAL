@@ -195,7 +195,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamaÃ±o();i++) {
 			Object[] x = {
 					arrOP.obtener(i).getNroOp(),
 					arrCliente.obtener(arrOP.obtener(i).getCodCliente()-1).getDesCliente(),
@@ -208,7 +208,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 	private void cargarCliente() {
 		ArregloCliente arrCliente = new ArregloCliente ();
 		cboCodCliente.setSelectedIndex(-1);
-		for(int i=0;i<arrCliente.tamaño();i++) {
+		for(int i=0;i<arrCliente.tamaÃ±o();i++) {
 			cboCodCliente.addItem(arrCliente.obtener(i).getDesCliente());
 		}
 	}
@@ -216,7 +216,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 	private void cargarEstilo() {
 		ArregloEstiloOP arrEstiloOP = new ArregloEstiloOP();
 		cboCodEstilo.setSelectedIndex(-1);
-		for(int i=0;i<arrEstiloOP.tamaño();i++) {
+		for(int i=0;i<arrEstiloOP.tamaÃ±o();i++) {
 			cboCodEstilo.addItem(arrEstiloOP.obtener(i).getDesEstiloOp());
 		}
 	}
