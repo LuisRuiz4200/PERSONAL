@@ -91,7 +91,7 @@ public class FrmConsultaIngresoAvio extends JFrame implements ActionListener {
 		
 		model.setRowCount(0);
 		
-		for (int i=0;i<arrIngAvio.tamaño();i++) {
+		for (int i=0;i<arrIngAvio.tamano();i++) {
 			Object[] x = new Object[] {
 					arrIngAvio.obtener(i).getNroVale(),
 					arrIngAvio.obtener(i).getNroOP(),

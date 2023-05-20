@@ -4,8 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import arreglos.ArregloColorOP;
+import arreglos.ArregloF10;
 import arreglos.ArregloProgramaAcabado;
 import clases.ColorOP;
+import clases.F10;
 import clases.ProgramaAcabado;
 import reuzables.Custom;
 
@@ -96,8 +98,82 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		table.getColumn("ACTUALIZADO").setPreferredWidth(100);
 		table.getColumn("ESTADO").setPreferredWidth(100);
 		
+		table.setAutoCreateRowSorter(true);
+		
 		arranque();
 	}
+
+	//METODOS VOID
+	private void arranque() {
+		listarProgramaAcabado();
+	}
+	
+	private void listarProgramaAcabado() {
+		
+		modelo.setRowCount(0);
+		
+		for(int i=0;i<arrProgramaAcabado.tamano();i++) {
+			
+			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
+			
+			Object[] x = new Object[] {
+					obj.getCod_programaAcabado(),
+					obj.getNro_OP(),
+					obj.getCod_colorOP(),
+					obj.getCantPed_programaAcabado(),
+					obj.getCantProg_programaAcabado(),
+					obj.getCod_citiConfeccion(),
+					obj.getCod_citiAcabado(),
+					obj.getObs_programaAcabado(),
+					new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
+					obj.getEstado_programaAcabado()
+					
+			};
+			
+			modelo.addRow(x);
+		}
+		
+	}
+	
+	private void filtrarOP() {
+		
+		modelo.setRowCount(0);
+		
+		for(int i=0;i<arrProgramaAcabado.tamano();i++) {
+
+			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
+			
+			if (String.valueOf(obj.getNro_OP()).startsWith(txtNroOP.getText().trim())) {
+				
+				Object[] x = new Object[] {
+						obj.getCod_programaAcabado(),
+						obj.getNro_OP(),
+						obj.getCod_colorOP(),
+						obj.getCantPed_programaAcabado(),
+						obj.getCantProg_programaAcabado(),
+						obj.getCod_citiConfeccion(),
+						obj.getCod_citiAcabado(),
+						obj.getObs_programaAcabado(),
+						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
+						obj.getEstado_programaAcabado()
+				};
+				
+				modelo.addRow(x);
+			}else {
+				
+			}
+			
+		}	
+	}
+	
+	private void cargarPrograma() {
+		int n = table.getSelectedRow();
+		
+		String nroOP = table.getValueAt(n, 1).toString();
+		
+		txtNroOP.setText(nroOP);
+	}
+	
 	
 	//KEY RELEASED (LLAVE LIBERADA) PARA TXT_NRO_OP
 	public void keyPressed(KeyEvent e) {
@@ -160,89 +236,38 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 			return;
 		}
 		
+		int nroOP = (int)table.getValueAt(n, 1);
+		String colorOP = (String)table.getValueAt(n, 2);
+		String confeccion = (String)table.getValueAt(n, 5);
+		String acabado = (String)table.getValueAt(n, 6);
+		
+		ArregloF10 arrF10 = new ArregloF10();
+		F10 objF10 = arrF10.buscarPorNroOPYColorOP(nroOP,colorOP);
+		
+		//INICIALIZACION DE LA NUEVA VENTANA
 		FrmProgramaAcabado frame = new FrmProgramaAcabado();
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		FrmPrincipal.escritorio.add(frame);
 		
-		FrmProgramaAcabado.txtCodPrograma.setText(table.getValueAt(n,0).toString());
+		//PANEL ORDEN DE PRODUCCION
+		FrmProgramaAcabado.txtNroOP.setText(objF10.getNroOP_F10()+"");
+		FrmProgramaAcabado.txtClienteOP.setText(objF10.getCliente_F10());
+		FrmProgramaAcabado.txtEstiloOP.setText(objF10.getEstilo_F10());
+		FrmProgramaAcabado.txtColorOP.setText(objF10.getColor_F10());
+		FrmProgramaAcabado.txtPrendaOP.setText(objF10.getPrenda_F10());
+		FrmProgramaAcabado.txtIdF10.setText(objF10.getId_F10()+"");
+		
+		//PANEL CONFECCION Y ACABADO
+		FrmProgramaAcabado.txtCodCitiConfeccion.setText(confeccion);
+		FrmProgramaAcabado.txtCodCitiAcabado.setText(acabado);
+		
+		//BOTONES DE FUNCION
 		FrmProgramaAcabado.btnGrabar.setEnabled(false);
 		FrmProgramaAcabado.btnEditar.setEnabled(true);
 		FrmProgramaAcabado.txtNroOP.setEditable(false);
 		
 		this.dispose();
 		
-	}
-	//METODOS VOID
-	private void arranque() {
-		listarProgramaAcabado();
-	}
-	
-	private void listarProgramaAcabado() {
-		
-		
-		modelo.setRowCount(0);
-		
-		for(int i=0;i<arrProgramaAcabado.tamaño();i++) {
-			
-			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
-			
-			Object[] x = new Object[] {
-					obj.getCod_programaAcabado(),
-					obj.getNro_OP(),
-					obj.getCod_colorOP(),
-					obj.getCantPed_programaAcabado(),
-					obj.getCantProg_programaAcabado(),
-					obj.getCod_citiConfeccion(),
-					obj.getCod_citiAcabado(),
-					obj.getObs_programaAcabado(),
-					new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
-					obj.getEstado_programaAcabado()
-					
-			};
-			
-			modelo.addRow(x);
-		}
-		
-	}
-	
-	private void filtrarOP() {
-		
-		modelo.setRowCount(0);
-		
-		for(int i=0;i<arrProgramaAcabado.tamaño();i++) {
-
-			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
-			
-			if (String.valueOf(obj.getNro_OP()).startsWith(txtNroOP.getText().trim())) {
-				
-				Object[] x = new Object[] {
-						obj.getCod_programaAcabado(),
-						obj.getNro_OP(),
-						obj.getCod_colorOP(),
-						obj.getCantPed_programaAcabado(),
-						obj.getCantProg_programaAcabado(),
-						obj.getCod_citiConfeccion(),
-						obj.getCod_citiAcabado(),
-						obj.getObs_programaAcabado(),
-						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
-						obj.getEstado_programaAcabado()
-						
-				};
-				
-				modelo.addRow(x);
-			}else {
-				
-			}
-			
-		}	
-	}
-	
-	private void cargarPrograma() {
-		int n = table.getSelectedRow();
-		
-		String nroOP = table.getValueAt(n, 1).toString();
-		
-		txtNroOP.setText(nroOP);
 	}
 }

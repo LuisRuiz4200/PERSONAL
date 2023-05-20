@@ -19,7 +19,7 @@ public class ArregloCitiAcabado {
 		cargarCitiAcabado();
 	}
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrCitiAcabado.size();
 	}
 	

@@ -8,6 +8,7 @@ import arreglos.ArregloCitiAcabado;
 import arreglos.ArregloCitiConfeccion;
 import arreglos.ArregloCliente;
 import arreglos.ArregloColorOP;
+import arreglos.ArregloF10;
 import arreglos.ArregloOrdenProduccion;
 import arreglos.ArregloProgramaAcabado;
 import clases.CitiAcabado;
@@ -37,7 +38,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private JLabel lblDesCitiConfeccion;
 	public static JTextField txtNroOP;
 	private JLabel lblNroOP;
-	private JTextField txtClienteOP;
+	public static JTextField txtClienteOP;
 	private JLabel lblClienteOP;
 	private JLabel lblColorOP;
 	public static JTextField txtCodCitiAcabado;
@@ -83,7 +84,6 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		this.setTitle("PROGRAMA ACABADO");
 		this.setBounds(0,0,702,516);
-		//this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
 		
 		this.setIconifiable(true);
@@ -300,122 +300,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		arranque();
 	}
-	
-	// ACTION PERFORMED DE LOS BOTONES
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnBuscarCitiAcabado) {
-			actionPerformedBtnBuscarCitiAcabado(e);
-		}
-		if (e.getSource() == btnBuscarCitiConfeccion) {
-			actionPerformedBtnBuscarCitiConfeccion(e);
-		}
-		if (e.getSource() == btnBuscarOP) {
-			actionPerformedBtnBuscarOP(e);
-		}
-		if (e.getSource() == btnLista) {
-			actionPerformedBtnLista(e);
-		}
-		if (e.getSource() == btnNuevo) {
-			actionPerformedBtnNuevo(e);
-		}
-		if (e.getSource() == btnEliminar) {
-			actionPerformedBtnEliminar(e);
-		}
-		if (e.getSource() == btnEditar) {
-			actionPerformedBtnEditar(e);
-		}
-		if (e.getSource() == btnGrabar) {
-			actionPerformedBtnGrabar(e);
-		}
-	}
-	protected void actionPerformedBtnGrabar(ActionEvent e) {
-		adicionar();
-	}
-	protected void actionPerformedBtnEditar(ActionEvent e) {
-		editar();
-	}
-	protected void actionPerformedBtnEliminar(ActionEvent e) {
-		eliminar();
-	}
-	protected void actionPerformedBtnNuevo(ActionEvent e) {
-		limpiar();
-	}
-	protected void actionPerformedBtnLista(ActionEvent e) {
-		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
-		this.dispose();
-		frame.setVisible(true);
-		frame.setLocation(40,40);
-		frame.toFront();
-		FrmPrincipal.escritorio.add(frame);
-		
-	}
-	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
 
-		DlgListaF10.frame = "FrmProgramaAcabado";
-		DlgListaF10 buscarOP = new DlgListaF10 ();
-		buscarOP.setVisible(true);
-	}
-
-	protected void actionPerformedBtnBuscarCitiConfeccion(ActionEvent e) {
-		
-		DlgBuscarCitiConfeccion.frame = "FrmProgramaAcabado";
-		DlgBuscarCitiConfeccion dlg = new DlgBuscarCitiConfeccion(new FrmPrincipal(),true);
-		dlg.setVisible(true);
-	}
-
-	protected void actionPerformedBtnBuscarCitiAcabado(ActionEvent e) {
-		
-		DlgBuscarCitiAcabado.frame = "FrmProgramaAcabado";
-		DlgBuscarCitiAcabado dlg = new DlgBuscarCitiAcabado(new FrmPrincipal(),true);
-		dlg.setVisible(true);
-	}
-	//CARET CHANGED PARA TXT NRO_OP, COD_CITIS
-	public void caretUpdate(CaretEvent e) {
-		if (e.getSource() == txtCodCitiAcabado) {
-			caretUpdateTxtCodCitiAcabado(e);
-		}
-		if (e.getSource() == txtCodCitiConfeccion) {
-			caretUpdateTxtCodCitiConfeccion(e);
-		}
-		if (e.getSource() == txtCodPrograma) {
-			caretUpdateTxtCodPrograma(e);
-		}
-		if (e.getSource() == txtNroOP) {
-			caretUpdateTxtNroOP(e);
-		}
-	}
-	protected void caretUpdateTxtNroOP(CaretEvent e) {
-		try {
-			cargarOP();
-		}catch(Exception ex) {
-			
-		}
-	}
-
-	protected void caretUpdateTxtCodPrograma(CaretEvent e) {
-		try {
-			mostrarPrograma();
-		}catch(Exception ex) {
-			
-		}
-	}
-	
-
-	protected void caretUpdateTxtCodCitiConfeccion(CaretEvent e) {
-		try {
-			mostrarCitiConfeccion();
-		}catch(Exception ex) {
-			
-		}
-	}
-	
-	protected void caretUpdateTxtCodCitiAcabado(CaretEvent e) {
-		try {
-			mostratCitiAcabado();
-		}catch(Exception ex) {
-			
-		}
-	}
 	
 	//METODOS GET
 	
@@ -526,10 +411,10 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		FrmProgramaAcabado.txtEstiloOP.setText("");
 		FrmProgramaAcabado.txtPrendaOP.setText("");
 		FrmProgramaAcabado.txtIdF10.setText("");
+		FrmProgramaAcabado.txtClienteOP.setText("");
 		
 		this.txtCantPedido.setText("");
 		this.txtCantProgramada.setText("");
-		this.txtClienteOP.setText("");
 		this.txtDesCitiConfeccion.setText("");
 		this.txtDesCitiAcabado.setText("");
 		this.txtEstadoPrograma.setText("REGISTRADO");
@@ -540,7 +425,8 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		this.txtFechaActualizada.setEnabled(false);
 		this.txtDesCitiConfeccion.setEditable(false);
 		this.txtEstadoPrograma.setEditable(false);
-		this.txtClienteOP.setEditable(false);
+		
+		FrmProgramaAcabado.txtClienteOP.setEditable(false);
 		FrmProgramaAcabado.txtNroOP.setEditable(false);
 		FrmProgramaAcabado.txtEstiloOP.setEditable(false);
 		FrmProgramaAcabado.txtColorOP.setEditable(false);
@@ -665,20 +551,14 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	
 	private void cargarOP(){
 		
-		ArregloOrdenProduccion arrOP = new ArregloOrdenProduccion() ;
-		OrdenProduccion OP = arrOP.buscar(leerNroOP());
-
-		ArregloCliente arrCliente = new ArregloCliente();
-		Cliente cliente = arrCliente.buscar(OP.getCodCliente());
-		
-		
-		txtClienteOP.setText(cliente.getDesCliente());
+		//METODO SIN USUAR
 		
 	}
 
 	
 	private void mostrarPrograma() {
 		ProgramaAcabado obj = arrProgramaAcabado.buscar(leerCodPrograma());
+		
 		txtNroOP.setText(obj.getNro_OP()+"");
 		txtColorOP.setText(obj.getCod_colorOP());
 		txtCodCitiConfeccion.setText(obj.getCod_citiConfeccion());
@@ -705,4 +585,119 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	}
 	
 	
+	// ACTION PERFORMED DE LOS BOTONES
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscarCitiAcabado) {
+			actionPerformedBtnBuscarCitiAcabado(e);
+		}
+		if (e.getSource() == btnBuscarCitiConfeccion) {
+			actionPerformedBtnBuscarCitiConfeccion(e);
+		}
+		if (e.getSource() == btnBuscarOP) {
+			actionPerformedBtnBuscarOP(e);
+		}
+		if (e.getSource() == btnLista) {
+			actionPerformedBtnLista(e);
+		}
+		if (e.getSource() == btnNuevo) {
+			actionPerformedBtnNuevo(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnEditar) {
+			actionPerformedBtnEditar(e);
+		}
+		if (e.getSource() == btnGrabar) {
+			actionPerformedBtnGrabar(e);
+		}
+	}
+	protected void actionPerformedBtnGrabar(ActionEvent e) {
+		adicionar();
+	}
+	protected void actionPerformedBtnEditar(ActionEvent e) {
+		editar();
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		eliminar();
+	}
+	protected void actionPerformedBtnNuevo(ActionEvent e) {
+		limpiar();
+	}
+	protected void actionPerformedBtnLista(ActionEvent e) {
+		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
+		this.dispose();
+		frame.setVisible(true);
+		frame.setLocation(40,40);
+		frame.toFront();
+		FrmPrincipal.escritorio.add(frame);
+		
+	}
+	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
+
+		DlgListaF10.frame = "FrmProgramaAcabado";
+		DlgListaF10 buscarOP = new DlgListaF10 (new FrmPrincipal(),true);
+		buscarOP.setVisible(true);
+	}
+
+	protected void actionPerformedBtnBuscarCitiConfeccion(ActionEvent e) {
+		
+		DlgBuscarCitiConfeccion.frame = "FrmProgramaAcabado";
+		DlgBuscarCitiConfeccion dlg = new DlgBuscarCitiConfeccion(new FrmPrincipal(),true);
+		dlg.setVisible(true);
+	}
+
+	protected void actionPerformedBtnBuscarCitiAcabado(ActionEvent e) {
+		
+		DlgBuscarCitiAcabado.frame = "FrmProgramaAcabado";
+		DlgBuscarCitiAcabado dlg = new DlgBuscarCitiAcabado(new FrmPrincipal(),true);
+		dlg.setVisible(true);
+	}
+	//CARET CHANGED PARA TXT NRO_OP, COD_CITIS
+	public void caretUpdate(CaretEvent e) {
+		if (e.getSource() == txtCodCitiAcabado) {
+			caretUpdateTxtCodCitiAcabado(e);
+		}
+		if (e.getSource() == txtCodCitiConfeccion) {
+			caretUpdateTxtCodCitiConfeccion(e);
+		}
+		if (e.getSource() == txtCodPrograma) {
+			caretUpdateTxtCodPrograma(e);
+		}
+		if (e.getSource() == txtNroOP) {
+			caretUpdateTxtNroOP(e);
+		}
+	}
+	protected void caretUpdateTxtNroOP(CaretEvent e) {
+		try {
+			cargarOP();
+		}catch(Exception ex) {
+			
+		}
+	}
+
+	protected void caretUpdateTxtCodPrograma(CaretEvent e) {
+		try {
+			mostrarPrograma();
+		}catch(Exception ex) {
+			
+		}
+	}
+	
+
+	protected void caretUpdateTxtCodCitiConfeccion(CaretEvent e) {
+		try {
+			mostrarCitiConfeccion();
+		}catch(Exception ex) {
+			
+		}
+	}
+	
+	protected void caretUpdateTxtCodCitiAcabado(CaretEvent e) {
+		try {
+			mostratCitiAcabado();
+		}catch(Exception ex) {
+			
+		}
+	}
 }

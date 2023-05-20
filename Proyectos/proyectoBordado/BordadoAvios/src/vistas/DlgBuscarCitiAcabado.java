@@ -75,49 +75,7 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		arranque();
 		
 	}
-	//BOTON SELECCIONAR
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnElegir) {
-			actionPerformedBtnElegir(e);
-		}
-	}
-	protected void actionPerformedBtnElegir(ActionEvent e) {
-		
-		exportarCiti();
-		
-		
-		
-	}
-	//EVENTOS DE LA TABLA MOUSE CLIKED
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == table) {
-			mouseClickedTable(e);
-		}
-	}
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	public void mousePressed(MouseEvent e) {
-	}
-	public void mouseReleased(MouseEvent e) {
-	}
-	protected void mouseClickedTable(MouseEvent e) {
-		mostrarCiti();
-	}
-	//CAJA DE TEXTO DE OP
-	public void keyPressed(KeyEvent e) {
-	}
-	public void keyReleased(KeyEvent e) {
-		if (e.getSource() == txtCitiAcabado) {
-			keyReleasedTxtOP(e);
-		}
-	}
-	public void keyTyped(KeyEvent e) {
-	}
-	protected void keyReleasedTxtOP(KeyEvent e) {
-		buscarCiti();
-	}
+	
 	//METODOS VOID
 	
 	private void arranque() {
@@ -128,7 +86,7 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiAcabado.tamano();i++) {
 			
 			Object[] x = new Object[] {
 					arrCitiAcabado.obtener(i).getCod_citiAcabado(),
@@ -145,7 +103,7 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiAcabado.tamano();i++) {
 			
 			String codCiti = String.valueOf(arrCitiAcabado.obtener(i).getCod_citiAcabado());
 			
@@ -164,15 +122,11 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 	
 	private void mostrarCiti() {
 		
-		
 		int n = table.getSelectedRow();
 		
 		String nroOp = table.getValueAt(n, 0).toString();
 		
-		txtCitiAcabado.setText(nroOp);
-		
-		
-		
+		txtCitiAcabado.setText(nroOp);	
 		
 	}
 	
@@ -188,7 +142,49 @@ public class DlgBuscarCitiAcabado extends JDialog implements ActionListener, Key
 			
 		}
 	}
-	
+	//BOTON SELECCIONAR
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnElegir) {
+				actionPerformedBtnElegir(e);
+			}
+		}
+		protected void actionPerformedBtnElegir(ActionEvent e) {
+			
+			exportarCiti();
+			
+			
+			
+		}
+		//EVENTOS DE LA TABLA MOUSE CLIKED
+		public void mouseClicked(MouseEvent e) {
+			if (e.getSource() == table) {
+				mouseClickedTable(e);
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+		}
+		public void mousePressed(MouseEvent e) {
+		}
+		public void mouseReleased(MouseEvent e) {
+		}
+		protected void mouseClickedTable(MouseEvent e) {
+			mostrarCiti();
+		}
+		//CAJA DE TEXTO DE OP
+		public void keyPressed(KeyEvent e) {
+		}
+		public void keyReleased(KeyEvent e) {
+			if (e.getSource() == txtCitiAcabado) {
+				keyReleasedTxtOP(e);
+			}
+		}
+		public void keyTyped(KeyEvent e) {
+		}
+		protected void keyReleasedTxtOP(KeyEvent e) {
+			buscarCiti();
+		}
 	
 }	
 	

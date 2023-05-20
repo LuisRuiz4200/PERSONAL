@@ -7,6 +7,7 @@ import arreglos.*;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{
@@ -23,7 +24,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	private JMenu mnAcabado;
 	private JMenuItem mniProgramaAcabado;
 	private JMenuItem mniConsultaProgramaAcabado;
-	public static JDesktopPane escritorio;
 	private JMenu mnCitis;
 	private JMenuItem mniCitiConfeccion;
 	private JMenuItem mniCitiAcabado;
@@ -35,6 +35,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	private JMenuItem mniPrenda;
 	private JMenuItem mniCliente;
 	private JMenuItem mniActualizar;
+	public static JDesktopPane escritorio;
 	
 	public static void main (String[] args) {
 		FrmPrincipal ventana = new FrmPrincipal();
@@ -47,10 +48,6 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		this.setBounds(0,0,987,688);
 		this.setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		escritorio = new JDesktopPane();
-		escritorio.setBackground(Color.LIGHT_GRAY);
-		this.getContentPane().add(escritorio);
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -135,6 +132,10 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		
 		mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
+		
+		escritorio = new JDesktopPane();
+		escritorio.setBackground(Color.LIGHT_GRAY);
+		getContentPane().add(escritorio, BorderLayout.CENTER);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.mniActualizar) {

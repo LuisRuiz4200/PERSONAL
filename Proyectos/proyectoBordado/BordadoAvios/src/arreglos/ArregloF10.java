@@ -40,6 +40,15 @@ public class ArregloF10 {
 		return null;
 	}
 	
+	public F10 buscarPorNroOPYColorOP(int nroOP, String colorOP) {
+		for (F10 obj:arrF10) {
+			if (obj.getNroOP_F10()==nroOP && obj.getColor_F10().equals(colorOP)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+	
 	//CArgaR y grabar
 	
 	public void grabarF10() {}

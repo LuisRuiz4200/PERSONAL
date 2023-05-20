@@ -121,7 +121,7 @@ public class FrmCliente extends JFrame implements ActionListener, MouseListener{
 		
 		boolean find=false;
 		
-		for (int i=0;i<arrCliente.tamaño();i++) {	
+		for (int i=0;i<arrCliente.tamano();i++) {	
 			if(codCliente==arrCliente.obtener(i).getCodCliente()) {
 				arrCliente.obtener(i).setDesCliente(desCliente);
 				arrCliente.grabarCliente();
@@ -139,7 +139,7 @@ public class FrmCliente extends JFrame implements ActionListener, MouseListener{
 	protected void actionPerformedBtnEliminar(ActionEvent e) {
 		int codCliente = leerCodCliente();
 		
-		for  (int i=0;i<arrCliente.tamaño();i++) {
+		for  (int i=0;i<arrCliente.tamano();i++) {
 			if(codCliente==arrCliente.obtener(i).getCodCliente()) {
 				arrCliente.eliminar(arrCliente.obtener(i));
 				arrCliente.grabarCliente();
@@ -189,7 +189,7 @@ public class FrmCliente extends JFrame implements ActionListener, MouseListener{
 	
 	private void listarCliente() {
 		modelo.setRowCount(0);
-		for (int i=0;i<arrCliente.tamaño();i++) {
+		for (int i=0;i<arrCliente.tamano();i++) {
 			Object [] x = {
 					arrCliente.obtener(i).getCodCliente(),
 					arrCliente.obtener(i).getDesCliente()

@@ -124,7 +124,7 @@ public class FrmTipoAvio extends JFrame implements ActionListener, KeyListener, 
 		int codTipoAvio = leerCodTipoAvio();
 		String desTipoAvio = leerDesTipoAvio();
 		
-		for(int i=0;i<arrTipoAvio.tamaño();i++) {
+		for(int i=0;i<arrTipoAvio.tamano();i++) {
 			if(codTipoAvio==arrTipoAvio.obtener(i).getCodTipoAvio()) {
 				arrTipoAvio.obtener(i).setDesTipoAvio(desTipoAvio);
 				arrTipoAvio.grabarTipoAvio();
@@ -139,7 +139,7 @@ public class FrmTipoAvio extends JFrame implements ActionListener, KeyListener, 
 		
 		int codTipoAvio = leerCodTipoAvio();
 		
-		for(int i=0;i<arrTipoAvio.tamaño();i++) {
+		for(int i=0;i<arrTipoAvio.tamano();i++) {
 			if(codTipoAvio==arrTipoAvio.obtener(i).getCodTipoAvio()) {
 				if(Custom.mensajeConfirmacion(this,"SEGURO QUIERE ELIMINAR ESTA FILA")==0) {
 					arrTipoAvio.eliminar(arrTipoAvio.obtener(i));
@@ -220,7 +220,7 @@ public class FrmTipoAvio extends JFrame implements ActionListener, KeyListener, 
 		
 		model.setRowCount(0);
 		
-		for (int i=0;i<arrTipoAvio.tamaño();i++) {
+		for (int i=0;i<arrTipoAvio.tamano();i++) {
 			Object[] x = {
 				arrTipoAvio.obtener(i).getCodTipoAvio(),
 				arrTipoAvio.obtener(i).getDesTipoAvio()
@@ -233,10 +233,10 @@ public class FrmTipoAvio extends JFrame implements ActionListener, KeyListener, 
 	public void correlativo() {
 		int n = 0;
 		
-		if(arrTipoAvio.tamaño()==0) {
+		if(arrTipoAvio.tamano()==0) {
 			txtCodTipoAvio.setText("" + 1);
 		}else 
-			n = arrTipoAvio.obtener(arrTipoAvio.tamaño()-1).getCodTipoAvio()+1;
+			n = arrTipoAvio.obtener(arrTipoAvio.tamano()-1).getCodTipoAvio()+1;
 			txtCodTipoAvio.setText("" + n);
 	}
 	

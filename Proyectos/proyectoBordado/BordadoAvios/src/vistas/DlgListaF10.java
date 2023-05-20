@@ -14,7 +14,7 @@ import arreglos.ArregloF10;
 import clases.F10;
 
 @SuppressWarnings("serial")
-public class DlgListaF10 extends JFrame implements KeyListener,ActionListener,MouseListener{
+public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,MouseListener{
 	private JTable table;
 	private JScrollPane scrollPane;
 	private DefaultTableModel modelo;
@@ -25,12 +25,10 @@ public class DlgListaF10 extends JFrame implements KeyListener,ActionListener,Mo
 	private JButton btnElegir;
 	
 	public static void main (String[] args) {
-		DlgListaF10 ventana = new DlgListaF10();
-		ventana.setVisible(true);
 	}
 	
-	public DlgListaF10() {
-		
+	public DlgListaF10(JFrame frame, boolean bandera) {
+		super(frame,bandera);
 		this.setTitle("LISTA DE F10");
 		this.setBounds(0,0,625,326);
 		this.setLocationRelativeTo(this);
@@ -139,6 +137,7 @@ public class DlgListaF10 extends JFrame implements KeyListener,ActionListener,Mo
 			FrmProgramaAcabado.txtEstiloOP.setText(objF10.getEstilo_F10());
 			FrmProgramaAcabado.txtPrendaOP.setText(objF10.getPrenda_F10());
 			FrmProgramaAcabado.txtIdF10.setText(objF10.getId_F10()+"");
+			FrmProgramaAcabado.txtClienteOP.setText(objF10.getCliente_F10());
 			this.dispose();
 			break;
 		}

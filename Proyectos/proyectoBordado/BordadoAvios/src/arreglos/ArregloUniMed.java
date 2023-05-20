@@ -17,7 +17,7 @@ public class ArregloUniMed {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrUniMed.size();
 	}
 	

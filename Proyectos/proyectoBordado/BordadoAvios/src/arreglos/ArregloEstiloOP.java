@@ -20,7 +20,7 @@ public class ArregloEstiloOP {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrEstiloOP.size();
 	}
 	

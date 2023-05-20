@@ -239,7 +239,7 @@ public class FrmCitiAcabado extends JInternalFrame implements ActionListener, Mo
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrCitiAcabado.tamaño();i++) {
+		for(int i=0;i<arrCitiAcabado.tamano();i++) {
 			Object[] x = new Object[] {
 				arrCitiAcabado.obtener(i).getCod_citiAcabado(),
 				arrCitiAcabado.obtener(i).getDes_citiAcabado(),

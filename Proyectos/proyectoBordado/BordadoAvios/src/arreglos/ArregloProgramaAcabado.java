@@ -22,7 +22,7 @@ public class ArregloProgramaAcabado {
 		cargarProgramaAcabado();
 	}
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrProgramaAcabado.size();
 	}
 	

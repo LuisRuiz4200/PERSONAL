@@ -129,7 +129,7 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamano();i++) {
 			
 			Object[] x = new Object[] {
 					arrCitiConfeccion.obtener(i).getCod_citiConfeccion(),
@@ -146,7 +146,7 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrCitiConfeccion.tamaño();i++) {
+		for(int i=0;i<arrCitiConfeccion.tamano();i++) {
 			
 			String codCiti = String.valueOf(arrCitiConfeccion.obtener(i).getCod_citiConfeccion());
 			

@@ -191,7 +191,7 @@ public class FrmColorOP extends JFrame implements ActionListener, MouseListener{
 	private void listarColorOP() {
 		modelo.setRowCount(0);
 		
-		for (int i=0; i<arrColorOP.tamaño();i++) {
+		for (int i=0; i<arrColorOP.tamano();i++) {
 			Object[] x = {
 					arrColorOP.obtener(i).getNroOP(),
 					arrColorOP.obtener(i).getCodColorOP(),
@@ -208,7 +208,7 @@ public class FrmColorOP extends JFrame implements ActionListener, MouseListener{
 		
 		cboNroOP.setSelectedIndex(-1);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamano();i++) {
 			cboNroOP.addItem(arrOP.obtener(i).getNroOp());
 		}
 		
