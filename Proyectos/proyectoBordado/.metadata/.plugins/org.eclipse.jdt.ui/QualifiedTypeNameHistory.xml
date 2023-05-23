@@ -15,7 +15,6 @@
     <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
     <fullyQualifiedTypeName name="arreglos.ArregloOrdenProduccion"/>
     <fullyQualifiedTypeName name="clases.OrdenProduccion"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloCliente"/>
     <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="arreglos.ArregloEstiloOP"/>
     <fullyQualifiedTypeName name="clases.EstiloOP"/>
@@ -23,7 +22,6 @@
     <fullyQualifiedTypeName name="arreglos.ArregloProgramaAcabado"/>
     <fullyQualifiedTypeName name="arreglos.ArregloColorOP"/>
     <fullyQualifiedTypeName name="clases.ColorOP"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="clases.ProgramaAcabado"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="com.toedter.calendar.JDateChooser"/>
@@ -40,4 +38,6 @@
     <fullyQualifiedTypeName name="arreglos.ArregloF10"/>
     <fullyQualifiedTypeName name="clases.F10"/>
     <fullyQualifiedTypeName name="javax.swing.JInternalFrame"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloCliente"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

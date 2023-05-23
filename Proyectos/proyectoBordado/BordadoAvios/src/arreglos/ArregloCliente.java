@@ -41,6 +41,12 @@ public class ArregloCliente {
 		return null;
 	}
 	
+	public List<Cliente> lista(){
+		
+		return arrCliente.subList(0, tamano());
+		
+	}
+	
 	//METODOS DE LECTURA Y ESCRITURA
 	
 	public void grabarCliente() {

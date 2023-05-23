@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import arreglos.ArregloCliente;
 import arreglos.ArregloF10;
 import clases.F10;
 
@@ -12,7 +13,7 @@ import clases.F10;
 public class FrmF10 extends JFrame implements ActionListener{
 	private JTextField txtIdF10;
 	private JTextField txtNroOP;
-	private JTextField txtCliente;
+	private JComboBox<Object> cboCliente;
 	private JTextField txtEstilo;
 	private JTextField txtColor;
 	private JTextField txtPrenda;
@@ -66,10 +67,9 @@ public class FrmF10 extends JFrame implements ActionListener{
 		lblNroOP.setBounds(107, 11, 85, 14);
 		panelF10.add(lblNroOP);
 		
-		txtCliente = new JTextField();
-		txtCliente.setColumns(10);
-		txtCliente.setBounds(213, 27, 104, 20);
-		panelF10.add(txtCliente);
+		cboCliente = new JComboBox<Object>();
+		cboCliente.setBounds(213, 27, 104, 20);
+		panelF10.add(cboCliente);
 		
 		lblCliente = new JLabel("CLIENTE");
 		lblCliente.setBounds(214, 11, 85, 14);
@@ -172,7 +172,7 @@ public class FrmF10 extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		String res = null;
 		
-		res = this.txtCliente.getText().trim();
+		res = this.cboCliente.getSelectedItem().toString().trim();
 		
 		return res;
 	}
@@ -191,6 +191,7 @@ public class FrmF10 extends JFrame implements ActionListener{
 	
 	private void arranque() {
 		limpiar();
+		cargarCliente();
 	}
 	
 	private void adicionar() {
@@ -211,6 +212,15 @@ public class FrmF10 extends JFrame implements ActionListener{
 		
 	}
 	
+	private void cargarCliente() {
+		ArregloCliente arrCliente = new ArregloCliente();
+		
+		cboCliente.removeAllItems();
+		
+		arrCliente.lista().forEach((c)->cboCliente.addItem(c.getDesCliente()));
+		
+	}
+	
 	private void eliminar() {
 		
 	}
@@ -225,7 +235,7 @@ public class FrmF10 extends JFrame implements ActionListener{
 		txtIdF10.setEditable(false);
 		
 		txtNroOP.setText("");
-		txtCliente.setText("");
+		cboCliente.setSelectedIndex(-1);
 		txtEstilo.setText("");
 		txtPrenda.setText("");
 		txtColor.setText("");

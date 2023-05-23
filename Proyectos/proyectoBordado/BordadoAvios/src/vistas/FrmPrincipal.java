@@ -14,12 +14,11 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	private JMenuBar menuBar;
 	private JMenu mnArchivo;
 	private JMenu mnMantenimiento;
-	private JMenu mnTransaccion;
+	private JMenu mnBordado;
 	private JMenu mnAyuda;
 	private JMenuItem mniIngresoAvio;
 	private JMenuItem mniAvio;
 	private JMenuItem mniTipoAvio;
-	private JMenu mnConsulta;
 	private JMenuItem mniConsultaIngresoAvio;
 	private JMenu mnAcabado;
 	private JMenuItem mniProgramaAcabado;
@@ -116,19 +115,16 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		mniConsultaProgramaAcabado.addActionListener(this);
 		mnAcabado.add(mniConsultaProgramaAcabado);
 		
-		mnTransaccion = new JMenu("Transaccion");
-		menuBar.add(mnTransaccion);
+		mnBordado = new JMenu("Bordado");
+		menuBar.add(mnBordado);
 		
 		mniIngresoAvio = new JMenuItem("Ingreso de Avios");
 		mniIngresoAvio.addActionListener(this);
-		mnTransaccion.add(mniIngresoAvio);
-		
-		mnConsulta = new JMenu("Consulta");
-		menuBar.add(mnConsulta);
+		mnBordado.add(mniIngresoAvio);
 		
 		mniConsultaIngresoAvio = new JMenuItem("Consulta Ingreso Avio");
+		mnBordado.add(mniConsultaIngresoAvio);
 		mniConsultaIngresoAvio.addActionListener(this);
-		mnConsulta.add(mniConsultaIngresoAvio);
 		
 		mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
@@ -188,14 +184,13 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 		this.dispose();
 	}
 
-	//TRANSACCION
+	//BORDADO - AVIOS
 	protected void actionPerformedMniIngresoAvio(ActionEvent e) {
 		FrmIngresoAvio ventana = new FrmIngresoAvio();
 		escritorio.add(ventana);
 		ventana.setVisible(true);
 		ventana.toFront();
 	}
-	//CONSULTA
 	protected void actionPerformedMniConsultaIngresoAvio(ActionEvent e) {
 		FrmConsultaIngresoAvio ventana = new FrmConsultaIngresoAvio();
 		ventana.setVisible(true);

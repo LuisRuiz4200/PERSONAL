@@ -13,6 +13,7 @@ import reuzables.Custom;
 
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -29,6 +30,17 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
 	private JButton btnEditar;
 	private JButton btnAgregar;
+	private JPanel panelProgramaAcabado;
+	private JTextField txtColor;
+	private JTextField txtAcabado;
+	private JTextArea txtObsPrograma;
+	private JTextField txtIdPrograma;
+	private JLabel lblColor;
+	private JLabel lblAcabado;
+	private JLabel lblObsPrograma;
+	private JLabel lblIdPrograma;
+	private JTextField txtEstado;
+	private JTextField txtFechaActualizada;
 	
 	public static void main (String[] args) {
 		FrmConsultaProgramaAcabado ventana = new FrmConsultaProgramaAcabado();
@@ -48,22 +60,12 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		this.getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 88, 843, 329);
+		scrollPane.setBounds(10, 120, 843, 297);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		table.addMouseListener(this);
 		scrollPane.setViewportView(table);
-		
-		txtNroOP = new JTextField();
-		txtNroOP.addKeyListener(this);
-		txtNroOP.setBounds(10, 45, 86, 20);
-		getContentPane().add(txtNroOP);
-		txtNroOP.setColumns(10);
-		
-		lblNroOP = new JLabel("NRO OP");
-		lblNroOP.setBounds(10, 21, 72, 14);
-		getContentPane().add(lblNroOP);
 		
 		modelo = new DefaultTableModel();
 		modelo.addColumn("ID");
@@ -83,12 +85,12 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		
 		btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(this);
-		btnEditar.setBounds(165, 44, 89, 23);
+		btnEditar.setBounds(657, 86, 89, 23);
 		getContentPane().add(btnEditar);
 		
 		btnAgregar = new JButton("AGREGAR");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(272, 44, 89, 23);
+		btnAgregar.setBounds(764, 86, 89, 23);
 		getContentPane().add(btnAgregar);
 		
 		table.getColumn("ID").setPreferredWidth(40);
@@ -102,12 +104,73 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		
 		table.setAutoCreateRowSorter(true);
 		
+		panelProgramaAcabado = new JPanel();
+		panelProgramaAcabado.setBounds(10, 11, 592, 99);
+		getContentPane().add(panelProgramaAcabado);
+		panelProgramaAcabado.setLayout(null);
+		
+		txtColor = new JTextField();
+		txtColor.setBounds(106, 25, 86, 20);
+		panelProgramaAcabado.add(txtColor);
+		txtColor.setColumns(10);
+		
+		txtAcabado = new JTextField();
+		txtAcabado.setColumns(10);
+		txtAcabado.setBounds(202, 25, 86, 20);
+		panelProgramaAcabado.add(txtAcabado);
+		
+		txtObsPrograma = new JTextArea();
+		txtObsPrograma.setBounds(324, 25, 258, 63);
+		panelProgramaAcabado.add(txtObsPrograma);
+		
+		txtIdPrograma = new JTextField();
+		txtIdPrograma.setBounds(10, 68, 57, 20);
+		panelProgramaAcabado.add(txtIdPrograma);
+		txtIdPrograma.setColumns(10);
+		
+		txtNroOP = new JTextField();
+		txtNroOP.setBounds(10, 25, 86, 20);
+		panelProgramaAcabado.add(txtNroOP);
+		txtNroOP.addKeyListener(this);
+		txtNroOP.setColumns(10);
+		
+		lblNroOP = new JLabel("NRO OP");
+		lblNroOP.setBounds(10, 12, 72, 14);
+		panelProgramaAcabado.add(lblNroOP);
+		
+		lblColor = new JLabel("COLOR");
+		lblColor.setBounds(106, 12, 72, 14);
+		panelProgramaAcabado.add(lblColor);
+		
+		lblAcabado = new JLabel("ACABADO");
+		lblAcabado.setBounds(202, 12, 72, 14);
+		panelProgramaAcabado.add(lblAcabado);
+		
+		lblObsPrograma = new JLabel("PROGRAMA");
+		lblObsPrograma.setBounds(324, 12, 72, 14);
+		panelProgramaAcabado.add(lblObsPrograma);
+		
+		lblIdPrograma = new JLabel("ID");
+		lblIdPrograma.setBounds(10, 53, 72, 14);
+		panelProgramaAcabado.add(lblIdPrograma);
+		
+		txtEstado = new JTextField();
+		txtEstado.setColumns(10);
+		txtEstado.setBounds(767, 11, 86, 20);
+		getContentPane().add(txtEstado);
+		
+		txtFechaActualizada = new JTextField();
+		txtFechaActualizada.setColumns(10);
+		txtFechaActualizada.setBounds(660, 11, 86, 20);
+		getContentPane().add(txtFechaActualizada);
+		
 		arranque();
 	}
 
 	//METODOS VOID
 	private void arranque() {
 		listarProgramaAcabado();
+		limpiar();
 	}
 	
 	private void listarProgramaAcabado() {
@@ -169,12 +232,44 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		}	
 	}
 	
-	private void cargarPrograma() {
+	private void limpiar() {
+		txtIdPrograma.setText("");
+		txtNroOP.setText("");
+		txtColor.setText("");
+		txtAcabado.setText("");
+		txtObsPrograma.setText("");
+		txtEstado.setText("");
+		txtFechaActualizada.setText("");
+		
+		txtIdPrograma.setEditable(false);
+		txtColor.setEditable(false);
+		txtAcabado.setEditable(false);
+		txtObsPrograma.setEditable(false);
+		txtEstado.setEditable(false);
+		txtFechaActualizada.setEditable(false);
+	}
+	
+	private void mostrarPrograma() {
 		int n = table.getSelectedRow();
 		
 		String nroOP = table.getValueAt(n, 1).toString();
+		int idPrograma = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_programaAcabado();
+		String color = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_colorOP();
+		String acabado = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_citiAcabado();
+		String obsPrograma = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getObs_programaAcabado();
+		String estado = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getEstado_programaAcabado();
+		Date fechaActualizada = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getFechaAct_programaAcabado();
 		
+		
+		txtIdPrograma.setText(idPrograma + "");
 		txtNroOP.setText(nroOP);
+		txtColor.setText(color);
+		txtAcabado.setText(acabado);
+		txtObsPrograma.setText(obsPrograma);
+		txtEstado.setText(estado);
+		txtFechaActualizada.setText(new SimpleDateFormat("dd MMM yyy").format(fechaActualizada));
+		
+		
 	}
 	
 	
@@ -208,7 +303,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseClickedTable(MouseEvent e) {
-		cargarPrograma();
+		mostrarPrograma();
 	}
 	//ACTION PERFORMED
 	public void actionPerformed(ActionEvent e) {
