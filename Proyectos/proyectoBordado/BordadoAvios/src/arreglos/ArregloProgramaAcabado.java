@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import clases.CitiAcabado;
 import clases.ProgramaAcabado;
+import reuzables.Custom;
 
 public class ArregloProgramaAcabado {
 	
@@ -47,7 +48,10 @@ public class ArregloProgramaAcabado {
 				x.setCod_colorOP(obj.getCod_colorOP());
 				x.setCantProg_programaAcabado(obj.getCantProg_programaAcabado());
 				x.setCantPed_programaAcabado(obj.getCantPed_programaAcabado());
+				x.setCod_citiConfeccion(obj.getCod_citiConfeccion());
+				x.setCod_citiAcabado(obj.getCod_citiAcabado());
 				x.setFechaAct_programaAcabado(obj.getFechaAct_programaAcabado());
+				x.setObs_programaAcabado(obj.getObs_programaAcabado());
 				x.setEstado_programaAcabado(obj.getEstado_programaAcabado());
 			}
 		}
@@ -78,6 +82,21 @@ public class ArregloProgramaAcabado {
 		return res;
 	}
 	
+	public int duplicado (int nroOP, String color, String acabado) {
+		int res=0;
+		
+		for(ProgramaAcabado obj: arrProgramaAcabado) {
+			if (obj.getNro_OP()==nroOP && obj.getCod_colorOP().equals(color) && obj.getCod_citiAcabado().equals(acabado)) {
+				Custom.mensajeAdvertencia(null, "YA SE REGISTRO AL PROGRAMA ESTOS DETALLES");
+				res = 0;
+			}else {
+				res = 1;
+			}
+		}
+		
+		return res;
+	}
+	
 	//METODOS PARA GRABAR Y CARGAR DATA
 	
 	public void grabarProgramaAcabado() {
@@ -96,6 +115,7 @@ public class ArregloProgramaAcabado {
 						obj.getCod_citiConfeccion() + ";" +
 						obj.getCod_citiAcabado() + ";" +
 						obj.getObs_programaAcabado() + ";" + 
+						new SimpleDateFormat("dd/MM/yyyy").format(obj.getFechaReg_programaAcabado()) +";" +
 						new SimpleDateFormat("dd/MM/yyyy").format(obj.getFechaAct_programaAcabado()) +";" +
 						obj.getEstado_programaAcabado() + ";" 
 						;
@@ -128,8 +148,9 @@ public class ArregloProgramaAcabado {
 				 citiConfeccion.setCod_citiConfeccion(n[5]);
 				 citiConfeccion.setCod_citiAcabado(n[6]);
 				 citiConfeccion.setObs_programaAcabado(n[7]);
-				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[8]).getTime()));
-				 citiConfeccion.setEstado_programaAcabado(n[9]);
+				 citiConfeccion.setFechaReg_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[8]).getTime()));
+				 citiConfeccion.setFechaAct_programaAcabado(new Date(new SimpleDateFormat("dd/MM/yyyy").parse(n[9]).getTime()));
+				 citiConfeccion.setEstado_programaAcabado(n[10]);
 				 
 				 adicionar(citiConfeccion);
 				

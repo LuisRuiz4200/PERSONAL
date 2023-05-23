@@ -19,7 +19,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListener, KeyListener{
+public class FrmIngresoAvio extends JInternalFrame implements ActionListener, MouseListener, KeyListener{
 	private JPanel panelOrdenProduccion;
 	private JLabel lblNroVale;
 	private JTextField txtNroVale;
@@ -63,8 +63,11 @@ public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListe
 		
 		this.setTitle("INGRESO AVIOS");
 		this.setBounds(0,0,747,540);
-		this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
+		
+		this.setClosable(true);
+		this.setMaximizable(true);
+		this.setIconifiable(true);
 		
 		panelOrdenProduccion = new JPanel();
 		panelOrdenProduccion.setBorder(new TitledBorder(null, "Orden de Produccion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -284,14 +287,14 @@ public class FrmIngresoAvio extends JFrame implements ActionListener, MouseListe
 	}
 	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
 		
-		DlgBuscarOP dg = new DlgBuscarOP(new FrmPrincipal(),true);
+		DlgBuscarOP dg = new DlgBuscarOP(null,true);
 		dg.setLocationRelativeTo(this);
 		dg.setVisible(true);
 		
 	}
 	protected void actionPerformedBtnBuscarAvio(ActionEvent e) {
 		
-		DlgBuscarAvio consultaAvio = new DlgBuscarAvio(this,true);
+		DlgBuscarAvio consultaAvio = new DlgBuscarAvio(null,true);
 		DlgBuscarAvio.source="FrmIngresoAvio";
 		consultaAvio.setVisible(true);
 	}

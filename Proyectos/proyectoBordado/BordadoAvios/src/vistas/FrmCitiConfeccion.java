@@ -228,6 +228,7 @@ public class FrmCitiConfeccion extends JInternalFrame implements ActionListener,
 			arrCitiConfeccion.grabarCitiConfeccion();
 			
 			listarCitiAcabado();
+			
 		}else {
 			JOptionPane.showMessageDialog(this, "OPERACION CANCELADA");
 		}

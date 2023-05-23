@@ -165,16 +165,11 @@ public class DlgBuscarCitiConfeccion extends JDialog implements ActionListener, 
 	
 	private void mostrarCiti() {
 		
-		
 		int n = table.getSelectedRow();
 		
 		String nroOp = table.getValueAt(n, 0).toString();
 		
 		txtCitiConfeccion.setText(nroOp);
-		
-		
-		
-		
 	}
 	
 	private void exportarCiti() {

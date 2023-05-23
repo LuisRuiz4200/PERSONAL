@@ -45,7 +45,7 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	public FrmPrincipal() {
 		
 		this.setTitle("PRINCIPAL");
-		this.setBounds(0,0,987,688);
+		this.setBounds(0,0,987,647);
 		this.setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -183,17 +183,17 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	
 	private void actionPerformedMniActualizar(ActionEvent e) {
 		// TODO Auto-generated method stub
-		new ArregloPrenda();
-		new ArregloCliente();
-		new ArregloEstiloOP();
-		new ArregloOrdenProduccion();
-		new ArregloColorOP();
+		FrmPrincipal frame = new FrmPrincipal();
+		frame.setVisible(true);
+		this.dispose();
 	}
 
 	//TRANSACCION
 	protected void actionPerformedMniIngresoAvio(ActionEvent e) {
 		FrmIngresoAvio ventana = new FrmIngresoAvio();
+		escritorio.add(ventana);
 		ventana.setVisible(true);
+		ventana.toFront();
 	}
 	//CONSULTA
 	protected void actionPerformedMniConsultaIngresoAvio(ActionEvent e) {
@@ -203,32 +203,32 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	//ACABADO
 	protected void actionPerformedMniProgramaAcabado(ActionEvent e) {
 		FrmProgramaAcabado frame = new FrmProgramaAcabado();
+		escritorio.add(frame);
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		frame.toFront();
-		escritorio.add(frame);
 	}
 	protected void actionPerformedMniConsultaProgramaAcabado(ActionEvent e) {
 		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
+		escritorio.add(frame);
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		frame.toFront();
-		escritorio.add(frame);
 	}
 	//MANTENIMIENTO - CITIS
 	protected void actionPerformedMniCitiConfeccion(ActionEvent e) {
 		FrmCitiConfeccion frame = new FrmCitiConfeccion();
+		escritorio.add(frame);
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		frame.toFront();
-		escritorio.add(frame);
 	}
 	protected void actionPerformedMniCitiAcabado(ActionEvent e) {
 		FrmCitiAcabado frame = new FrmCitiAcabado();
+		escritorio.add(frame);
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		frame.toFront();
-		escritorio.add(frame);
 	}
 	//MANTENIMIENTO - DATA BASE
 	private void actionPerformedMniPrenda(ActionEvent e) {

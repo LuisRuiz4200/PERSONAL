@@ -12,6 +12,7 @@ public class ProgramaAcabado {
 	private String cod_citiConfeccion;
 	private String cod_citiAcabado;
 	private String obs_programaAcabado;
+	private Date fechaReg_programaAcabado;
 	private Date fechaAct_programaAcabado;
 	private String estado_programaAcabado;
 	
@@ -21,7 +22,7 @@ public class ProgramaAcabado {
 
 	public ProgramaAcabado(int cod_programaAcabado, int nro_OP, String cod_colorOP, int cantPed_programaAcabado,
 			int cantProg_programaAcabado, String cod_citiConfeccion, String cod_citiAcabado, String obs_programaAcabado,
-			Date fechaAct_programaAcabado, String estado_programaAcabado) {
+			Date fechaReg_programaAcabado, Date fechaAct_programaAcabado, String estado_programaAcabado) {
 		super();
 		this.cod_programaAcabado = cod_programaAcabado;
 		this.nro_OP = nro_OP;
@@ -31,6 +32,7 @@ public class ProgramaAcabado {
 		this.cod_citiConfeccion = cod_citiConfeccion;
 		this.cod_citiAcabado = cod_citiAcabado;
 		this.obs_programaAcabado = obs_programaAcabado;
+		this.fechaReg_programaAcabado = fechaReg_programaAcabado;
 		this.fechaAct_programaAcabado = fechaAct_programaAcabado;
 		this.estado_programaAcabado = estado_programaAcabado;
 	}
@@ -97,6 +99,14 @@ public class ProgramaAcabado {
 
 	public void setObs_programaAcabado(String obs_programaAcabado) {
 		this.obs_programaAcabado = obs_programaAcabado;
+	}
+
+	public Date getFechaReg_programaAcabado() {
+		return fechaReg_programaAcabado;
+	}
+
+	public void setFechaReg_programaAcabado(Date fechaReg_programaAcabado) {
+		this.fechaReg_programaAcabado = fechaReg_programaAcabado;
 	}
 
 	public Date getFechaAct_programaAcabado() {

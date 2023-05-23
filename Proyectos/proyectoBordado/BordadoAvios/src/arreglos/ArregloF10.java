@@ -2,6 +2,8 @@ package arreglos;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import clases.F10;
@@ -49,9 +51,44 @@ public class ArregloF10 {
 		return null;
 	}
 	
+	public int correlativo() {
+		int res = 0;
+		
+		if (arrF10.size()==0) {
+			res = 1;
+		}
+		
+		for (F10 obj:arrF10) {
+			res = obj.getId_F10() + 1;
+		}
+		
+		return res;
+	}
+	
 	//CArgaR y grabar
 	
-	public void grabarF10() {}
+	public void grabarF10() {
+		PrintWriter pr;
+		String linea;
+		
+		try {
+			pr = new PrintWriter(new FileWriter("F10.txt"));
+			for (F10 obj: arrF10) {
+				linea = obj.getId_F10() + ";" +
+						obj.getNroOP_F10() + ";" +
+						obj.getCliente_F10() + ";" +
+						obj.getEstilo_F10() + ";" +
+						obj.getPrenda_F10() + ";" +
+						obj.getColor_F10() + ";";
+				
+				pr.println(linea);
+			}
+			pr.close();
+		}catch(Exception e){
+			
+		}
+		
+	}
 	
 	public void cargarF10() {
 		BufferedReader br ;
@@ -73,9 +110,10 @@ public class ArregloF10 {
 				
 				arrF10.add(obj);
 			}
+			br.close();
 			
 		}catch(Exception e) {
-			Custom.mensajeError(null,e.getMessage());
+			Custom.mensajeError(null,e.getMessage() + "\n ArregloF10, cargarF10");
 		}
 	}
 	

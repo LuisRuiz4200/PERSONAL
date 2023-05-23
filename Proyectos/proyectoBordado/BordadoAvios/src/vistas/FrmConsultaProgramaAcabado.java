@@ -74,6 +74,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		modelo.addColumn("CONFECCION");
 		modelo.addColumn("ACABADO");
 		modelo.addColumn("OBSERVACION");
+		modelo.addColumn("REGISTRADO");
 		modelo.addColumn("ACTUALIZADO");
 		modelo.addColumn("ESTADO");
 		table.setModel(modelo);
@@ -95,6 +96,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		table.getColumn("CONFECCION").setPreferredWidth(100);
 		table.getColumn("ACABADO").setPreferredWidth(100);
 		table.getColumn("OBSERVACION").setPreferredWidth(200);
+		table.getColumn("REGISTRADO").setPreferredWidth(100);
 		table.getColumn("ACTUALIZADO").setPreferredWidth(100);
 		table.getColumn("ESTADO").setPreferredWidth(100);
 		
@@ -125,6 +127,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 					obj.getCod_citiConfeccion(),
 					obj.getCod_citiAcabado(),
 					obj.getObs_programaAcabado(),
+					new SimpleDateFormat("dd MMM yyy").format(obj.getFechaReg_programaAcabado()),
 					new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
 					obj.getEstado_programaAcabado()
 					
@@ -236,6 +239,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 			return;
 		}
 		
+		int id = (int) table.getValueAt(n, 0);
 		int nroOP = (int)table.getValueAt(n, 1);
 		String colorOP = (String)table.getValueAt(n, 2);
 		String confeccion = (String)table.getValueAt(n, 5);
@@ -249,6 +253,9 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		FrmPrincipal.escritorio.add(frame);
+		
+		//RETORNAMOS EL ID DEL DOCUMENTO
+		FrmProgramaAcabado.txtCodPrograma.setText(id+"");
 		
 		//PANEL ORDEN DE PRODUCCION
 		FrmProgramaAcabado.txtNroOP.setText(objF10.getNroOP_F10()+"");
@@ -266,6 +273,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		FrmProgramaAcabado.btnGrabar.setEnabled(false);
 		FrmProgramaAcabado.btnEditar.setEnabled(true);
 		FrmProgramaAcabado.txtNroOP.setEditable(false);
+		FrmProgramaAcabado.btnEliminar.setEnabled(true);
 		
 		this.dispose();
 		

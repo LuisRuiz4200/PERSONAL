@@ -23,6 +23,8 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 	private JLabel lblNroOP;
 	public static String frame;
 	private JButton btnElegir;
+	private JButton btnEditar;
+	private JButton btnAgregar;
 	
 	public static void main (String[] args) {
 	}
@@ -75,6 +77,16 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 		btnElegir.setBounds(124, 38, 89, 23);
 		btnElegir.addActionListener(this);
 		getContentPane().add(btnElegir);
+		
+		btnEditar = new JButton("EDITAR");
+		btnEditar.addActionListener(this);
+		btnEditar.setBounds(357, 40, 89, 23);
+		getContentPane().add(btnEditar);
+		
+		btnAgregar = new JButton("AGREGAR");
+		btnAgregar.addActionListener(this);
+		btnAgregar.setBounds(456, 40, 89, 23);
+		getContentPane().add(btnAgregar);
 		
 		arranque();
 	}
@@ -138,7 +150,9 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 			FrmProgramaAcabado.txtPrendaOP.setText(objF10.getPrenda_F10());
 			FrmProgramaAcabado.txtIdF10.setText(objF10.getId_F10()+"");
 			FrmProgramaAcabado.txtClienteOP.setText(objF10.getCliente_F10());
+			
 			this.dispose();
+			
 			break;
 		}
 	}
@@ -175,6 +189,12 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAgregar) {
+			actionPerformedBtnAgregar(e);
+		}
+		if (e.getSource() == btnEditar) {
+			actionPerformedBtnEditar(e);
+		}
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnElegir) {
 			actionPerformedBtnElegir(e);
@@ -226,5 +246,14 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	protected void actionPerformedBtnEditar(ActionEvent e) {
+		
+	}
+	protected void actionPerformedBtnAgregar(ActionEvent e) {
+		FrmF10 frame = new FrmF10();
+		this.dispose();
+		frame.setVisible(true);
+		frame.toFront();
 	}
 }

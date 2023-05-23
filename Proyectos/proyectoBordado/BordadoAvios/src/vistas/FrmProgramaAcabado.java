@@ -19,11 +19,12 @@ import clases.ProgramaAcabado;
 import reuzables.Custom;
 
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import javax.swing.event.CaretListener;
-
-import com.toedter.calendar.JDateChooser;
 
 import javax.swing.event.CaretEvent;
 
@@ -55,7 +56,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private JTextField txtCantProgramada;
 	private JLabel lblCantPrograma;
 	private JButton btnLista;
-	private JDateChooser txtFechaActualizada;
+	private JTextField txtFechaActualizada;
 	private JLabel lblFechaActualizada;
 	private JTextField txtEstadoPrograma;
 	private JLabel lblEstadoPrograma;
@@ -74,15 +75,25 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	public static JTextField txtPrendaOP;
 	private JLabel lblPrendaOP;
 	public static JTextField txtIdF10;
+	private JTextField txtFechaReg;
 	
 	public static void main (String[] args) {
-		FrmProgramaAcabado ventana = new FrmProgramaAcabado();
-		ventana.setVisible(true);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmProgramaAcabado frame = new FrmProgramaAcabado();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					Custom.mensajeAdvertencia(null, e.getMessage().toString());
+				}
+			}
+		});
 	}
 	
 	public FrmProgramaAcabado() {
 		
 		this.setTitle("PROGRAMA ACABADO");
+		this.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 		this.setBounds(0,0,702,516);
 		this.getContentPane().setLayout(null);
 		
@@ -271,7 +282,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		btnLista.setBounds(417, 447, 89, 23);
 		getContentPane().add(btnLista);
 		
-		txtFechaActualizada = new JDateChooser();
+		txtFechaActualizada = new JTextField();
 		txtFechaActualizada.setBounds(431, 31, 118, 20);
 		getContentPane().add(txtFechaActualizada);
 		
@@ -297,6 +308,15 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		txtCodPrograma.setColumns(10);
 		txtCodPrograma.setBounds(13, 31, 86, 20);
 		getContentPane().add(txtCodPrograma);
+		
+		txtFechaReg = new JTextField();
+		txtFechaReg.setBounds(307, 31, 100, 20);
+		getContentPane().add(txtFechaReg);
+		txtFechaReg.setColumns(10);
+		
+		JLabel lblFechaReg = new JLabel("FECHA REGISTRO");
+		lblFechaReg.setBounds(307, 11, 100, 14);
+		getContentPane().add(lblFechaReg);
 		
 		arranque();
 	}
@@ -356,9 +376,9 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	}
 	
 	private String leerObservacion () {
-		String res = "NINGUNA";
+		String res = null;
 		
-		res = FrmProgramaAcabado.txtObsPrograma.getText();
+		res = txtObsPrograma.getText();
 		
 		return res ;
 	}
@@ -374,7 +394,12 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private Date leerFechaActualizada() {
 		Date res = null;
 		
-		res = this.txtFechaActualizada.getDate();
+		try {
+			res = new SimpleDateFormat("dd/MM/yyy").parse( this.txtFechaActualizada.getText().trim());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return res;
 	}
@@ -395,6 +420,18 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		return res;
 	}
 	
+	private Date leerFechaRegistro() {
+		Date res = null;
+		
+		try {
+			res = new SimpleDateFormat("dd/MM/yyy").parse( this.txtFechaReg.getText().trim());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	
 	//METODOS VOID
 	private void arranque() {
@@ -412,17 +449,19 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		FrmProgramaAcabado.txtPrendaOP.setText("");
 		FrmProgramaAcabado.txtIdF10.setText("");
 		FrmProgramaAcabado.txtClienteOP.setText("");
+		FrmProgramaAcabado.txtObsPrograma.setText("");
 		
 		this.txtCantPedido.setText("");
 		this.txtCantProgramada.setText("");
 		this.txtDesCitiConfeccion.setText("");
 		this.txtDesCitiAcabado.setText("");
 		this.txtEstadoPrograma.setText("REGISTRADO");
-		this.txtFechaActualizada.setDate(new Date());
+		this.txtFechaActualizada.setText(new SimpleDateFormat("dd/MM/yyy").format(new Date().getTime()));
+		this.txtFechaReg.setText(new SimpleDateFormat("dd/MM/yyy").format(new Date().getTime()));
 		
-
+		this.txtFechaReg.setEditable(false);
 		this.txtDesCitiAcabado.setEditable(false);
-		this.txtFechaActualizada.setEnabled(false);
+		this.txtFechaActualizada.setEditable(false);
 		this.txtDesCitiConfeccion.setEditable(false);
 		this.txtEstadoPrograma.setEditable(false);
 		
@@ -448,12 +487,13 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		String codColorOP = leerColorOP();
+		String ColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
 		String citiAcabado = leerCitiAcabado();
 		String observacion = leerObservacion();
+		Date fechaRegistro = leerFechaRegistro();
 		Date fechaActualizada = leerFechaActualizada();
 		String estado = leerEstadoPrograma();
 		
@@ -461,24 +501,30 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		obj.setCod_programaAcabado(codPrograma);
 		obj.setNro_OP(nroOP);
-		obj.setCod_colorOP(codColorOP);
+		obj.setCod_colorOP(ColorOP);
 		obj.setCantPed_programaAcabado(cantPedido);
 		obj.setCantProg_programaAcabado(cantPrograma);
 		obj.setCod_citiConfeccion(citiConfeccion);
 		obj.setCod_citiAcabado(citiAcabado);
 		obj.setObs_programaAcabado(observacion);
+		obj.setFechaReg_programaAcabado(fechaRegistro);
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		if (codPrograma==-1 || nroOP==-1 || codColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+		if (codPrograma==-1 || nroOP==-1 || ColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
 				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
 			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
 			return;
-		}else {
+		}else if(arrProgramaAcabado.duplicado(nroOP, ColorOP, citiAcabado)==0) {
+			
+			return;
+		}
+		else {
 			arrProgramaAcabado.adicionar(obj);
 			arrProgramaAcabado.grabarProgramaAcabado();
 			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
 			limpiar();
+			return;
 		}
 	}
 	
@@ -486,36 +532,39 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		String codColorOP = leerColorOP();
+		String ColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
 		String citiAcabado = leerCitiAcabado();
 		String observacion = leerObservacion();
-		Date fechaActualizada = leerFechaActualizada();
+		Date fechaRegistro = leerFechaRegistro();
+		Date fechaActualizada = new Date();
 		String estado = leerEstadoPrograma();
 		
 		ProgramaAcabado obj = new ProgramaAcabado();
 		
 		obj.setCod_programaAcabado(codPrograma);
 		obj.setNro_OP(nroOP);
-		obj.setCod_colorOP(codColorOP);
+		obj.setCod_colorOP(ColorOP);
 		obj.setCantPed_programaAcabado(cantPedido);
 		obj.setCantProg_programaAcabado(cantPrograma);
 		obj.setCod_citiConfeccion(citiConfeccion);
 		obj.setCod_citiAcabado(citiAcabado);
 		obj.setObs_programaAcabado(observacion);
+		obj.setFechaReg_programaAcabado(fechaRegistro);
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
-		if (codPrograma==-1 || nroOP==-1 || codColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
+		if (codPrograma==-1 || nroOP==-1 || ColorOP==null || cantPedido==-1 || cantPrograma==-1 || citiConfeccion==null ||
 				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
 			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
 			return;
 		}else {
 			arrProgramaAcabado.editar(obj);
 			arrProgramaAcabado.grabarProgramaAcabado();
-			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
+			Custom.mensajeExito(this, "En hora buena, operacion exitosa \n"
+					+ "Fecha de actualizacion: " + fechaActualizada);
 			limpiar();
 		}
 	}
@@ -523,12 +572,13 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private void eliminar() {
 		int codPrograma = leerCodPrograma();
 		int nroOP = leerNroOP();
-		String codColorOP = leerColorOP();
+		String ColorOP = leerColorOP();
 		int cantPedido = leerCantPedido();
 		int cantPrograma = leerCantPrograma();
 		String citiConfeccion = leerCitiConfeccion();
 		String citiAcabado = leerCitiAcabado();
 		String observacion = leerObservacion();
+		Date fechaRegistro = leerFechaRegistro();
 		Date fechaActualizada = leerFechaActualizada();
 		String estado = leerEstadoPrograma();
 		
@@ -536,12 +586,13 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		
 		obj.setCod_programaAcabado(codPrograma);
 		obj.setNro_OP(nroOP);
-		obj.setCod_colorOP(codColorOP);
+		obj.setCod_colorOP(ColorOP);
 		obj.setCantPed_programaAcabado(cantPedido);
 		obj.setCantProg_programaAcabado(cantPrograma);
 		obj.setCod_citiConfeccion(citiConfeccion);
 		obj.setCod_citiAcabado(citiAcabado);
 		obj.setObs_programaAcabado(observacion);
+		obj.setFechaReg_programaAcabado(fechaRegistro);
 		obj.setFechaAct_programaAcabado(fechaActualizada);
 		obj.setEstado_programaAcabado(estado);
 		
@@ -565,7 +616,8 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		txtCodCitiAcabado.setText(obj.getCod_citiAcabado());
 		txtCantPedido.setText(obj.getCantPed_programaAcabado()+"");
 		txtCantProgramada.setText(obj.getCantProg_programaAcabado()+"");
-		txtFechaActualizada.setDate(obj.getFechaAct_programaAcabado());
+		txtFechaActualizada.setText(new SimpleDateFormat("dd/MM/yyy").format(obj.getFechaAct_programaAcabado().toString()));
+		txtFechaReg.setText(new SimpleDateFormat("dd/MM/yyy").format(obj.getFechaReg_programaAcabado().toString()));
 		txtEstadoPrograma.setText(obj.getEstado_programaAcabado());
 		txtObsPrograma.setText(obj.getObs_programaAcabado());
 	}
@@ -636,21 +688,21 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
 
 		DlgListaF10.frame = "FrmProgramaAcabado";
-		DlgListaF10 buscarOP = new DlgListaF10 (new FrmPrincipal(),true);
+		DlgListaF10 buscarOP = new DlgListaF10 (null,true);
 		buscarOP.setVisible(true);
 	}
 
 	protected void actionPerformedBtnBuscarCitiConfeccion(ActionEvent e) {
 		
 		DlgBuscarCitiConfeccion.frame = "FrmProgramaAcabado";
-		DlgBuscarCitiConfeccion dlg = new DlgBuscarCitiConfeccion(new FrmPrincipal(),true);
+		DlgBuscarCitiConfeccion dlg = new DlgBuscarCitiConfeccion(null,true);
 		dlg.setVisible(true);
 	}
 
 	protected void actionPerformedBtnBuscarCitiAcabado(ActionEvent e) {
 		
 		DlgBuscarCitiAcabado.frame = "FrmProgramaAcabado";
-		DlgBuscarCitiAcabado dlg = new DlgBuscarCitiAcabado(new FrmPrincipal(),true);
+		DlgBuscarCitiAcabado dlg = new DlgBuscarCitiAcabado(null,true);
 		dlg.setVisible(true);
 	}
 	//CARET CHANGED PARA TXT NRO_OP, COD_CITIS

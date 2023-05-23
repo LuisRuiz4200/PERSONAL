@@ -37,4 +37,7 @@
     <fullyQualifiedTypeName name="javax.swing.JDesktopPane"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="vistas.FrmCitiConfeccion"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloF10"/>
+    <fullyQualifiedTypeName name="clases.F10"/>
+    <fullyQualifiedTypeName name="javax.swing.JInternalFrame"/>
 </qualifiedTypeNameHistroy>

@@ -1,5 +1,4 @@
 INDEX VERSION 1.131+C:\Users\lr270\OneDrive\Documentos\GitHub\PERSONAL\Proyectos\proyectoBordado\.metadata\.plugins\org.eclipse.jdt.core
 100734146.index
 2589105401.index
-2914081328.index
 1865797976.index
