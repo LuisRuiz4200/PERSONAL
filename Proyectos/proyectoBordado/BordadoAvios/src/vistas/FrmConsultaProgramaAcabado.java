@@ -110,13 +110,13 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		panelProgramaAcabado.setLayout(null);
 		
 		txtColor = new JTextField();
-		txtColor.setBounds(106, 25, 86, 20);
+		txtColor.setBounds(106, 25, 186, 20);
 		panelProgramaAcabado.add(txtColor);
 		txtColor.setColumns(10);
 		
 		txtAcabado = new JTextField();
 		txtAcabado.setColumns(10);
-		txtAcabado.setBounds(202, 25, 86, 20);
+		txtAcabado.setBounds(206, 68, 86, 20);
 		panelProgramaAcabado.add(txtAcabado);
 		
 		txtObsPrograma = new JTextArea();
@@ -143,11 +143,11 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		panelProgramaAcabado.add(lblColor);
 		
 		lblAcabado = new JLabel("ACABADO");
-		lblAcabado.setBounds(202, 12, 72, 14);
+		lblAcabado.setBounds(206, 55, 72, 14);
 		panelProgramaAcabado.add(lblAcabado);
 		
-		lblObsPrograma = new JLabel("PROGRAMA");
-		lblObsPrograma.setBounds(324, 12, 72, 14);
+		lblObsPrograma = new JLabel("OBSERVACION");
+		lblObsPrograma.setBounds(324, 12, 105, 14);
 		panelProgramaAcabado.add(lblObsPrograma);
 		
 		lblIdPrograma = new JLabel("ID");
@@ -169,8 +169,9 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 
 	//METODOS VOID
 	private void arranque() {
-		listarProgramaAcabado();
+
 		limpiar();
+		listarProgramaAcabado();
 	}
 	
 	private void listarProgramaAcabado() {
@@ -220,6 +221,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 						obj.getCod_citiConfeccion(),
 						obj.getCod_citiAcabado(),
 						obj.getObs_programaAcabado(),
+						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaReg_programaAcabado()),
 						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
 						obj.getEstado_programaAcabado()
 				};
@@ -233,6 +235,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	}
 	
 	private void limpiar() {
+		
 		txtIdPrograma.setText("");
 		txtNroOP.setText("");
 		txtColor.setText("");
@@ -247,6 +250,8 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		txtObsPrograma.setEditable(false);
 		txtEstado.setEditable(false);
 		txtFechaActualizada.setEditable(false);
+		
+		txtNroOP.requestFocus();
 	}
 	
 	private void mostrarPrograma() {
@@ -285,6 +290,15 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	}
 	protected void keyReleasedTxtNroOP(KeyEvent e) {
 		filtrarOP();
+		
+		if(txtNroOP.getText().length()<5) {
+			txtColor.setText("");
+			txtEstado.setText("");
+			txtAcabado.setText("");
+			txtFechaActualizada.setText("");
+			txtIdPrograma.setText("");
+			txtObsPrograma.setText("");
+		}
 	}
 	
 	//MOUSE CLIKED
@@ -335,10 +349,13 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		}
 		
 		int id = (int) table.getValueAt(n, 0);
-		int nroOP = (int)table.getValueAt(n, 1);
-		String colorOP = (String)table.getValueAt(n, 2);
-		String confeccion = (String)table.getValueAt(n, 5);
-		String acabado = (String)table.getValueAt(n, 6);
+		
+		int nroOP = arrProgramaAcabado.buscar(id).getNro_OP();
+		String colorOP = arrProgramaAcabado.buscar(id).getCod_colorOP();
+		String confeccion = arrProgramaAcabado.buscar(id).getCod_citiConfeccion();
+		String acabado = arrProgramaAcabado.buscar(id).getCod_citiAcabado();
+		String obsPrograma = arrProgramaAcabado.buscar(id).getObs_programaAcabado();
+		Date fechaReg = arrProgramaAcabado.buscar(id).getFechaReg_programaAcabado();
 		
 		ArregloF10 arrF10 = new ArregloF10();
 		F10 objF10 = arrF10.buscarPorNroOPYColorOP(nroOP,colorOP);
@@ -363,6 +380,10 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		//PANEL CONFECCION Y ACABADO
 		FrmProgramaAcabado.txtCodCitiConfeccion.setText(confeccion);
 		FrmProgramaAcabado.txtCodCitiAcabado.setText(acabado);
+		
+		//OBSERVACIONES Y FECHA DE REGISTRO
+		FrmProgramaAcabado.txtObsPrograma.setText(obsPrograma);
+		FrmProgramaAcabado.txtFechaReg.setText(new SimpleDateFormat("dd/MM/yyy").format(fechaReg).toString());
 		
 		//BOTONES DE FUNCION
 		FrmProgramaAcabado.btnGrabar.setEnabled(false);

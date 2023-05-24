@@ -75,7 +75,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	public static JTextField txtPrendaOP;
 	private JLabel lblPrendaOP;
 	public static JTextField txtIdF10;
-	private JTextField txtFechaReg;
+	public static JTextField txtFechaReg;
 	
 	public static void main (String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -515,17 +515,17 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 				 citiAcabado==null || observacion==null || fechaActualizada==null || estado==null) {
 			JOptionPane.showMessageDialog(this,"VUELVA A INTENTARLO","MENSAJE",0);
 			return;
-		}else if(arrProgramaAcabado.duplicado(nroOP, ColorOP, citiAcabado)==0) {
+		}
+		
+		if(arrProgramaAcabado.duplicado(nroOP, ColorOP, citiAcabado)==0) {
 			
 			return;
 		}
-		else {
-			arrProgramaAcabado.adicionar(obj);
-			arrProgramaAcabado.grabarProgramaAcabado();
-			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
-			limpiar();
-			return;
-		}
+
+		arrProgramaAcabado.adicionar(obj);
+		arrProgramaAcabado.grabarProgramaAcabado();
+		Custom.mensajeExito(this, "En hora buena, operacion exitosa");
+		limpiar();
 	}
 	
 	private void editar() {
@@ -678,11 +678,12 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	}
 	protected void actionPerformedBtnLista(ActionEvent e) {
 		FrmConsultaProgramaAcabado frame = new FrmConsultaProgramaAcabado();
-		this.dispose();
+		
+		FrmPrincipal.escritorio.add(frame);
 		frame.setVisible(true);
 		frame.setLocation(40,40);
 		frame.toFront();
-		FrmPrincipal.escritorio.add(frame);
+		this.dispose();
 		
 	}
 	protected void actionPerformedBtnBuscarOP(ActionEvent e) {
