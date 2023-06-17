@@ -1,4 +1,4 @@
-package vistas;
+package vista;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -98,49 +98,23 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	//MANTENIMIENTO
 	
 	protected void actionPerformedMniCliente(ActionEvent e) {
-		FrmCliente form = new FrmCliente();
-		form.setVisible(true);
-		//form.setLocationRelativeTo(this);
-		escritorio.add(form).setLocation(0,0);
-		form.toFront();
 	}
 	
 	protected void actionPerformedMniDeuda(ActionEvent e) {
-		
-		FrmDeuda form = new FrmDeuda();
-		form.setVisible(true);
-		//form.setLocationRelativeTo(this);
-		escritorio.add(form).setLocation(0,0);
-		form.toFront();
 		
 	}
 	
 	//TRANSACCION
 	
 	protected void actionPerformedMntiPago(ActionEvent e) {
-		FrmPago form = new FrmPago();
-		form.setVisible(true);
-		//form.setLocationRelativeTo(this);
-		escritorio.add(form).setLocation(0,0);
-		form.toFront();
 	}
 	
 	//CONSULTA
 	
 	protected void actionPerformedMniConsultaDeuda(ActionEvent e) {
-		FrmConsultaDeuda form = new FrmConsultaDeuda();
-		form.setVisible(true);
-		//form.setLocationRelativeTo(this);
-		escritorio.add(form);
-		form.toFront();
 	}
 	
 	
 	protected void actionPerformedMniConsultaPago(ActionEvent e) {
-		FrmConsultaPago form = new FrmConsultaPago();
-		form.setVisible(true);
-		//form.setLocationRelativeTo(this);
-		escritorio.add(form).setLocation(0,0);
-		form.toFront();
 	}
 }

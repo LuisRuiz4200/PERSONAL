@@ -1,4 +1,4 @@
-package utils;
+package reuzable;
 
 import java.awt.Component;
 import java.text.DecimalFormat;

@@ -1,7 +1,8 @@
-C0001;Luis;Machaca Ruiz;75963004
-C0002;Gleydi;Ruiz Siancas;-
-C0003;Gabriel;Ruiz Siancas;-
-C0004;Klinsman;Santillan;-
-C0005;Jean Pier;Magiña;-
-C0006;Lucy;Ruiz Siancas;-
-C0007;Kilian;Zuta;-
+C0001;Luis;Machaca Ruiz;75963004;
+C0002;Gleydi;Ruiz Siancas;-;
+C0003;Gabriel;Ruiz Siancas;-;
+C0004;Klinsman;Santillan;-;
+C0005;Jean Pier;Magiña;-;
+C0006;Lucy;Ruiz Siancas;-;
+C0007;Kilian;Zuta;-;
+1;RUIZ;;;
