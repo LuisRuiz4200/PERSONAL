@@ -26,8 +26,11 @@ public class ArregloPago {
 		arrPago.add(Pago);
 	}
 	
-	public void eliminar(Pago p) {
-		arrPago.remove(p);
+	public void eliminar(String id) {
+		
+		Pago obj =buscar(id);
+		
+		arrPago.remove(obj);
 	}
 	
 	public Pago obtener(int x) {

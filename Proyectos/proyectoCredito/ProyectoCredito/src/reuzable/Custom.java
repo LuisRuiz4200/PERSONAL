@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 
-public class Tool {
+public class Custom {
 	
 	public static void mensajeError(Component s, String msj) {
 		JOptionPane.showMessageDialog(s, msj,"ERROR!",0);

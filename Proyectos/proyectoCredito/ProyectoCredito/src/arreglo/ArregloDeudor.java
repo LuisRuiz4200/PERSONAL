@@ -26,7 +26,8 @@ public class ArregloDeudor {
 		arrCliente.add(obj);
 	}
 	
-	public void eliminar (Deudor obj) {
+	public void eliminar (String id) {
+		Deudor obj  = buscar (id);
 		arrCliente.remove(obj);
 	}
 	

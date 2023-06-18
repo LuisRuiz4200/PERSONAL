@@ -7,6 +7,7 @@ import javax.swing.table.TableRowSorter;
 
 import arreglo.ArregloDeudor;
 import modelo.Deudor;
+import reuzable.Custom;
 
 import java.awt.event.ActionListener;
 import java.awt.Component;
@@ -181,6 +182,9 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		
 		arrDeudor.adicionar(obj);
 		arrDeudor.grabarDeudor();
+		
+		Custom.mensajeExito(this, "AGREGADO");
+		
 		limpiar();
 		
 		
@@ -201,24 +205,20 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		
 		arrDeudor.editar(obj);
 		arrDeudor.grabarDeudor();
+		
+		Custom.mensajeExito(this, "EDITADO");
+		
 		limpiar();
 		
 	}
 	private void eliminar() {
 		String id = txtIdDeudor.getText();
-		String nombre = txtNombreDeudor.getText();
-		String apellido = txtApellidoDeudor.getText();
-		String dni = txtDniDeudor.getText();
 		
-		Deudor obj = new Deudor();
-		
-		obj.setId_deudor(id);
-		obj.setNom_deudor(nombre);
-		obj.setApe_deudor(apellido);
-		obj.setDni_deudor(dni);
-		
-		arrDeudor.adicionar(obj);
+		arrDeudor.eliminar(id);
 		arrDeudor.grabarDeudor();
+		
+		Custom.mensajeExito(this, "ELIMINADO");
+		
 		limpiar();
 	}
 	

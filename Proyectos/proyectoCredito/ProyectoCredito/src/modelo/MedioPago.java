@@ -1,6 +1,6 @@
 package modelo;
 
-public class MedioPago {
+public abstract class MedioPago {
 	
 	private String id_medioPago;
 	private String des_medioPago;
