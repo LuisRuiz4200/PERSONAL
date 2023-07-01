@@ -2,6 +2,21 @@ package vistas;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Color;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.WorksheetDocument;
 
 import arreglos.ArregloColorOP;
 import arreglos.ArregloF10;
@@ -10,14 +25,27 @@ import clases.ColorOP;
 import clases.F10;
 import clases.ProgramaAcabado;
 import reuzables.Custom;
+import reuzables.Excel;
+import reuzables.ExcelAspose;
 
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Vector;
+import java.util.stream.Stream;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
+import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -33,7 +61,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	private JPanel panelProgramaAcabado;
 	private JTextField txtColor;
 	private JTextField txtAcabado;
-	private JTextArea txtObsPrograma;
+	private JTextPane txtObsPrograma;
 	private JTextField txtIdPrograma;
 	private JLabel lblColor;
 	private JLabel lblAcabado;
@@ -41,6 +69,11 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	private JLabel lblIdPrograma;
 	private JTextField txtEstado;
 	private JTextField txtFechaActualizada;
+	private JLabel lblFechaActPrograma;
+	private JLabel lblEstadoPrograma;
+	private JTextField txtCliente;
+	private JLabel lblCliente;
+	private JButton btnExportarExcel;
 	
 	public static void main (String[] args) {
 		FrmConsultaProgramaAcabado ventana = new FrmConsultaProgramaAcabado();
@@ -85,16 +118,16 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		
 		btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(this);
-		btnEditar.setBounds(657, 86, 89, 23);
+		btnEditar.setBounds(657, 98, 89, 23);
 		getContentPane().add(btnEditar);
 		
 		btnAgregar = new JButton("AGREGAR");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(764, 86, 89, 23);
+		btnAgregar.setBounds(764, 98, 89, 23);
 		getContentPane().add(btnAgregar);
 		
 		table.getColumn("ID").setPreferredWidth(40);
-		table.getColumn("COLOR").setPreferredWidth(200);
+		table.getColumn("COLOR").setPreferredWidth(250);
 		table.getColumn("CONFECCION").setPreferredWidth(100);
 		table.getColumn("ACABADO").setPreferredWidth(100);
 		table.getColumn("OBSERVACION").setPreferredWidth(200);
@@ -104,22 +137,24 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		
 		table.setAutoCreateRowSorter(true);
 		
+		
+		
 		panelProgramaAcabado = new JPanel();
 		panelProgramaAcabado.setBounds(10, 11, 592, 99);
 		getContentPane().add(panelProgramaAcabado);
 		panelProgramaAcabado.setLayout(null);
 		
 		txtColor = new JTextField();
-		txtColor.setBounds(106, 25, 186, 20);
+		txtColor.setBounds(106, 25, 208, 20);
 		panelProgramaAcabado.add(txtColor);
 		txtColor.setColumns(10);
 		
 		txtAcabado = new JTextField();
 		txtAcabado.setColumns(10);
-		txtAcabado.setBounds(206, 68, 86, 20);
+		txtAcabado.setBounds(228, 68, 86, 20);
 		panelProgramaAcabado.add(txtAcabado);
 		
-		txtObsPrograma = new JTextArea();
+		txtObsPrograma = new JTextPane();
 		txtObsPrograma.setBounds(324, 25, 258, 63);
 		panelProgramaAcabado.add(txtObsPrograma);
 		
@@ -143,7 +178,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		panelProgramaAcabado.add(lblColor);
 		
 		lblAcabado = new JLabel("ACABADO");
-		lblAcabado.setBounds(206, 55, 72, 14);
+		lblAcabado.setBounds(228, 55, 72, 14);
 		panelProgramaAcabado.add(lblAcabado);
 		
 		lblObsPrograma = new JLabel("OBSERVACION");
@@ -154,15 +189,38 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		lblIdPrograma.setBounds(10, 53, 72, 14);
 		panelProgramaAcabado.add(lblIdPrograma);
 		
+		txtCliente = new JTextField();
+		txtCliente.setText("");
+		txtCliente.setColumns(10);
+		txtCliente.setBounds(106, 69, 112, 20);
+		panelProgramaAcabado.add(txtCliente);
+		
+		lblCliente = new JLabel("CLIENTE");
+		lblCliente.setBounds(106, 56, 72, 14);
+		panelProgramaAcabado.add(lblCliente);
+		
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(767, 11, 86, 20);
+		txtEstado.setBounds(753, 33, 86, 20);
 		getContentPane().add(txtEstado);
 		
 		txtFechaActualizada = new JTextField();
 		txtFechaActualizada.setColumns(10);
-		txtFechaActualizada.setBounds(660, 11, 86, 20);
+		txtFechaActualizada.setBounds(612, 33, 134, 20);
 		getContentPane().add(txtFechaActualizada);
+		
+		lblFechaActPrograma = new JLabel("FECHA ACTUALIZADA");
+		lblFechaActPrograma.setBounds(612, 11, 134, 14);
+		getContentPane().add(lblFechaActPrograma);
+		
+		lblEstadoPrograma = new JLabel("ESTADO");
+		lblEstadoPrograma.setBounds(756, 11, 92, 14);
+		getContentPane().add(lblEstadoPrograma);
+		
+		btnExportarExcel = new JButton("EXCEL");
+		btnExportarExcel.addActionListener(this);
+		btnExportarExcel.setBounds(657, 64, 89, 23);
+		getContentPane().add(btnExportarExcel);
 		
 		arranque();
 	}
@@ -199,39 +257,16 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 			
 			modelo.addRow(x);
 		}
-		
 	}
 	
 	private void filtrarOP() {
 		
-		modelo.setRowCount(0);
+		String nroOP = txtNroOP.getText();
 		
-		for(int i=0;i<arrProgramaAcabado.tamano();i++) {
-
-			ProgramaAcabado obj = arrProgramaAcabado.obtener(i);
-			
-			if (String.valueOf(obj.getNro_OP()).startsWith(txtNroOP.getText().trim())) {
-				
-				Object[] x = new Object[] {
-						obj.getCod_programaAcabado(),
-						obj.getNro_OP(),
-						obj.getCod_colorOP(),
-						obj.getCantPed_programaAcabado(),
-						obj.getCantProg_programaAcabado(),
-						obj.getCod_citiConfeccion(),
-						obj.getCod_citiAcabado(),
-						obj.getObs_programaAcabado(),
-						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaReg_programaAcabado()),
-						new SimpleDateFormat("dd MMM yyy").format(obj.getFechaAct_programaAcabado()),
-						obj.getEstado_programaAcabado()
-				};
-				
-				modelo.addRow(x);
-			}else {
-				
-			}
-			
-		}	
+		TableRowSorter<TableModel> filtro = new TableRowSorter<TableModel>(modelo);
+		table.setRowSorter(filtro);
+		filtro.setRowFilter(RowFilter.regexFilter(nroOP, 1));;
+		
 	}
 	
 	private void limpiar() {
@@ -250,6 +285,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		txtObsPrograma.setEditable(false);
 		txtEstado.setEditable(false);
 		txtFechaActualizada.setEditable(false);
+		txtCliente.setEditable(false);
 		
 		txtNroOP.requestFocus();
 	}
@@ -257,23 +293,25 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	private void mostrarPrograma() {
 		int n = table.getSelectedRow();
 		
-		String nroOP = table.getValueAt(n, 1).toString();
+		ArregloF10 arrF10 = new ArregloF10();
+		
+		int nroOP =(int) table.getValueAt(n, 1);
 		int idPrograma = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_programaAcabado();
 		String color = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_colorOP();
 		String acabado = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getCod_citiAcabado();
 		String obsPrograma = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getObs_programaAcabado();
 		String estado = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getEstado_programaAcabado();
 		Date fechaActualizada = arrProgramaAcabado.buscar((int)table.getValueAt(n, 0)).getFechaAct_programaAcabado();
-		
+		String cliente = arrF10.buscarPorNroOPYColorOP(nroOP, color).getCliente_F10();
 		
 		txtIdPrograma.setText(idPrograma + "");
-		txtNroOP.setText(nroOP);
+		txtNroOP.setText(nroOP + "");
 		txtColor.setText(color);
 		txtAcabado.setText(acabado);
 		txtObsPrograma.setText(obsPrograma);
 		txtEstado.setText(estado);
-		txtFechaActualizada.setText(new SimpleDateFormat("dd MMM yyy").format(fechaActualizada));
-		
+		txtFechaActualizada.setText(new SimpleDateFormat("dd MMM yyy hh:mm:ss").format(fechaActualizada));
+		txtCliente.setText(cliente);
 		
 	}
 	
@@ -298,6 +336,7 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 			txtFechaActualizada.setText("");
 			txtIdPrograma.setText("");
 			txtObsPrograma.setText("");
+			txtCliente.setText("");
 		}
 	}
 	
@@ -321,6 +360,9 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	}
 	//ACTION PERFORMED
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnExportarExcel) {
+			actionPerformedBtnExportarExcel(e);
+		}
 		if (e.getSource() == btnEditar) {
 			actionPerformedBtnEditar(e);
 		}
@@ -331,15 +373,13 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 	private void actionPerformedBtnAgregar(ActionEvent e) {
 		// TODO Auto-generated method stub
 		FrmProgramaAcabado frame = new FrmProgramaAcabado();
-		frame.setVisible(true);
-		frame.setLocation(40,40);
-		frame.toFront();
-		this.dispose();
 		FrmPrincipal.escritorio.add(frame);
+		frame.setVisible(true);
+		this.dispose();
 		
 	}
 
-	protected void actionPerformedBtnEditar(ActionEvent e) {
+	private void actionPerformedBtnEditar(ActionEvent e) {
 		
 		int n = table.getSelectedRow();
 		
@@ -362,9 +402,8 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		
 		//INICIALIZACION DE LA NUEVA VENTANA
 		FrmProgramaAcabado frame = new FrmProgramaAcabado();
-		frame.setVisible(true);
-		frame.setLocation(40,40);
 		FrmPrincipal.escritorio.add(frame);
+		frame.setVisible(true);
 		
 		//RETORNAMOS EL ID DEL DOCUMENTO
 		FrmProgramaAcabado.txtCodPrograma.setText(id+"");
@@ -392,6 +431,12 @@ public class FrmConsultaProgramaAcabado extends JInternalFrame implements KeyLis
 		FrmProgramaAcabado.btnEliminar.setEnabled(true);
 		
 		this.dispose();
+		
+	}
+	protected void actionPerformedBtnExportarExcel(ActionEvent e) {
+		
+		Excel.generarExcel(this, "ProgramaAcabdo", table);
+		//FrmPrincipal.reiniciar();
 		
 	}
 }

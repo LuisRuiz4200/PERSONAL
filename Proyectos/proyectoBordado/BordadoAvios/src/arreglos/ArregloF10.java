@@ -42,6 +42,15 @@ public class ArregloF10 {
 		return null;
 	}
 	
+	public F10 buscarPorNroOP(int nroOP) {
+		for (F10 obj:arrF10) {
+			if (obj.getNroOP_F10()==nroOP) {
+				return obj;
+			}
+		}
+		return null;
+	}
+	
 	public F10 buscarPorNroOPYColorOP(int nroOP, String colorOP) {
 		for (F10 obj:arrF10) {
 			if (obj.getNroOP_F10()==nroOP && obj.getColor_F10().equals(colorOP)) {

@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import arreglos.ArregloF10;
 import clases.F10;
+import reuzables.Custom;
 
 @SuppressWarnings("serial")
 public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,MouseListener{
@@ -139,8 +140,16 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 	
 	private void exportarData() {
 		
-		int id =(int) table.getValueAt(table.getSelectedRow(), 0);
-		F10 objF10 = arrF10.buscar(id);
+		int id = -1;
+		F10 objF10=null;
+		
+		if(table.getSelectedRow()<0) {
+			Custom.mensajeAdvertencia(this, "ELIGA UNA FILA DE LA TABALA");
+			return;
+		}else {
+			id =(int) table.getValueAt(table.getSelectedRow(), 0);
+			objF10 = arrF10.buscar(id);
+		}
 		
 		switch(frame) {
 		case "FrmProgramaAcabado":
@@ -150,6 +159,22 @@ public class DlgListaF10 extends JDialog implements KeyListener,ActionListener,M
 			FrmProgramaAcabado.txtPrendaOP.setText(objF10.getPrenda_F10());
 			FrmProgramaAcabado.txtIdF10.setText(objF10.getId_F10()+"");
 			FrmProgramaAcabado.txtClienteOP.setText(objF10.getCliente_F10());
+			
+			this.dispose();
+			
+			break;
+		case "FrmPrioridad":
+			
+			FrmPrioridad.txtIdF10.setText(id+"");
+			FrmPrioridad.txtNroOP.setText(objF10.getNroOP_F10()+"");
+			FrmPrioridad.txtColorOP.setText(objF10.getColor_F10());
+			
+			this.dispose();
+			
+			break;
+		case "FrmIngresoAvio":
+			
+			FrmIngresoAvio.txtNroOP.setText(objF10.getNroOP_F10() + "");
 			
 			this.dispose();
 			

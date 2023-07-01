@@ -67,7 +67,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	public static JTextField txtCodPrograma;
 	
 	private ArregloProgramaAcabado arrProgramaAcabado = new ArregloProgramaAcabado();
-	public static JTextArea txtObsPrograma;
+	public static JEditorPane txtObsPrograma;
 	private JLabel lblObsPrograma;
 	public static JTextField txtColorOP;
 	public static JTextField txtEstiloOP;
@@ -76,6 +76,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private JLabel lblPrendaOP;
 	public static JTextField txtIdF10;
 	public static JTextField txtFechaReg;
+	private JScrollPane spObsPrograma;
 	
 	public static void main (String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -100,6 +101,8 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		this.setIconifiable(true);
 		this.setMaximizable(true);
 		this.setClosable(true);
+		this.setLocation(40, 40);
+		this.toFront();
 		
 		panelConfeccion = new JPanel();
 		panelConfeccion.setBounds(10, 213, 319, 89);
@@ -126,7 +129,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		lblDesCitiConfeccion.setBounds(153, 25, 86, 14);
 		panelConfeccion.add(lblDesCitiConfeccion);
 		
-		btnBuscarCitiConfeccion = new JButton("New button");
+		btnBuscarCitiConfeccion = new JButton("...");
 		btnBuscarCitiConfeccion.addActionListener(this);
 		btnBuscarCitiConfeccion.setBounds(106, 44, 37, 23);
 		panelConfeccion.add(btnBuscarCitiConfeccion);
@@ -156,7 +159,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		lblDesCitiAcabado.setBounds(153, 23, 86, 14);
 		panelAcabado.add(lblDesCitiAcabado);
 		
-		btnBuscarCitiAcabado = new JButton("New button");
+		btnBuscarCitiAcabado = new JButton("...");
 		btnBuscarCitiAcabado.addActionListener(this);
 		btnBuscarCitiAcabado.setBounds(106, 42, 37, 23);
 		panelAcabado.add(btnBuscarCitiAcabado);
@@ -191,7 +194,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		lblColorOP.setBounds(338, 24, 86, 14);
 		panelOP.add(lblColorOP);
 		
-		btnBuscarOP = new JButton("New button");
+		btnBuscarOP = new JButton("...");
 		btnBuscarOP.addActionListener(this);
 		btnBuscarOP.setBounds(106, 43, 37, 23);
 		panelOP.add(btnBuscarOP);
@@ -245,7 +248,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		getContentPane().add(btnNuevo);
 		
 		panelPrograma = new JPanel();
-		panelPrograma.setBounds(339, 221, 256, 170);
+		panelPrograma.setBounds(339, 221, 324, 183);
 		getContentPane().add(panelPrograma);
 		panelPrograma.setLayout(null);
 		
@@ -267,11 +270,14 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		lblCantPrograma.setBounds(106, 11, 86, 14);
 		panelPrograma.add(lblCantPrograma);
 		
-		txtObsPrograma = new JTextArea();
-		txtObsPrograma.setBounds(10, 100, 198, 59);
-		txtObsPrograma.setLineWrap(true);
+		spObsPrograma = new JScrollPane();
+		spObsPrograma.setBounds(10, 100, 304, 72);
+		panelPrograma.add(spObsPrograma);
+		
+		txtObsPrograma = new JEditorPane();
+		spObsPrograma.setViewportView(txtObsPrograma);
+		//txtObsPrograma.setLineWrap(true);
 		txtObsPrograma.setBorder(new EmptyBorder(4,4,4,4));
-		panelPrograma.add(txtObsPrograma);
 		
 		lblObsPrograma = new JLabel("OBSERVACION");
 		lblObsPrograma.setBounds(10, 75, 86, 14);
@@ -310,12 +316,12 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		getContentPane().add(txtCodPrograma);
 		
 		txtFechaReg = new JTextField();
-		txtFechaReg.setBounds(307, 31, 100, 20);
+		txtFechaReg.setBounds(294, 31, 100, 20);
 		getContentPane().add(txtFechaReg);
 		txtFechaReg.setColumns(10);
 		
 		JLabel lblFechaReg = new JLabel("FECHA REGISTRO");
-		lblFechaReg.setBounds(307, 11, 100, 14);
+		lblFechaReg.setBounds(294, 11, 114, 14);
 		getContentPane().add(lblFechaReg);
 		
 		arranque();
@@ -378,7 +384,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	private String leerObservacion () {
 		String res = null;
 		
-		res = txtObsPrograma.getText();
+		res = txtObsPrograma.getText().toUpperCase().trim();
 		
 		return res ;
 	}
@@ -399,6 +405,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Custom.mensajeAdvertencia(this, e.getMessage());
 		}
 		
 		return res;
@@ -427,6 +434,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 			res = new SimpleDateFormat("dd/MM/yyy").parse( this.txtFechaReg.getText().trim());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			Custom.mensajeAdvertencia(this, e.getMessage());
 			e.printStackTrace();
 		}
 		return res;
@@ -493,8 +501,8 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		String citiConfeccion = leerCitiConfeccion();
 		String citiAcabado = leerCitiAcabado();
 		String observacion = leerObservacion();
-		Date fechaRegistro = leerFechaRegistro();
-		Date fechaActualizada = leerFechaActualizada();
+		Date fechaRegistro = new Date();
+		Date fechaActualizada = new Date();
 		String estado = leerEstadoPrograma();
 		
 		ProgramaAcabado obj = new ProgramaAcabado();
@@ -517,15 +525,17 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 			return;
 		}
 		
-		if(arrProgramaAcabado.duplicado(nroOP, ColorOP, citiAcabado)==0) {
+		if(arrProgramaAcabado.duplicado(nroOP, ColorOP, citiAcabado)==false) {
+			
+			arrProgramaAcabado.adicionar(obj);
+			arrProgramaAcabado.grabarProgramaAcabado();
+			Custom.mensajeExito(this, "En hora buena, operacion exitosa");
+			limpiar();
 			
 			return;
 		}
 
-		arrProgramaAcabado.adicionar(obj);
-		arrProgramaAcabado.grabarProgramaAcabado();
-		Custom.mensajeExito(this, "En hora buena, operacion exitosa");
-		limpiar();
+		
 	}
 	
 	private void editar() {
@@ -538,7 +548,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		String citiConfeccion = leerCitiConfeccion();
 		String citiAcabado = leerCitiAcabado();
 		String observacion = leerObservacion();
-		Date fechaRegistro = leerFechaRegistro();
+		Date fechaRegistro = new Date();
 		Date fechaActualizada = new Date();
 		String estado = leerEstadoPrograma();
 		
@@ -571,33 +581,20 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	
 	private void eliminar() {
 		int codPrograma = leerCodPrograma();
-		int nroOP = leerNroOP();
-		String ColorOP = leerColorOP();
-		int cantPedido = leerCantPedido();
-		int cantPrograma = leerCantPrograma();
-		String citiConfeccion = leerCitiConfeccion();
-		String citiAcabado = leerCitiAcabado();
-		String observacion = leerObservacion();
-		Date fechaRegistro = leerFechaRegistro();
-		Date fechaActualizada = leerFechaActualizada();
-		String estado = leerEstadoPrograma();
+		int res;
 		
-		ProgramaAcabado obj = new ProgramaAcabado();
+		ProgramaAcabado obj =arrProgramaAcabado.buscar(codPrograma);
 		
-		obj.setCod_programaAcabado(codPrograma);
-		obj.setNro_OP(nroOP);
-		obj.setCod_colorOP(ColorOP);
-		obj.setCantPed_programaAcabado(cantPedido);
-		obj.setCantProg_programaAcabado(cantPrograma);
-		obj.setCod_citiConfeccion(citiConfeccion);
-		obj.setCod_citiAcabado(citiAcabado);
-		obj.setObs_programaAcabado(observacion);
-		obj.setFechaReg_programaAcabado(fechaRegistro);
-		obj.setFechaAct_programaAcabado(fechaActualizada);
-		obj.setEstado_programaAcabado(estado);
+		res = Custom.mensajeConfirmacion(this, "EL PROGRAMA " + codPrograma + " SE ELIMINARA DE LA LISTA");
 		
-		arrProgramaAcabado.editar(obj);
-		arrProgramaAcabado.grabarProgramaAcabado();
+		if(res == 0) {
+			arrProgramaAcabado.eliminar(obj);
+			arrProgramaAcabado.grabarProgramaAcabado();
+			Custom.mensajeExito(this,"PROGRAMA " + codPrograma + " ELIMINADO");
+		}else {
+			Custom.mensajeAdvertencia(this, "Operacion cancelada");
+		}
+		
 	}
 	
 	private void cargarOP(){
@@ -628,7 +625,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 		txtDesCitiConfeccion.setText(obj.getDes_citiConfeccion());
 		
 	}
-	private void mostratCitiAcabado() {
+	private void mostrarCitiAcabado() {
 		ArregloCitiAcabado arrCitiAcabado = new ArregloCitiAcabado();
 		CitiAcabado obj = arrCitiAcabado.buscar(leerCitiAcabado());
 		
@@ -748,7 +745,7 @@ public class FrmProgramaAcabado extends JInternalFrame implements ActionListener
 	
 	protected void caretUpdateTxtCodCitiAcabado(CaretEvent e) {
 		try {
-			mostratCitiAcabado();
+			mostrarCitiAcabado();
 		}catch(Exception ex) {
 			
 		}
