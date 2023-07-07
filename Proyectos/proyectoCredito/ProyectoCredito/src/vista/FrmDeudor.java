@@ -168,7 +168,7 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		listarDeudor();
 	}
 	private void agregar(){
-		String id = txtIdDeudor.getText();
+		int id = Integer.parseInt(txtIdDeudor.getText());
 		String nombre = txtNombreDeudor.getText();
 		String apellido = txtApellidoDeudor.getText();
 		String dni = txtDniDeudor.getText();
@@ -191,7 +191,7 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	}
 	
 	private void editar() {
-		String id = txtIdDeudor.getText();
+		int id = Integer.parseInt(txtIdDeudor.getText());
 		String nombre = txtNombreDeudor.getText();
 		String apellido = txtApellidoDeudor.getText();
 		String dni = txtDniDeudor.getText();
@@ -212,7 +212,7 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		
 	}
 	private void eliminar() {
-		String id = txtIdDeudor.getText();
+		int id = Integer.parseInt(txtIdDeudor.getText());
 		
 		arrDeudor.eliminar(id);
 		arrDeudor.grabarDeudor();

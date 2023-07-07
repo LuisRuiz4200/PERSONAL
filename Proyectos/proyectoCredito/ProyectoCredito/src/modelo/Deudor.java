@@ -2,14 +2,14 @@ package modelo;
 
 public class Deudor {
 	
-	private String id_deudor;
+	private int id_deudor;
 	private String nom_deudor;
 	private String ape_deudor;
 	private String dni_deudor;
 	
 	public Deudor() {}
 
-	public Deudor(String id_deudor, String nom_deudor, String ape_deudor, String dni_deudor) {
+	public Deudor(int id_deudor, String nom_deudor, String ape_deudor, String dni_deudor) {
 		super();
 		this.id_deudor = id_deudor;
 		this.nom_deudor = nom_deudor;
@@ -17,11 +17,11 @@ public class Deudor {
 		this.dni_deudor = dni_deudor;
 	}
 
-	public String getId_deudor() {
+	public int getId_deudor() {
 		return id_deudor;
 	}
 
-	public void setId_deudor(String id_deudor) {
+	public void setId_deudor(int id_deudor) {
 		this.id_deudor = id_deudor;
 	}
 

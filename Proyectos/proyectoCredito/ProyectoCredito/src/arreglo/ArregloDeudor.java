@@ -26,7 +26,7 @@ public class ArregloDeudor {
 		arrCliente.add(obj);
 	}
 	
-	public void eliminar (String id) {
+	public void eliminar (int id) {
 		Deudor obj  = buscar (id);
 		arrCliente.remove(obj);
 	}
@@ -46,9 +46,9 @@ public class ArregloDeudor {
 		return arrCliente.subList(0, tamano());
 	}
 	
-	public Deudor buscar (String codigo) {
+	public Deudor buscar (int codigo) {
 		for (int i=0;i<tamano();i++) {
-			if(obtener(i).getId_deudor().equals(codigo)) {
+			if(obtener(i).getId_deudor()==codigo) {
 				return obtener(i);
 			}
 		}
@@ -93,12 +93,18 @@ public class ArregloDeudor {
 			while((texto=br.readLine())!=null) {
 				pos = texto.split(";");
 				
-				String codigo = pos[0];
+				int codigo =Integer.parseInt( pos[0]);
 				String nombre = pos[1];
 				String apellido = pos [2];
 				String dni = pos [3];
 				
-				adicionar(new Deudor(codigo,nombre,apellido,dni));
+				Deudor obj = new Deudor();
+				obj.setId_deudor(codigo);
+				obj.setNom_deudor(nombre);
+				obj.setApe_deudor(apellido);
+				obj.setDni_deudor(dni);
+				
+				adicionar(obj);
 			}
 			br.close();	
 		}catch(Exception e) {
