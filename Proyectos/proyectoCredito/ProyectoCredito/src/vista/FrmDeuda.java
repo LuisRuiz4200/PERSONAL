@@ -3,15 +3,25 @@ package vista;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import arreglo.ArregloDeuda;
 import arreglo.ArregloDeudor;
+import modelo.Deuda;
 import modelo.Deudor;
 import reuzable.Custom;
+import reuzable.RenderTable;
 
 import javax.swing.event.CaretEvent;
 
@@ -91,7 +101,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		panelGestionDeuda.setLayout(null);
 		
 		panelDeudor = new JPanel();
-		panelDeudor.setBorder(new TitledBorder(null, "DEUDOR", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelDeudor.setBorder(new TitledBorder(null, "DEUDOR"));
 		panelDeudor.setBounds(10, 91, 642, 77);
 		panelGestionDeuda.add(panelDeudor);
 		panelDeudor.setLayout(null);
@@ -148,6 +158,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		panelGestionDeuda.add(lblMonto);
 		
 		txtCuota = new JTextField();
+		txtCuota.addCaretListener(this);
 		txtCuota.setColumns(10);
 		txtCuota.setBounds(566, 195, 86, 20);
 		panelGestionDeuda.add(txtCuota);
@@ -265,6 +276,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	
 	private void arranque() {
 		limpiar();
+		listar();
 	}
 	
 	private void limpiar() {
@@ -287,25 +299,52 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 				((JTextField) obj).setEditable(false);
 			}
 		}
+		for (Component obj : panelGestionDeuda.getComponents()) {
+			if(obj instanceof JTextField) {
+				((JTextField) obj).setText("");
+			}
+		}
 		
 		txtIdDeuda.setText(arrDeuda.correlativo()+"");
+		txtEstado.setText("REGISTRADO");
+		txtFechaRegDeuda.setText(new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(new Date()));
+		txtInteres.setText("0.00");
 	}
 	
 	private void adicionar () {
-		int idDeuda = leerIdDeuda();
-		int idDeudor = leerIdDeudor();
-		double monto = leerMontoDeuda();
-		int nroCuota = leerNroCuota();
-		double interesDeuda = leerInteresDeuda();
-		Date fechaReg = new Date();
-		String estado = leerEstadoDeuda();
+		try {
+			int idDeuda = leerIdDeuda();
+			int idDeudor = leerIdDeudor();
+			double monto = leerMontoDeuda();
+			int nroCuota = leerNroCuota();
+			double interesDeuda = leerInteresDeuda();
+			Date fechaReg = new Date();
+			String estado = leerEstadoDeuda();
+			
+			Deuda obj = new Deuda();
+			
+			obj.setId_deuda(idDeuda);
+			obj.setId_deudor(idDeudor);
+			obj.setMonto_deuda(monto);
+			obj.setCuota_deuda(nroCuota);
+			obj.setInteres_deuda(interesDeuda);
+			obj.setFechaReg_deuda(fechaReg);
+			obj.setEstado_deuda(estado);
+			
+			arrDeuda.adicionar(obj);
+			arrDeuda.grabarData();
+			Custom.mensajeExito(this,"Registrado exitosamente" );
+			limpiar();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Custom.mensajeError(this, e.getMessage());
+		}
+		
 	}
 	
-	private int leerIdDeuda() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	private void editar() {
 		
 	}
@@ -314,6 +353,93 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	}
 	
 	private void listar() {
+		Object[] cabecera = new Object[] {"ID","DEUDOR","MONTO","INTERES","CUOTAS","TOTAL","FECHA","ESTADO","EDITAR","ELIMINAR"};
+		
+		DefaultTableModel modelo = new DefaultTableModel(cabecera,0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		
+		ArregloDeudor arrDeudor = new ArregloDeudor();
+		
+		JButton btnEditar =new JButton("Editar");
+		btnEditar.addActionListener(this);
+		btnEditar.setBackground(Color.BLUE);
+		btnEditar.setVisible(true);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				Custom.mensajeExito(null, "Boton eliminar");
+			}
+		});
+		
+		btnEliminar.setBackground(Color.red);
+		btnEliminar.setVisible(true);
+		
+		for (Deuda obj:arrDeuda.listar()) {
+			Object[] cuerpo = new Object[] {
+				obj.getId_deuda(),
+				arrDeudor.buscar(obj.getId_deudor()).getNom_deudor(),
+				obj.getMonto_deuda(),
+				obj.getInteres_deuda(),
+				obj.getCuota_deuda(),
+				obj.getTotal(obj.getMonto_deuda(),obj.getCuota_deuda()),
+				new SimpleDateFormat("dd MMM yyy").format(obj.getFechaReg_deuda()),
+				obj.getEstado_deuda(),
+				btnEditar,
+				btnEliminar
+				
+			};
+			
+			this.tbDeuda.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+						boolean hasFocus, int row, int column) {
+					// TODO Auto-generated method stub
+					if( value instanceof JButton) {
+						return (JButton) value;
+					}
+					
+					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				}
+			});
+			
+			modelo.addRow(cuerpo);
+		}
+		
+		tbDeuda.setRowHeight(20);
+		tbDeuda.setModel(modelo);
 		
 	}
 	
@@ -321,6 +447,60 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	
 	//GETTER
 	
+	private String leerEstadoDeuda() {
+		// TODO Auto-generated method stub
+		String res = null;
+		
+		res = txtEstado.getText();
+		
+		return res;
+	}
+
+	private double leerInteresDeuda() {
+		// TODO Auto-generated method stub
+		double res = 0;
+		
+		res = Double.parseDouble(txtInteres.getText());
+		
+		return res;
+	}
+
+	private int leerNroCuota() {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		res = Integer.parseInt(txtCuota.getText());
+		
+		return res;
+	}
+
+	private double leerMontoDeuda() {
+		// TODO Auto-generated method stub
+		double res = 0;
+		
+		res = Double.parseDouble(txtMonto.getText());
+		
+		return res;
+	}
+
+	private int leerIdDeudor() {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		res = Integer.parseInt(txtIdDeudor.getText());
+		
+		return res;
+	}
+
+	private int leerIdDeuda() {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		res = Integer.parseInt(txtIdDeuda.getText());
+		
+		return res;
+	}
+
 	
 	
 	
@@ -344,12 +524,16 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		}
 	}
 	protected void actionPerformedBtnAgregar(ActionEvent e) {
+		adicionar();
 	}
 	protected void actionPerformedBtnEditar(ActionEvent e) {
+		editar();
 	}
 	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		eliminar();
 	}
 	protected void actionPerformedBtnNuevo(ActionEvent e) {
+		limpiar();
 	}
 	protected void actionPerformedBtnBuscarDeudor(ActionEvent e) {
 		DlgBuscarDeudor dlg = new DlgBuscarDeudor(this,true);
@@ -358,6 +542,9 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	}
 	//CARET LISTENER
 	public void caretUpdate(CaretEvent e) {
+		if (e.getSource() == txtCuota) {
+			caretUpdateTxtCuota(e);
+		}
 		if (e.getSource() == txtIdDeudor) {
 			caretUpdateTxtidDeuda(e);
 		}
@@ -382,6 +569,22 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 			
 		}catch(Exception ex) {
 			Custom.mensajeError(this, ex.getMessage());
+		}
+	}
+	protected void caretUpdateTxtCuota(CaretEvent e) {
+		if(txtMonto.getText().trim().length()==0) {
+			txtInteres.setText("0.00");
+			txtTotalPago.setText("0.00");
+			return ;
+		}
+		
+		try {
+			double interesGenerado = new Deuda ().getInteresGenerado(leerNroCuota(), leerMontoDeuda());
+			txtInteres.setText( new DecimalFormat("0.00").format(interesGenerado*100) );
+			txtTotalPago.setText(new DecimalFormat("0.00").format(new Deuda().getTotal(leerMontoDeuda(), leerNroCuota())));
+		}catch(Exception ex) {
+			txtInteres.setText("0.00");
+			txtTotalPago.setText("0.00");
 		}
 	}
 }

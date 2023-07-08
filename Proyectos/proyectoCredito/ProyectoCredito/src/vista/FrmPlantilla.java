@@ -6,6 +6,7 @@ import javax.swing.*;
 public class FrmPlantilla extends JFrame{
 	
 	private JPanel panel;
+	private JButton btnNewButton;
 	
 	public static void main(String [] args) {
 		
@@ -24,6 +25,10 @@ public class FrmPlantilla extends JFrame{
 		panel = new JPanel();
 		panel.setLayout(null);
 		this.setContentPane(panel);
+		
+		btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(196, 111, 89, 23);
+		panel.add(btnNewButton);
 		
 		
 	}

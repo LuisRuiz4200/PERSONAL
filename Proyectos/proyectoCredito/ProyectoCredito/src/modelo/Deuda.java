@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class Deuda {
@@ -10,8 +11,8 @@ public class Deuda {
 	private int cuota_deuda;
 	private String des_deuda;
 	private double interes_deuda;
-	private Date fechaReg_deuda;
-	private Date fechaAct_deuda;
+	private Date fechaReg_deuda = null;
+	private Date fechaAct_deuda = null;
 	private String estado_deuda;
 	
 	
@@ -152,6 +153,13 @@ public class Deuda {
 	public void setTEM(double tEM) {
 		TEM = tEM;
 	}
+	
+	
+	public double getTotal(double monto, int cuota) {
+		double res = 0;
+		res = Double.parseDouble(new DecimalFormat("0.00").format(monto * getInteresGenerado(cuota,monto) + monto));
+		return res;
+	}
 
 
 
@@ -171,8 +179,9 @@ public class Deuda {
 			nuevoInteres = (nuevoMontoMensual - (monto/cuota))/(monto/cuota)*100;
 		}
 		
-		return nuevoInteres;
+		return nuevoInteres/100;
 	}
+	
 	
 	
 	

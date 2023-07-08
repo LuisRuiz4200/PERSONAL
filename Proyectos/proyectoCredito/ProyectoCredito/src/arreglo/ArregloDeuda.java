@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.*;
+import reuzable.Custom;
 
 
 public class ArregloDeuda {
@@ -25,18 +26,18 @@ public class ArregloDeuda {
 		return arrDeuda.size();
 	}
 	
-	public void adicionar(Deuda g) {
-		arrDeuda.add(g);
+	public void adicionar(Deuda obj) {
+		arrDeuda.add(obj);
 	}
 	
-	public void eliminar(Deuda g) {
-		arrDeuda.remove(g);
+	public void eliminar(Deuda obj) {
+		arrDeuda.remove(obj);
 	}
 	
 	public List<Deuda> listar() {
 		List<Deuda> lista = new ArrayList<Deuda>();
 		
-		lista = (List<Deuda>) arrDeuda.listIterator();
+		lista = arrDeuda.subList(0, tamano());
 		
 		return lista;
 	}
@@ -114,8 +115,8 @@ public class ArregloDeuda {
 						g.getCuota_deuda() + ";" + 
 						g.getDes_deuda() + ";" +
 						g.getInteres_deuda() + ";" +
-						g.getFechaReg_deuda() + ";" +
-						g.getFechaAct_deuda() + ";" +
+						((g.getFechaReg_deuda()==null)?null:new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(g.getFechaReg_deuda())) + ";" +
+						((g.getFechaAct_deuda()==null)?null:new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(g.getFechaAct_deuda())) + ";" +
 						g.getEstado_deuda() + ";";
 				
 				pw.println(texto);
@@ -123,7 +124,7 @@ public class ArregloDeuda {
 			}
 			pw.close();
 		}catch(Exception e){
-			
+			Custom.mensajeError(null, e.getMessage());
 		}
 		
 	}
@@ -146,8 +147,8 @@ public class ArregloDeuda {
 				int cuota= Integer.parseInt(pos[3]);
 				String motivo=pos[4];
 				double interes = Double.parseDouble(pos[5]);
-				Date fechaReg= new SimpleDateFormat().parse(pos[6]);
-				Date fechaAct = new SimpleDateFormat().parse(pos[7]);
+				Date fechaReg = ((pos[6].equals("null"))?null: new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[6]));
+				Date fechaAct = ((pos[7].equals("null"))?null: new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[7]));
 				String estado = pos[8];
 				
 				Deuda obj = new Deuda();
@@ -167,7 +168,8 @@ public class ArregloDeuda {
 			br.close();
 			
 		}catch(Exception e) {
-			
+			//Custom.mensajeError(null, e.getMessage());
+			e.printStackTrace();
 		}
 		
 	}
