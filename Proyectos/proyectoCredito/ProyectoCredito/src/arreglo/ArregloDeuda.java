@@ -30,8 +30,19 @@ public class ArregloDeuda {
 		arrDeuda.add(obj);
 	}
 	
-	public void eliminar(Deuda obj) {
-		arrDeuda.remove(obj);
+	public void eliminar(int idDeuda) {
+		Deuda objDeuda = buscar(idDeuda);
+		arrDeuda.remove(objDeuda);
+	}
+	public void editar (Deuda obj) {
+		Deuda objDeuda = buscar(obj.getId_deuda());
+		objDeuda.setId_deudor(obj.getId_deudor());
+		objDeuda.setMonto_deuda(obj.getMonto_deuda());
+		objDeuda.setCuota_deuda(obj.getCuota_deuda());
+		objDeuda.setInteres_deuda(obj.getInteres_deuda());
+		objDeuda.setDes_deuda(obj.getDes_deuda());
+		objDeuda.setFechaAct_deuda(obj.getFechaAct_deuda());
+		objDeuda.setEstado_deuda(obj.getEstado_deuda());
 	}
 	
 	public List<Deuda> listar() {

@@ -2,7 +2,6 @@ package vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import arreglo.ArregloDeudor;
 import modelo.Deudor;
@@ -83,15 +82,21 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 	}
 	
 	private void arranque() {
-		cargarDeudor();
+		listar();
 		cargarCboFiltro();
 	}
 	
-	private void cargarDeudor() {
+	private void listar() {
 		
 		Object[] cabecera = new Object[] {"ID","NOMBRE","APELLIDO","DNI","ESTADO"};
 
-		DefaultTableModel modelo = new DefaultTableModel(cabecera,0);
+		DefaultTableModel modelo = new DefaultTableModel(cabecera,0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
 		
 		for (Deudor obj : arrDeudor.listar()) {
 			Object[] cuerpo = new Object[] {

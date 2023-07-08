@@ -14,19 +14,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import arreglo.ArregloDeuda;
 import arreglo.ArregloDeudor;
 import modelo.Deuda;
 import modelo.Deudor;
 import reuzable.Custom;
-import reuzable.RenderTable;
 
 import javax.swing.event.CaretEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
+public class FrmDeuda extends JFrame implements ActionListener, CaretListener, KeyListener{
 	
 
 	public static JTextField txtIdDeudor;
@@ -256,6 +256,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		spTbDeudaa.setViewportView(tbDeuda);
 		
 		txtFiltro = new JTextField();
+		txtFiltro.addKeyListener(this);
 		txtFiltro.setColumns(10);
 		txtFiltro.setBounds(138, 26, 134, 20);
 		panelConsultaDeudor.add(txtFiltro);
@@ -277,6 +278,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	private void arranque() {
 		limpiar();
 		listar();
+		cargarCboFiltro();
 	}
 	
 	private void limpiar() {
@@ -309,6 +311,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		txtEstado.setText("REGISTRADO");
 		txtFechaRegDeuda.setText(new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(new Date()));
 		txtInteres.setText("0.00");
+		
 	}
 	
 	private void adicionar () {
@@ -346,10 +349,50 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 	
 	
 	private void editar() {
-		
+		try {
+			int idDeuda = leerIdDeuda();
+			int idDeudor = leerIdDeudor();
+			double monto = leerMontoDeuda();
+			int nroCuota = leerNroCuota();
+			double interesDeuda = leerInteresDeuda();
+			Date fechaReg = new Date();
+			String estado = leerEstadoDeuda();
+			
+			Deuda obj = new Deuda();
+			
+			obj.setId_deuda(idDeuda);
+			obj.setId_deudor(idDeudor);
+			obj.setMonto_deuda(monto);
+			obj.setCuota_deuda(nroCuota);
+			obj.setInteres_deuda(interesDeuda);
+			obj.setFechaReg_deuda(fechaReg);
+			obj.setEstado_deuda(estado);
+			
+			arrDeuda.editar(obj);
+			arrDeuda.grabarData();
+			Custom.mensajeExito(this,"Editado exitosamente" );
+			limpiar();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Custom.mensajeError(this, e.getMessage());
+		}
 	}
 	private void eliminar () {
-		
+		try {
+			int idDeuda = leerIdDeuda();
+			
+			arrDeuda.eliminar(idDeuda);
+			arrDeuda.grabarData();
+			Custom.mensajeExito(this,"Eliminado exitosamente" );
+			limpiar();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Custom.mensajeError(this, e.getMessage());
+		}
 	}
 	
 	private void listar() {
@@ -366,44 +409,10 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		ArregloDeudor arrDeudor = new ArregloDeudor();
 		
 		JButton btnEditar =new JButton("Editar");
-		btnEditar.addActionListener(this);
 		btnEditar.setBackground(Color.BLUE);
 		btnEditar.setVisible(true);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				Custom.mensajeExito(null, "Boton eliminar");
-			}
-		});
-		
 		btnEliminar.setBackground(Color.red);
 		btnEliminar.setVisible(true);
 		
@@ -443,6 +452,14 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 		
 	}
 	
+	private void cargarCboFiltro() {
+		
+		cboFiltro.setSelectedIndex(-1);
+		
+		for(int i=0;i<tbDeuda.getColumnCount();i++) {
+			cboFiltro.addItem(tbDeuda.getColumnName(i));
+		}
+	}
 	
 	
 	//GETTER
@@ -586,5 +603,19 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener{
 			txtInteres.setText("0.00");
 			txtTotalPago.setText("0.00");
 		}
+	}
+	
+	//KEY LISTENER
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == txtFiltro) {
+			keyReleasedTxtFiltro(e);
+		}
+	}
+	public void keyTyped(KeyEvent e) {
+	}
+	protected void keyReleasedTxtFiltro(KeyEvent e) {
+		Custom.filtrarTabla(tbDeuda, txtFiltro.getText(), cboFiltro.getSelectedIndex());
 	}
 }
