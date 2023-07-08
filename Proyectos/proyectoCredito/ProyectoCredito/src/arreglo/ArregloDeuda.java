@@ -7,40 +7,49 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import modelo.*;
 
 
 public class ArregloDeuda {
 	
-	private ArrayList<Deuda> arrGasto;
+	private ArrayList<Deuda> arrDeuda;
 	
 	public ArregloDeuda(){
-		arrGasto = new ArrayList <Deuda>();
+		arrDeuda = new ArrayList <Deuda>();
 		cargarData();
 	}
 	
-	public int tamaño() {
-		return arrGasto.size();
+	public int tamano() {
+		return arrDeuda.size();
 	}
 	
 	public void adicionar(Deuda g) {
-		arrGasto.add(g);
+		arrDeuda.add(g);
 	}
 	
 	public void eliminar(Deuda g) {
-		arrGasto.remove(g);
+		arrDeuda.remove(g);
+	}
+	
+	public List<Deuda> listar() {
+		List<Deuda> lista = new ArrayList<Deuda>();
+		
+		lista = (List<Deuda>) arrDeuda.listIterator();
+		
+		return lista;
 	}
 	
 	public Deuda obtener(int x) {
-		return arrGasto.get(x);
+		return arrDeuda.get(x);
 	}
 	
 	public Deuda buscar (int codigo) {
 		
 		Deuda g= null;
 		
-		for(int i = 0 ; i<tamaño();i++) {
+		for(int i = 0 ; i<tamano();i++) {
 			if(obtener(i).getId_deuda()==codigo) {
 				g=obtener(i);
 			}
@@ -52,7 +61,7 @@ public class ArregloDeuda {
 	public double deudaTotal (int idDedudor) {
 		double res= -1;
 		
-		for(int i = 0 ; i<tamaño();i++) {
+		for(int i = 0 ; i<tamano();i++) {
 			if(obtener(i).getId_deudor()==idDedudor) {
 				res += obtener(i).getMonto_deuda() * (obtener(i).getInteres_deuda()/100) + obtener(i).getMonto_deuda();
 			}
@@ -63,13 +72,27 @@ public class ArregloDeuda {
 	
 	public void cargarEstado() {
 		
-		for(int i = 0 ; i<tamaño();i++) {
+		for(int i = 0 ; i<tamano();i++) {
 			obtener(i).setEstado_deuda("REGISTRADO");
 		}
 		
 		grabarData();
 		
 		
+	}
+	
+	public int correlativo() {
+		int id=0;
+		
+		if (tamano()==0) {
+			id=1;
+		}else {
+			for (Deuda obj : arrDeuda) {
+				id = obj.getId_deuda() + 1;
+			}
+		}
+		
+		return id;
 	}
 	
 	//Metodos de guardar y buscar 
@@ -83,7 +106,7 @@ public class ArregloDeuda {
 		try {
 			pw= new PrintWriter(new FileWriter("Deuda.txt"));
 			
-			for(int i=0;i<tamaño();i++) {
+			for(int i=0;i<tamano();i++) {
 				g = obtener(i);
 				texto = g.getId_deuda() + ";" +
 						g.getId_deudor() + ";" +

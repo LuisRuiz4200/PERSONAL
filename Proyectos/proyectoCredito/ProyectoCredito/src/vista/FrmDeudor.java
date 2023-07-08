@@ -1,6 +1,8 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -13,15 +15,18 @@ import java.awt.event.ActionListener;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	
 
+	public static JTextField txtIdDeudor;
 	private ArregloDeudor arrDeudor = new ArregloDeudor();
 	
-	private JTextField txtIdDeudor;
 	private JLabel lblIdDeudor;
 	private JTextField txtDniDeudor;
 	private JLabel lblDniDeudor;
@@ -41,6 +46,13 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	private JTextField txtFiltro;
 	private JComboBox<Object> cboFiltro;
 	private JLabel lblFiltrar;
+	private JTextField txtFechaReg;
+	private JLabel lblFechaReg;
+	private JTextField txtFechaAct;
+	private JLabel lblFechaAct;
+	private JTextField txtEstado;
+	private JLabel lblEstado;
+	private JPanel panelCabecera;
 	
 	
 	public static void main(String [] args) {
@@ -53,12 +65,12 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	public FrmDeudor() {
 		
 		setTitle("DEUDOR");
-		setBounds(100,100,703,402);
+		setBounds(100,100,620,362);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		tpDeudor = new JTabbedPane(JTabbedPane.TOP);
-		tpDeudor.setBounds(10, 11, 667, 341);
+		tpDeudor.setBounds(10, 11, 573, 281);
 		getContentPane().add(tpDeudor);
 		
 		panelGestionDeudor = new JPanel();
@@ -66,67 +78,100 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		panelGestionDeudor.setLayout(null);
 		
 		txtDniDeudor = new JTextField();
-		txtDniDeudor.setBounds(10, 121, 166, 20);
+		txtDniDeudor.setBounds(20, 156, 166, 20);
 		panelGestionDeudor.add(txtDniDeudor);
 		txtDniDeudor.setColumns(10);
 		
 		lblDniDeudor = new JLabel("DNI");
-		lblDniDeudor.setBounds(10, 105, 86, 14);
+		lblDniDeudor.setBounds(20, 140, 86, 14);
 		panelGestionDeudor.add(lblDniDeudor);
 		
 		txtNombreDeudor = new JTextField();
-		txtNombreDeudor.setBounds(10, 74, 166, 20);
+		txtNombreDeudor.setBounds(20, 109, 166, 20);
 		panelGestionDeudor.add(txtNombreDeudor);
 		txtNombreDeudor.setColumns(10);
 		
 		lblNombreDeudor = new JLabel("NOMBRE");
-		lblNombreDeudor.setBounds(10, 58, 86, 14);
+		lblNombreDeudor.setBounds(20, 93, 86, 14);
 		panelGestionDeudor.add(lblNombreDeudor);
 		
-		txtIdDeudor = new JTextField();
-		txtIdDeudor.setBounds(10, 27, 86, 20);
-		panelGestionDeudor.add(txtIdDeudor);
-		txtIdDeudor.setColumns(10);
-		
-		lblIdDeudor = new JLabel("ID");
-		lblIdDeudor.setBounds(10, 11, 86, 14);
-		panelGestionDeudor.add(lblIdDeudor);
-		
 		txtApellidoDeudor = new JTextField();
-		txtApellidoDeudor.setBounds(198, 74, 166, 20);
+		txtApellidoDeudor.setBounds(208, 109, 166, 20);
 		panelGestionDeudor.add(txtApellidoDeudor);
 		txtApellidoDeudor.setColumns(10);
 		
 		lblApellidoDeudor = new JLabel("APELLIDO");
-		lblApellidoDeudor.setBounds(198, 58, 86, 14);
+		lblApellidoDeudor.setBounds(208, 93, 86, 14);
 		panelGestionDeudor.add(lblApellidoDeudor);
 		
 		btnAgregar = new JButton("AGREGAR");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(10, 152, 89, 23);
+		btnAgregar.setBounds(10, 219, 89, 23);
 		panelGestionDeudor.add(btnAgregar);
 		
 		btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(this);
-		btnEditar.setBounds(109, 152, 89, 23);
+		btnEditar.setBounds(109, 219, 89, 23);
 		panelGestionDeudor.add(btnEditar);
 		
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(208, 152, 89, 23);
+		btnEliminar.setBounds(208, 219, 89, 23);
 		panelGestionDeudor.add(btnEliminar);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(307, 152, 89, 23);
+		btnNuevo.setBounds(307, 219, 89, 23);
 		panelGestionDeudor.add(btnNuevo);
+		
+		panelCabecera = new JPanel();
+		panelCabecera.setBounds(10, 11, 548, 71);
+		panelCabecera.setBorder(new TitledBorder("CABECERA"));
+		panelGestionDeudor.add(panelCabecera);
+		panelCabecera.setLayout(null);
+		
+		txtIdDeudor = new JTextField();
+		txtIdDeudor.setBounds(10, 40, 86, 20);
+		panelCabecera.add(txtIdDeudor);
+		txtIdDeudor.setColumns(10);
+		
+		lblIdDeudor = new JLabel("ID");
+		lblIdDeudor.setBounds(10, 24, 86, 14);
+		panelCabecera.add(lblIdDeudor);
+		
+		txtFechaReg = new JTextField();
+		txtFechaReg.setBounds(192, 40, 103, 20);
+		panelCabecera.add(txtFechaReg);
+		txtFechaReg.setColumns(10);
+		
+		lblFechaReg = new JLabel("REGISTRO");
+		lblFechaReg.setBounds(192, 24, 86, 14);
+		panelCabecera.add(lblFechaReg);
+		
+		txtFechaAct = new JTextField();
+		txtFechaAct.setBounds(305, 40, 103, 20);
+		panelCabecera.add(txtFechaAct);
+		txtFechaAct.setColumns(10);
+		
+		lblFechaAct = new JLabel("ACTUALIZACION");
+		lblFechaAct.setBounds(305, 24, 103, 14);
+		panelCabecera.add(lblFechaAct);
+		
+		txtEstado = new JTextField();
+		txtEstado.setBounds(429, 40, 103, 20);
+		panelCabecera.add(txtEstado);
+		txtEstado.setColumns(10);
+		
+		lblEstado = new JLabel("ESTADO");
+		lblEstado.setBounds(429, 24, 86, 14);
+		panelCabecera.add(lblEstado);
 		
 		panelConsultaDeudor = new JPanel();
 		tpDeudor.addTab("Consulta", null, panelConsultaDeudor, null);
 		panelConsultaDeudor.setLayout(null);
 		
 		spTbDeudor = new JScrollPane();
-		spTbDeudor.setBounds(10, 57, 642, 245);
+		spTbDeudor.setBounds(10, 57, 522, 154);
 		panelConsultaDeudor.add(spTbDeudor);
 		
 		tbDeudor = new JTable();
@@ -165,6 +210,17 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 			}
 		}
 		
+		for (Component obj: this.panelCabecera.getComponents()) {
+			if (obj instanceof JTextField) {
+				((JTextField) obj).setEditable(false);
+			}
+		}
+		
+
+		txtIdDeudor.setText(arrDeudor.correlativo() + "");
+		txtFechaReg.setText(new SimpleDateFormat("dd/MM/yyy hh:mm").format(new Date()));
+		txtEstado.setText("REGISTRADO");
+		
 		listarDeudor();
 	}
 	private void agregar(){
@@ -172,6 +228,9 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		String nombre = txtNombreDeudor.getText();
 		String apellido = txtApellidoDeudor.getText();
 		String dni = txtDniDeudor.getText();
+		String estado = txtEstado.getText();
+		Date fechaReg = new Date();
+		
 		
 		Deudor obj = new Deudor();
 		
@@ -179,9 +238,11 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		obj.setNom_deudor(nombre);
 		obj.setApe_deudor(apellido);
 		obj.setDni_deudor(dni);
+		obj.setFechaReg_deudor(fechaReg);
+		obj.setEstado_deudor(estado);
 		
 		arrDeudor.adicionar(obj);
-		arrDeudor.grabarDeudor();
+		arrDeudor.grabarData();
 		
 		Custom.mensajeExito(this, "AGREGADO");
 		
@@ -195,6 +256,7 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		String nombre = txtNombreDeudor.getText();
 		String apellido = txtApellidoDeudor.getText();
 		String dni = txtDniDeudor.getText();
+		Date fechaAct = new Date();
 		
 		Deudor obj = new Deudor();
 		
@@ -202,9 +264,10 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		obj.setNom_deudor(nombre);
 		obj.setApe_deudor(apellido);
 		obj.setDni_deudor(dni);
+		obj.setFechaAct_deudor(fechaAct);
 		
 		arrDeudor.editar(obj);
-		arrDeudor.grabarDeudor();
+		arrDeudor.grabarData();
 		
 		Custom.mensajeExito(this, "EDITADO");
 		
@@ -215,7 +278,7 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		int id = Integer.parseInt(txtIdDeudor.getText());
 		
 		arrDeudor.eliminar(id);
-		arrDeudor.grabarDeudor();
+		arrDeudor.grabarData();
 		
 		Custom.mensajeExito(this, "ELIMINADO");
 		

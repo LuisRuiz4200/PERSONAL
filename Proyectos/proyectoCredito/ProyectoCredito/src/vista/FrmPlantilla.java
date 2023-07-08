@@ -5,7 +5,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class FrmPlantilla extends JFrame{
 	
-	
+	private JPanel panel;
 	
 	public static void main(String [] args) {
 		
@@ -17,11 +17,14 @@ public class FrmPlantilla extends JFrame{
 	public FrmPlantilla() {
 		
 		setTitle("");
-		setBounds(100,100,500,300);
+		setSize(500,300);
+		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.getContentPane().setLayout(null);
+		panel = new JPanel();
+		panel.setLayout(null);
+		this.setContentPane(panel);
+		
 		
 	}
-	
 }

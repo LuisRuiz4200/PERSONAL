@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="vistas.FrmDeudor2"/>
-    <fullyQualifiedTypeName name="java.awt.Component"/>
     <fullyQualifiedTypeName name="clases.Deudor"/>
     <fullyQualifiedTypeName name="arreglos.ArregloDeudor"/>
-    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="javax.swing.table.TableRowSorter"/>
     <fullyQualifiedTypeName name="javax.swing.table.TableModel"/>
     <fullyQualifiedTypeName name="javax.swing.RowSorter.SortKey"/>
     <fullyQualifiedTypeName name="javax.swing.RowSorter"/>
+    <fullyQualifiedTypeName name="modelo.Modelo"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="javax.swing.table.TableColumnModel"/>
     <fullyQualifiedTypeName name="reuzable.Custom"/>
+    <fullyQualifiedTypeName name="arreglo.ArregloDeudor"/>
+    <fullyQualifiedTypeName name="modelo.Deudor"/>
+    <fullyQualifiedTypeName name="java.awt.Component"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="arreglo.ArregloDeuda"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

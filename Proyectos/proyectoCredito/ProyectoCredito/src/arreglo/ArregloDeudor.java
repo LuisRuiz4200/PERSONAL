@@ -4,31 +4,35 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import modelo.*;
 
 public class ArregloDeudor {
 	
-	private ArrayList <Deudor>arrCliente;
+	private ArrayList <Deudor>arrDeudor;
 	
 	public ArregloDeudor() {
-		arrCliente = new ArrayList<Deudor>();
-		cargarDeudor();
+		arrDeudor = new ArrayList<Deudor>();
+		cargarData();
 	}
 	
 	public int tamano() {
-		return arrCliente.size();
+		return arrDeudor.size();
 	}
 	
 	public void adicionar(Deudor obj) {
-		arrCliente.add(obj);
+		arrDeudor.add(obj);
 	}
 	
 	public void eliminar (int id) {
 		Deudor obj  = buscar (id);
-		arrCliente.remove(obj);
+		arrDeudor.remove(obj);
 	}
 	
 	public void editar(Deudor obj) {
@@ -39,11 +43,11 @@ public class ArregloDeudor {
 	}
 	
 	public Deudor obtener(int x) {
-		return arrCliente.get(x);
+		return arrDeudor.get(x);
 	}
 	
 	public List<Deudor> listar(){
-		return arrCliente.subList(0, tamano());
+		return arrDeudor.subList(0, tamano());
 	}
 	
 	public Deudor buscar (int codigo) {
@@ -55,15 +59,31 @@ public class ArregloDeudor {
 		return null;
 	}
 	
+	public int correlativo() {
+		
+		int id=0;
+		
+		if(tamano()==0) {
+			id=1;
+		}else {
+			for (Deudor obj : arrDeudor) {
+				id = obj.getId_deudor() + 1;
+			}
+		}
+		
+		
+		return id;
+	}
+	
 	//metodos de grabar y cargar 
 	
-	public void grabarDeudor() {
+	public void grabarData() {
 		PrintWriter pw;
 		String texto;
 		Deudor c;
 		
 		try {
-			pw= new PrintWriter(new FileWriter("Cliente.txt"));
+			pw= new PrintWriter(new FileWriter("Deudor.txt"));
 			
 			for(int i=0;i<tamano();i++) {
 				c = obtener(i);
@@ -71,24 +91,27 @@ public class ArregloDeudor {
 				texto = c.getId_deudor() + ";" +
 						c.getNom_deudor() + ";" + 
 						c.getApe_deudor() + ";" +
-						c.getDni_deudor() + ";";
+						c.getDni_deudor() + ";" +
+						new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(c.getFechaReg_deudor()) + ";" +
+						((c.getFechaAct_deudor()==null)?c.getFechaAct_deudor():new SimpleDateFormat("dd/MM/yy hh:mm:ss").format(c.getFechaAct_deudor())) + ";" + 
+						c.getEstado_deudor() + ";" ;
 				
 				pw.println(texto);
 			}
 			pw.close();
 			
 		}catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(null,e.getMessage(), "GRABAR DEUDOR",0);
 		}
 	}
 	
-	public void cargarDeudor() {
+	public void cargarData() {
 		BufferedReader br;
 		String texto;
 		String [] pos;
 		
 		try {
-			br = new BufferedReader(new FileReader("Cliente.txt"));
+			br = new BufferedReader(new FileReader("Deudor.txt"));
 			
 			while((texto=br.readLine())!=null) {
 				pos = texto.split(";");
@@ -97,18 +120,29 @@ public class ArregloDeudor {
 				String nombre = pos[1];
 				String apellido = pos [2];
 				String dni = pos [3];
+				Date fechaReg = new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[4]);
+				Date fechaAct = null;
+				
+				try {
+					fechaAct = new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[5]);
+				} catch (Exception e) {}
+				
+				String estado = pos[6];
 				
 				Deudor obj = new Deudor();
 				obj.setId_deudor(codigo);
 				obj.setNom_deudor(nombre);
 				obj.setApe_deudor(apellido);
 				obj.setDni_deudor(dni);
+				obj.setFechaReg_deudor(fechaReg);
+				obj.setFechaAct_deudor(fechaAct);
+				obj.setEstado_deudor(estado);
 				
 				adicionar(obj);
 			}
 			br.close();	
 		}catch(Exception e) {
-			
+			JOptionPane.showMessageDialog(null,  e.getMessage(),"CARGAR DEUDOR",0);
 		}
 	}
 	

@@ -4,9 +4,12 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements ActionListener{
+	
+	private JPanel panel;
 	private JMenuBar menuBar;
 	private JMenu mnArchivo;
 	private JMenu mnMantenimiento;
@@ -31,10 +34,15 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	public FrmPrincipal() {
 		
 		setTitle("Proyecto Crediticio");
-		setBounds(100,100,931,511);
+		setSize(931,511);
+		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//this.getContentPane().setLayout(null);
+		
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout(0, 0));
+		this.setContentPane(panel);
 		
 		escritorio= new JDesktopPane();
 		escritorio.setBackground(Color.DARK_GRAY);
