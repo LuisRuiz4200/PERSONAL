@@ -4,150 +4,115 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-import modelo.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import interfaz.CRUD;
+import modelo.Pago;
+import reuzable.Custom;
 
-public class ArregloPago {
+public class ArregloPago implements CRUD<Pago> {
+
+	private List<Pago> arrPago;
 	
-	private ArrayList<Pago> arrPago;
-	
-	public ArregloPago(){
-		arrPago = new ArrayList <Pago>();
-		cargarData();
+	public ArregloPago() {
+		arrPago = new ArrayList<Pago>();
 	}
-	
-	public int tamaño() {
+
+	@Override
+	public int tamano() {
 		return arrPago.size();
 	}
-	
-	public void adicionar(Pago Pago) {
-		arrPago.add(Pago);
+
+	@Override
+	public void adicionar(Pago model) {
+		arrPago.add(model);
 	}
-	
-	public void eliminar(String id) {
-		
-		Pago obj =buscar(id);
-		
+
+	@Override
+	public void editar(Pago model) {
+		buscar(model.getId_deudor());
+	}
+
+	@Override
+	public void eliminar(int id) {
+		Pago obj = buscar(id);
 		arrPago.remove(obj);
 	}
-	
-	public Pago obtener(int x) {
-		return arrPago.get(x);
+
+	@Override
+	public List<Pago> listar() {
+		return arrPago.subList(0, tamano());
 	}
-	
-	public Pago buscar (String codigo) {
-		
-		Pago g= null;
-		
-		for(int i = 0 ; i<tamaño();i++) {
-			if(obtener(i).getId_pago().equals(codigo)) {
-				g=obtener(i);
+
+	@Override
+	public Pago buscar(int id) {
+		for (Pago obj : arrPago) {
+			if (obj.getId_pago() == id) {
+				return obj;
 			}
 		}
-		
-		return g;
+		return null;
 	}
-	
-	public double pagoTotal (String idDeudor) {
-		double res= -1;
-		
-		
-		for(int i = 0 ; i<tamaño();i++) {
-			if(obtener(i).getId_deudor().equals(idDeudor)) {
-				res += obtener(i).getMonto_pago() ;
-			}
-		}
-		
-		return res;
+
+	@Override
+	public Pago obtener(int index) {
+		return arrPago.get(index);
 	}
-	
-	public void cargarEstado() {
+
+	//METODOS ADICIONALES
+
+	@Override
+	public void grabarData() {
 		
-		cargarData();
-		
-		for(int i = 0 ; i<tamaño();i++) {
-			obtener(i).setEstado_pago("REGISTRADO");
-		}
-		
-		grabarData();
-		
-	}
-	
-	
-	//Metodos de guardar y buscar 
-	
-	public void grabarData () {
+		Gson json = new GsonBuilder().setPrettyPrinting().create();
 		
 		PrintWriter pw;
 		String texto;
-		Pago p;
+		
 		
 		try {
-			pw= new PrintWriter(new FileWriter("Pago.txt"));
+			pw = new PrintWriter(new FileWriter("Pago.json"));
 			
-			for(int i=0;i<tamaño();i++) {
-				p = obtener(i);
-				texto = p.getId_pago() + ";" +
-						p.getId_deudor() + ";" +
-						p.getMonto_pago() + ";" + 
-						p.getFechaReg_pago() + ";" +
-						p.getFechaAct_pago() + ";" +
-						p.getId_medioPago() + ";" +
-						p.getEstado_pago() + ";";
-				
-				pw.println(texto);
-				
-			}
+			texto = json.toJson(listar());
+			
+			pw.println(texto);
 			pw.close();
-		}catch(Exception e){
 			
+		}catch(Exception ex) {
+			Custom.mensajeExito(null, ex.getMessage());
 		}
 		
 	}
 	
+	@Override
 	public void cargarData() {
-		
-		BufferedReader br;
-		String texto;
-		String[] pos;
+
+		Gson json = new Gson();
+		JsonReader jr ;
 		
 		try {
-			br = new BufferedReader(new FileReader("Pago.txt"));
+			jr = new JsonReader(new FileReader("Pago.json"));
 			
-			while((texto=br.readLine())!=null) {
-				pos = texto.split(";");
-				
-				String codigo = pos[0];
-				String cliente = pos[1];
-				double monto= Double.parseDouble(pos[2]);
-				Date fechaReg= new SimpleDateFormat().parse(pos[3]);
-				Date fechaAct= new SimpleDateFormat().parse(pos[4]);
-				String medioPago = pos[5];
-				String estado = pos[6];
+			Type tipoLista = new TypeToken<List<Pago>>() {}.getType();
 			
-				Pago obj  = new Pago ();
-				obj.setId_pago(codigo);
-				obj.setId_deudor(cliente);
-				obj.setMonto_pago(monto);
-				obj.setFechaReg_pago(fechaReg);
-				obj.setFechaAct_pago(fechaAct);
-				obj.setId_medioPago(medioPago);
-				obj.setEstado_pago(estado);
-				
-				adicionar(obj);
-				
-				
-			}
+			arrPago = json.fromJson(jr, tipoLista);
 			
-			br.close();
+			jr.close();
 			
-		}catch(Exception e) {
-			
+		}catch(Exception ex) {
+			Custom.mensajeError(null, ex.getMessage());
 		}
 		
 	}
+
+	
+	
+	
 }

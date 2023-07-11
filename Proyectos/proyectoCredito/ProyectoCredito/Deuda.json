@@ -1,0 +1,26 @@
+[
+  {
+    "id_deuda": 1,
+    "id__persona_prestatario": 1,
+    "id_persona_prestamista": 4,
+    "monto_deuda": 150.0,
+    "cuota_deuda": 1,
+    "interes_deuda": 0.0,
+    "fechaReg_deuda": "Jul 10, 2023, 10:21:02 PM",
+    "estado_deuda": "REGISTRADO",
+    "TEA": 0.55,
+    "TEM": 0.0
+  },
+  {
+    "id_deuda": 2,
+    "id__persona_prestatario": 2,
+    "id_persona_prestamista": 4,
+    "monto_deuda": 123.0,
+    "cuota_deuda": 0,
+    "interes_deuda": 0.0,
+    "fechaReg_deuda": "Jul 10, 2023, 10:21:26 PM",
+    "estado_deuda": "REGISTRADO",
+    "TEA": 0.55,
+    "TEM": 0.0
+  }
+]

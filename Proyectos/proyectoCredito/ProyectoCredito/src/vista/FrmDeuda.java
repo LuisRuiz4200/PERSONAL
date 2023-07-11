@@ -3,8 +3,6 @@ package vista;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,24 +11,31 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import arreglo.ArregloDeuda;
-import arreglo.ArregloDeudor;
+import arreglo.ArregloPersona;
 import modelo.Deuda;
-import modelo.Deudor;
+import modelo.Persona;
 import reuzable.Custom;
+import reuzable.TablaRz;
 
 import javax.swing.event.CaretEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
-public class FrmDeuda extends JFrame implements ActionListener, CaretListener, KeyListener{
+public class FrmDeuda extends JFrame implements ActionListener, CaretListener, KeyListener, ChangeListener{
 	
 
-	public static JTextField txtIdDeudor;
-	
+	public static JTextField txtIdPrestatario;
+	public static JTextField txtIdPrestamista;
+
 	private ArregloDeuda arrDeuda = new ArregloDeuda();
 	
 	private JPanel panel;
@@ -53,7 +58,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	private JLabel lblDniDeudor;
 	private JTextField txtMonto;
 	private JLabel lblMonto;
-	private JTextField txtCuota;
+	private JSpinner txtCuota;
 	private JLabel lblCuota;
 	private JTextField txtInteres;
 	private JLabel lblInteres;
@@ -71,20 +76,33 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	private JTable tbDeuda;
 	private JPanel panelCabecera;
 	private JPanel panelCalculable;
+	private JPanel panelPrestamista;
+	private JLabel lblIdPrestamista;
+	private JButton btnBuscarPrestamista;
+	private JTextField txtNombrePrestamista;
+	private JLabel lblNombrePrestamista;
+	private JTextField txtApellidoPrestamista;
+	private JLabel lblApellidoPrestamista;
+	private JTextField txtDniPrestamista;
+	private JLabel lblDniPrestamista;
 	
 	
 	
 	public static void main(String [] args) {
-		
-		FrmDeuda form = new FrmDeuda();
-		form.setVisible(true);
+		try {
+			FrmDeuda form = new FrmDeuda();
+			form.setVisible(true);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		
 	}
 	
 	public FrmDeuda() {
 		
 		setTitle("DEUDA");
-		setBounds(100,100,700,458);
+		setSize(700,484);
+		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
@@ -93,7 +111,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		panel.setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 667, 373);
+		tabbedPane.setBounds(10, 11, 667, 419);
 		panel.add(tabbedPane);
 		
 		panelGestionDeuda = new JPanel();
@@ -106,11 +124,11 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		panelGestionDeuda.add(panelDeudor);
 		panelDeudor.setLayout(null);
 		
-		txtIdDeudor = new JTextField();
-		txtIdDeudor.setColumns(10);
-		txtIdDeudor.addCaretListener(this);
-		txtIdDeudor.setBounds(10, 44, 86, 20);
-		panelDeudor.add(txtIdDeudor);
+		txtIdPrestatario = new JTextField();
+		txtIdPrestatario.setColumns(10);
+		txtIdPrestatario.addCaretListener(this);
+		txtIdPrestatario.setBounds(10, 44, 86, 20);
+		panelDeudor.add(txtIdPrestatario);
 		
 		lblIdDeudor = new JLabel("ID DEUDOR");
 		lblIdDeudor.setBounds(10, 28, 86, 14);
@@ -150,41 +168,40 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		
 		txtMonto = new JTextField();
 		txtMonto.setColumns(10);
-		txtMonto.setBounds(470, 195, 86, 20);
+		txtMonto.setBounds(470, 283, 86, 20);
 		panelGestionDeuda.add(txtMonto);
 		
 		lblMonto = new JLabel("MONTO");
-		lblMonto.setBounds(470, 179, 86, 14);
+		lblMonto.setBounds(470, 267, 86, 14);
 		panelGestionDeuda.add(lblMonto);
 		
-		txtCuota = new JTextField();
-		txtCuota.addCaretListener(this);
-		txtCuota.setColumns(10);
-		txtCuota.setBounds(566, 195, 86, 20);
+		txtCuota = new JSpinner();
+		txtCuota.addChangeListener(this);
+		txtCuota.setBounds(566, 283, 86, 20);
 		panelGestionDeuda.add(txtCuota);
 		
 		lblCuota = new JLabel("CUOTA");
-		lblCuota.setBounds(566, 179, 86, 14);
+		lblCuota.setBounds(566, 267, 86, 14);
 		panelGestionDeuda.add(lblCuota);
 		
 		btnAgregar = new JButton("AGREGAR");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(10, 311, 89, 23);
+		btnAgregar.setBounds(10, 357, 89, 23);
 		panelGestionDeuda.add(btnAgregar);
 		
 		btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(this);
-		btnEditar.setBounds(116, 311, 89, 23);
+		btnEditar.setBounds(116, 357, 89, 23);
 		panelGestionDeuda.add(btnEditar);
 		
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(215, 311, 89, 23);
+		btnEliminar.setBounds(215, 357, 89, 23);
 		panelGestionDeuda.add(btnEliminar);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(314, 311, 89, 23);
+		btnNuevo.setBounds(314, 357, 89, 23);
 		panelGestionDeuda.add(btnNuevo);
 		
 		panelCabecera = new JPanel();
@@ -221,7 +238,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		panelCabecera.add(lblEstadoDeuda);
 		
 		panelCalculable = new JPanel();
-		panelCalculable.setBounds(10, 179, 255, 67);
+		panelCalculable.setBounds(10, 267, 255, 67);
 		panelCalculable.setBorder(new TitledBorder("CALCULABLE"));
 		panelGestionDeuda.add(panelCalculable);
 		panelCalculable.setLayout(null);
@@ -243,6 +260,54 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		lblTotalPago = new JLabel("TOTAL");
 		lblTotalPago.setBounds(106, 20, 86, 14);
 		panelCalculable.add(lblTotalPago);
+		
+		panelPrestamista = new JPanel();
+		panelPrestamista.setLayout(null);
+		panelPrestamista.setBorder(new TitledBorder(null, "PRESTAMISTA"));
+		panelPrestamista.setBounds(10, 179, 642, 77);
+		panelGestionDeuda.add(panelPrestamista);
+		
+		txtIdPrestamista = new JTextField();
+		txtIdPrestamista.addCaretListener(this);
+		txtIdPrestamista.setColumns(10);
+		txtIdPrestamista.setBounds(10, 44, 86, 20);
+		panelPrestamista.add(txtIdPrestamista);
+		
+		lblIdPrestamista = new JLabel("ID PRESTAMISTA");
+		lblIdPrestamista.setBounds(10, 28, 117, 14);
+		panelPrestamista.add(lblIdPrestamista);
+		
+		btnBuscarPrestamista = new JButton("...");
+		btnBuscarPrestamista.addActionListener(this);
+		btnBuscarPrestamista.setBounds(104, 43, 35, 23);
+		panelPrestamista.add(btnBuscarPrestamista);
+		
+		txtNombrePrestamista = new JTextField();
+		txtNombrePrestamista.setColumns(10);
+		txtNombrePrestamista.setBounds(159, 44, 178, 20);
+		panelPrestamista.add(txtNombrePrestamista);
+		
+		lblNombrePrestamista = new JLabel("NOMBRE");
+		lblNombrePrestamista.setBounds(159, 28, 86, 14);
+		panelPrestamista.add(lblNombrePrestamista);
+		
+		txtApellidoPrestamista = new JTextField();
+		txtApellidoPrestamista.setColumns(10);
+		txtApellidoPrestamista.setBounds(347, 44, 178, 20);
+		panelPrestamista.add(txtApellidoPrestamista);
+		
+		lblApellidoPrestamista = new JLabel("APELLIDO");
+		lblApellidoPrestamista.setBounds(347, 28, 86, 14);
+		panelPrestamista.add(lblApellidoPrestamista);
+		
+		txtDniPrestamista = new JTextField();
+		txtDniPrestamista.setColumns(10);
+		txtDniPrestamista.setBounds(535, 44, 97, 20);
+		panelPrestamista.add(txtDniPrestamista);
+		
+		lblDniPrestamista = new JLabel("DNI");
+		lblDniPrestamista.setBounds(535, 28, 86, 14);
+		panelPrestamista.add(lblDniPrestamista);
 		
 		panelConsultaDeudor = new JPanel();
 		panelConsultaDeudor.setLayout(null);
@@ -277,7 +342,6 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	
 	private void arranque() {
 		limpiar();
-		listar();
 		cargarCboFiltro();
 	}
 	
@@ -289,6 +353,12 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 			}
 		}
 		for (Component obj : panelDeudor.getComponents()) {
+			if(obj instanceof JTextField) {
+				((JTextField) obj).setText("");
+				((JTextField) obj).setEditable(false);
+			}
+		}
+		for (Component obj : panelPrestamista.getComponents()) {
 			if(obj instanceof JTextField) {
 				((JTextField) obj).setText("");
 				((JTextField) obj).setEditable(false);
@@ -307,17 +377,22 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 			}
 		}
 		
+		
+		
 		txtIdDeuda.setText(arrDeuda.correlativo()+"");
 		txtEstado.setText("REGISTRADO");
 		txtFechaRegDeuda.setText(new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(new Date()));
 		txtInteres.setText("0.00");
 		
+
+		listar();
 	}
 	
 	private void adicionar () {
 		try {
 			int idDeuda = leerIdDeuda();
-			int idDeudor = leerIdDeudor();
+			int idPrestamista = leerIdPrestamista();
+			int idPrestatario = leerIdPrestatario();
 			double monto = leerMontoDeuda();
 			int nroCuota = leerNroCuota();
 			double interesDeuda = leerInteresDeuda();
@@ -327,7 +402,8 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 			Deuda obj = new Deuda();
 			
 			obj.setId_deuda(idDeuda);
-			obj.setId_deudor(idDeudor);
+			obj.setId_persona_prestamista(idPrestamista);
+			obj.setId__persona_prestatario(idPrestatario);
 			obj.setMonto_deuda(monto);
 			obj.setCuota_deuda(nroCuota);
 			obj.setInteres_deuda(interesDeuda);
@@ -351,7 +427,8 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	private void editar() {
 		try {
 			int idDeuda = leerIdDeuda();
-			int idDeudor = leerIdDeudor();
+			int idPrestamista = leerIdPrestamista();
+			int idPrestatario = leerIdPrestatario();
 			double monto = leerMontoDeuda();
 			int nroCuota = leerNroCuota();
 			double interesDeuda = leerInteresDeuda();
@@ -361,7 +438,8 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 			Deuda obj = new Deuda();
 			
 			obj.setId_deuda(idDeuda);
-			obj.setId_deudor(idDeudor);
+			obj.setId__persona_prestatario(idPrestatario);
+			obj.setId_persona_prestamista(idPrestamista);
 			obj.setMonto_deuda(monto);
 			obj.setCuota_deuda(nroCuota);
 			obj.setInteres_deuda(interesDeuda);
@@ -396,17 +474,11 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	}
 	
 	private void listar() {
-		Object[] cabecera = new Object[] {"ID","DEUDOR","MONTO","INTERES","CUOTAS","TOTAL","FECHA","ESTADO","EDITAR","ELIMINAR"};
+		Object[] cabecera = new Object[] {"ID","PRESTATARIO","PRESTAMISTA","MONTO","INTERES","CUOTAS","TOTAL","FECHA","ESTADO","EDITAR","ELIMINAR"};
 		
-		DefaultTableModel modelo = new DefaultTableModel(cabecera,0) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		};
+		DefaultTableModel modelo = TablaRz.tableModel(cabecera);
 		
-		ArregloDeudor arrDeudor = new ArregloDeudor();
+		ArregloPersona arrDeudor = new ArregloPersona();
 		
 		JButton btnEditar =new JButton("Editar");
 		btnEditar.setBackground(Color.BLUE);
@@ -419,7 +491,8 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		for (Deuda obj:arrDeuda.listar()) {
 			Object[] cuerpo = new Object[] {
 				obj.getId_deuda(),
-				arrDeudor.buscar(obj.getId_deudor()).getNom_deudor(),
+				arrDeudor.buscar(obj.getId__persona_prestatario()).getNom_persona(),
+				arrDeudor.buscar(obj.getId_persona_prestamista()).getNom_persona(),
 				obj.getMonto_deuda(),
 				obj.getInteres_deuda(),
 				obj.getCuota_deuda(),
@@ -430,25 +503,17 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 				btnEliminar
 				
 			};
-			
-			this.tbDeuda.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-						boolean hasFocus, int row, int column) {
-					// TODO Auto-generated method stub
-					if( value instanceof JButton) {
-						return (JButton) value;
-					}
-					
-					return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-				}
-			});
-			
 			modelo.addRow(cuerpo);
 		}
 		
+		
+		
+		tbDeuda.setDefaultRenderer(Object.class, TablaRz.tableCellRendererModelComponent());
 		tbDeuda.setRowHeight(20);
 		tbDeuda.setModel(modelo);
+		
+		tbDeuda.setAutoResizeMode(0);
+		TablaRz.autoAjustar(tbDeuda);
 		
 	}
 	
@@ -463,6 +528,15 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	
 	
 	//GETTER
+	
+	private int leerIdPrestamista() {
+		int res = 0;
+		
+		res = Integer.parseInt(txtIdPrestamista.getText());
+		
+		return res;
+		
+	}
 	
 	private String leerEstadoDeuda() {
 		// TODO Auto-generated method stub
@@ -486,7 +560,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = Integer.parseInt(txtCuota.getText());
+		res = Integer.parseInt(txtCuota.getValue().toString());
 		
 		return res;
 	}
@@ -500,11 +574,11 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		return res;
 	}
 
-	private int leerIdDeudor() {
+	private int leerIdPrestatario() {
 		// TODO Auto-generated method stub
 		int res = 0;
 		
-		res = Integer.parseInt(txtIdDeudor.getText());
+		res = Integer.parseInt(txtIdPrestatario.getText());
 		
 		return res;
 	}
@@ -524,6 +598,9 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	
 	//ACTION LISTENER
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBuscarPrestamista) {
+			actionPerformedBtnBuscarPrestamista(e);
+		}
 		if (e.getSource() == btnBuscarDeudor) {
 			actionPerformedBtnBuscarDeudor(e);
 		}
@@ -553,42 +630,90 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		limpiar();
 	}
 	protected void actionPerformedBtnBuscarDeudor(ActionEvent e) {
-		DlgBuscarDeudor dlg = new DlgBuscarDeudor(this,true);
-		dlg.frame="FrmDeuda";
+		
+		DlgBuscarPersona.frame="FrmDeuda/Persona/Prestatario";
+		DlgBuscarPersona dlg = new DlgBuscarPersona(this,true) ;
+		dlg.setVisible(true);
+	}
+	protected void actionPerformedBtnBuscarPrestamista(ActionEvent e) {
+		
+		DlgBuscarPersona.frame="FrmDeuda/Persona/Prestamista";
+		DlgBuscarPersona dlg = new DlgBuscarPersona(this,true);
 		dlg.setVisible(true);
 	}
 	//CARET LISTENER
 	public void caretUpdate(CaretEvent e) {
-		if (e.getSource() == txtCuota) {
-			caretUpdateTxtCuota(e);
+		if (e.getSource() == txtIdPrestamista) {
+			caretUpdateTxtIdPrestamista(e);
 		}
-		if (e.getSource() == txtIdDeudor) {
+		if (e.getSource() == txtIdPrestatario) {
 			caretUpdateTxtidDeuda(e);
 		}
 	}
 	protected void caretUpdateTxtidDeuda(CaretEvent e) {
 		
-		if (txtIdDeudor.getText().isEmpty()) {
+		if (txtIdPrestatario.getText().isEmpty()) {
 			return;
 		}
 		
 		
 		try {
 
-			ArregloDeudor arrDeudor = new ArregloDeudor();
-			int idDeudro = Integer.parseInt(txtIdDeudor.getText());
+			ArregloPersona arrDeudor = new ArregloPersona();
+			int idDeudro = Integer.parseInt(txtIdPrestatario.getText());
 			
-			Deudor obj = arrDeudor.buscar(idDeudro);
+			Persona obj = arrDeudor.buscar(idDeudro);
 			
-			txtNombreDeudor.setText(obj.getNom_deudor());
-			txtApellidoDeudor.setText(obj.getApe_deudor());
-			txtDniDeudor.setText(obj.getDni_deudor());
+			txtNombreDeudor.setText(obj.getNom_persona());
+			txtApellidoDeudor.setText(obj.getApe_persona());
+			txtDniDeudor.setText(obj.getDni_persona());
 			
 		}catch(Exception ex) {
 			Custom.mensajeError(this, ex.getMessage());
 		}
 	}
-	protected void caretUpdateTxtCuota(CaretEvent e) {
+	protected void caretUpdateTxtIdPrestamista(CaretEvent e) {
+		if (txtIdPrestamista.getText().isEmpty()) {
+			return;
+		}
+		
+		
+		try {
+			ArregloPersona arrDeudor = new ArregloPersona();
+			int idDeudro = Integer.parseInt(txtIdPrestamista.getText());
+			
+			Persona obj = arrDeudor.buscar(idDeudro);
+			
+			txtNombrePrestamista.setText(obj.getNom_persona());
+			txtApellidoPrestamista.setText(obj.getApe_persona());
+			txtDniPrestamista.setText(obj.getDni_persona());
+			
+		}catch(Exception ex) {
+			Custom.mensajeError(this, ex.getMessage());
+		}
+	}
+
+	
+	//KEY LISTENER
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == txtFiltro) {
+			keyReleasedTxtFiltro(e);
+		}
+	}
+	public void keyTyped(KeyEvent e) {
+	}
+	protected void keyReleasedTxtFiltro(KeyEvent e) {
+		Custom.filtrarTabla(tbDeuda, txtFiltro.getText(), cboFiltro.getSelectedIndex());
+	}
+	//CHANGE LISTENER
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == txtCuota) {
+			stateChangedTxtCuota(e);
+		}
+	}
+	protected void stateChangedTxtCuota(ChangeEvent e) {
 		if(txtMonto.getText().trim().length()==0) {
 			txtInteres.setText("0.00");
 			txtTotalPago.setText("0.00");
@@ -604,18 +729,5 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 			txtTotalPago.setText("0.00");
 		}
 	}
-	
-	//KEY LISTENER
-	public void keyPressed(KeyEvent e) {
-	}
-	public void keyReleased(KeyEvent e) {
-		if (e.getSource() == txtFiltro) {
-			keyReleasedTxtFiltro(e);
-		}
-	}
-	public void keyTyped(KeyEvent e) {
-	}
-	protected void keyReleasedTxtFiltro(KeyEvent e) {
-		Custom.filtrarTabla(tbDeuda, txtFiltro.getText(), cboFiltro.getSelectedIndex());
-	}
+
 }

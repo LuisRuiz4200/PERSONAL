@@ -1,23 +1,22 @@
 package modelo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
 public class Credito extends MedioPago {
 	
 	private String nroTarjeta;
 	private int nroCuota;
-	
-	
-	public String getNroTarjeta() {
-		return nroTarjeta;
-	}
-	public void setNroTarjeta(String nroTarjeta) {
-		this.nroTarjeta = nroTarjeta;
-	}
-	public int getNroCuota() {
-		return nroCuota;
-	}
-	public void setNroCuota(int nroCuota) {
-		this.nroCuota = nroCuota;
-	}
 	
 	
 	

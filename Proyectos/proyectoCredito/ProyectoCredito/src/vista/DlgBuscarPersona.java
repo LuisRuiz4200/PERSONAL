@@ -3,8 +3,8 @@ package vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import arreglo.ArregloDeudor;
-import modelo.Deudor;
+import arreglo.ArregloPersona;
+import modelo.Persona;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -12,14 +12,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseListener{
+public class DlgBuscarPersona extends JDialog implements ActionListener, MouseListener{
 	
-	private ArregloDeudor arrDeudor = new ArregloDeudor();
+	private ArregloPersona arrpersona = new ArregloPersona();
 	
-	public String frame ;
+	public static String frame ;
 	
 	private JPanel panel;
-	private JPanel panelConsultaDeudor;
+	private JPanel panelConsultapersona;
 	private JTextField txtFiltro;
 	private JComboBox<Object> cboFiltro;
 	private JLabel lblFiltrar;
@@ -29,15 +29,15 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 	
 	public static void main(String [] args) {
 		
-		DlgBuscarDeudor form = new DlgBuscarDeudor(null,true);
+		DlgBuscarPersona form = new DlgBuscarPersona(null,true);
 		form.setVisible(true);
 		
 	}
 	
-	public DlgBuscarDeudor(JFrame frame, boolean x) {
+	public DlgBuscarPersona(JFrame frame, boolean x) {
 		super(frame,x);
 		
-		setTitle("BUSCAR DEUDOR - " + this.frame);
+		setTitle("BUSCAR persona - " + this.frame);
 		setSize(590,300);
 		this.setLocationRelativeTo(frame);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,27 +46,27 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 		panel.setLayout(null);
 		this.setContentPane(panel);
 		
-		panelConsultaDeudor = new JPanel();
-		panelConsultaDeudor.setLayout(null);
-		panelConsultaDeudor.setBounds(10, 11, 542, 222);
-		panel.add(panelConsultaDeudor);
+		panelConsultapersona = new JPanel();
+		panelConsultapersona.setLayout(null);
+		panelConsultapersona.setBounds(10, 11, 542, 222);
+		panel.add(panelConsultapersona);
 		
 		txtFiltro = new JTextField();
 		txtFiltro.setColumns(10);
 		txtFiltro.setBounds(138, 26, 134, 20);
-		panelConsultaDeudor.add(txtFiltro);
+		panelConsultapersona.add(txtFiltro);
 		
 		cboFiltro = new JComboBox<Object>();
 		cboFiltro.setBounds(10, 24, 118, 22);
-		panelConsultaDeudor.add(cboFiltro);
+		panelConsultapersona.add(cboFiltro);
 		
 		lblFiltrar = new JLabel("FILTRAR POR");
 		lblFiltrar.setBounds(10, 11, 106, 14);
-		panelConsultaDeudor.add(lblFiltrar);
+		panelConsultapersona.add(lblFiltrar);
 		
 		spTable = new JScrollPane();
 		spTable.setBounds(10, 57, 512, 150);
-		panelConsultaDeudor.add(spTable);
+		panelConsultapersona.add(spTable);
 		
 		table = new JTable();
 		table.addMouseListener(this);
@@ -75,7 +75,9 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 		btnElegir = new JButton("ELEGIR");
 		btnElegir.addActionListener(this);
 		btnElegir.setBounds(282, 25, 89, 23);
-		panelConsultaDeudor.add(btnElegir);
+		panelConsultapersona.add(btnElegir);
+		
+		
 		
 		arranque();
 		
@@ -98,13 +100,13 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 			}
 		};
 		
-		for (Deudor obj : arrDeudor.listar()) {
+		for (Persona obj : arrpersona.listar()) {
 			Object[] cuerpo = new Object[] {
-				obj.getId_deudor(),
-				obj.getNom_deudor(),
-				obj.getApe_deudor(),
-				obj.getDni_deudor(),
-				obj.getEstado_deudor()
+				obj.getId_persona(),
+				obj.getNom_persona(),
+				obj.getApe_persona(),
+				obj.getDni_persona(),
+				obj.getEstado_persona()
 			};
 			
 			modelo.addRow(cuerpo);
@@ -129,8 +131,12 @@ public class DlgBuscarDeudor extends JDialog implements ActionListener, MouseLis
 		int id =(int) table.getValueAt(fila, 0);
 		
 		switch(frame) {
-		case "FrmDeuda":
-			FrmDeuda.txtIdDeudor.setText(id+"");
+		case "FrmDeuda/Persona/Prestatario":
+			FrmDeuda.txtIdPrestatario.setText(id+"");
+			this.dispose();
+			break;
+		case "FrmDeuda/Persona/Prestamista":
+			FrmDeuda.txtIdPrestamista.setText(id+"");
 			this.dispose();
 			break;
 		default:

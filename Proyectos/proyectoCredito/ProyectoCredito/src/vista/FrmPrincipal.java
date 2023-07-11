@@ -106,10 +106,15 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	//MANTENIMIENTO
 	
 	protected void actionPerformedMniCliente(ActionEvent e) {
+		FrmPersona frame = new FrmPersona();
+		frame.setVisible(true);
+		//escritorio.add(frame);
 	}
 	
 	protected void actionPerformedMniDeuda(ActionEvent e) {
-		
+		FrmDeuda frame = new FrmDeuda ();
+		frame.setVisible(true);
+		//escritorio.add(frame);
 	}
 	
 	//TRANSACCION

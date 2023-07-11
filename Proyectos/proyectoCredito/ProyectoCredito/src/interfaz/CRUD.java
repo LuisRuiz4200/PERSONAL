@@ -2,19 +2,17 @@ package interfaz;
 
 import java.util.List;
 
-import conf.Modelo;
-
-public interface CRUD {
+public interface CRUD<T> {
 	
-	public int tamaño();
-	public void adicionar(Modelo model);
-	public void editar (Modelo model);
+	public int tamano();
+	public T buscar(int id);
+	public T obtener(int index);
+	public void adicionar( T model);
+	public void editar (T model);
 	public void eliminar(int id);
-	public List<Modelo> listar();
-	public Modelo buscar(int id);
-	public Modelo obtener(int index);
-	
-	public void cargarData();
+	public List<T> listar();
+
 	public void grabarData();
+	public void cargarData();
 	
 }

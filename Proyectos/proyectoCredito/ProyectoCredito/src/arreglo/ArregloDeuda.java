@@ -1,19 +1,24 @@
 package arreglo;
 
-import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
+import interfaz.CRUD;
 import modelo.*;
 import reuzable.Custom;
 
 
-public class ArregloDeuda {
+public class ArregloDeuda implements CRUD<Deuda> {
 	
 	private ArrayList<Deuda> arrDeuda;
 	
@@ -36,7 +41,8 @@ public class ArregloDeuda {
 	}
 	public void editar (Deuda obj) {
 		Deuda objDeuda = buscar(obj.getId_deuda());
-		objDeuda.setId_deudor(obj.getId_deudor());
+		objDeuda.setId__persona_prestatario(obj.getId__persona_prestatario());
+		objDeuda.setId_persona_prestamista(obj.getId_persona_prestamista());
 		objDeuda.setMonto_deuda(obj.getMonto_deuda());
 		objDeuda.setCuota_deuda(obj.getCuota_deuda());
 		objDeuda.setInteres_deuda(obj.getInteres_deuda());
@@ -70,11 +76,11 @@ public class ArregloDeuda {
 		return g;
 	}
 	
-	public double deudaTotal (int idDedudor) {
+	public double deudaTotal (int idPersonaPrestammista) {
 		double res= -1;
 		
 		for(int i = 0 ; i<tamano();i++) {
-			if(obtener(i).getId_deudor()==idDedudor) {
+			if(obtener(i).getId_persona_prestamista()==idPersonaPrestammista) {
 				res += obtener(i).getMonto_deuda() * (obtener(i).getInteres_deuda()/100) + obtener(i).getMonto_deuda();
 			}
 		}
@@ -111,28 +117,16 @@ public class ArregloDeuda {
 	
 	public void grabarData() {
 		
+		Gson json = new GsonBuilder().setPrettyPrinting().create();
 		PrintWriter pw;
 		String texto;
-		Deuda g;
 		
 		try {
-			pw= new PrintWriter(new FileWriter("Deuda.txt"));
+			pw= new PrintWriter(new FileWriter("Deuda.json"));
 			
-			for(int i=0;i<tamano();i++) {
-				g = obtener(i);
-				texto = g.getId_deuda() + ";" +
-						g.getId_deudor() + ";" +
-						g.getMonto_deuda() + ";" + 
-						g.getCuota_deuda() + ";" + 
-						g.getDes_deuda() + ";" +
-						g.getInteres_deuda() + ";" +
-						((g.getFechaReg_deuda()==null)?null:new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(g.getFechaReg_deuda())) + ";" +
-						((g.getFechaAct_deuda()==null)?null:new SimpleDateFormat("dd/MM/yyy hh:mm:ss").format(g.getFechaAct_deuda())) + ";" +
-						g.getEstado_deuda() + ";";
-				
-				pw.println(texto);
-				
-			}
+			texto = json.toJson(listar());
+			
+			pw.println(texto);
 			pw.close();
 		}catch(Exception e){
 			Custom.mensajeError(null, e.getMessage());
@@ -142,44 +136,16 @@ public class ArregloDeuda {
 	
 	public void cargarData() {
 		
-		BufferedReader br;
-		String texto;
-		String[] pos;
+		Gson json= new Gson();
 		
 		try {
-			br = new BufferedReader(new FileReader("Deuda.txt"));
 			
-			while((texto=br.readLine())!=null) {
-				pos = texto.split(";");
-				
-				int codigo = Integer.parseInt(pos[0]);
-				int cliente = Integer.parseInt(pos[1]);
-				double monto= Double.parseDouble(pos[2]);
-				int cuota= Integer.parseInt(pos[3]);
-				String motivo=pos[4];
-				double interes = Double.parseDouble(pos[5]);
-				Date fechaReg = ((pos[6].equals("null"))?null: new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[6]));
-				Date fechaAct = ((pos[7].equals("null"))?null: new SimpleDateFormat("dd/MM/yyy hh:mm:ss").parse(pos[7]));
-				String estado = pos[8];
-				
-				Deuda obj = new Deuda();
-				obj.setId_deuda(codigo);
-				obj.setId_deudor(cliente);
-				obj.setMonto_deuda(monto);
-				obj.setCuota_deuda(cuota);
-				obj.setDes_deuda(motivo);
-				obj.setInteres_deuda(interes);
-				obj.setFechaReg_deuda(fechaReg);
-				obj.setFechaAct_deuda(fechaAct);
-				obj.setEstado_deuda(estado);
-				
-				adicionar(obj);
-			}
+			Type tipoLista = new TypeToken<List<Deuda>>(){}.getType();
 			
-			br.close();
+			arrDeuda = json.fromJson(new JsonReader(new FileReader("Deuda.json")), tipoLista);
 			
 		}catch(Exception e) {
-			//Custom.mensajeError(null, e.getMessage());
+			Custom.mensajeError(null, e.getMessage());
 			e.printStackTrace();
 		}
 		

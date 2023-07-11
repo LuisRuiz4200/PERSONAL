@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import arreglo.ArregloDeudor;
-import modelo.Deudor;
+import arreglo.ArregloPersona;
+import modelo.Persona;
 import reuzable.Custom;
 
 import java.awt.event.ActionListener;
@@ -21,11 +21,11 @@ import java.util.Date;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
+public class FrmPersona extends JFrame implements ActionListener, KeyListener{
 	
 
 	public static JTextField txtIdDeudor;
-	private ArregloDeudor arrDeudor = new ArregloDeudor();
+	private ArregloPersona arrDeudor = new ArregloPersona();
 	
 	private JLabel lblIdDeudor;
 	private JTextField txtDniDeudor;
@@ -57,15 +57,16 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	
 	public static void main(String [] args) {
 		
-		FrmDeudor form = new FrmDeudor();
+		FrmPersona form = new FrmPersona();
 		form.setVisible(true);
 		
 	}
 	
-	public FrmDeudor() {
+	public FrmPersona() {
 		
 		setTitle("DEUDOR");
-		setBounds(100,100,620,362);
+		setSize(620,362);
+		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -232,14 +233,14 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		Date fechaReg = new Date();
 		
 		
-		Deudor obj = new Deudor();
+		Persona obj = new Persona();
 		
-		obj.setId_deudor(id);
-		obj.setNom_deudor(nombre);
-		obj.setApe_deudor(apellido);
-		obj.setDni_deudor(dni);
-		obj.setFechaReg_deudor(fechaReg);
-		obj.setEstado_deudor(estado);
+		obj.setId_persona(id);
+		obj.setNom_persona(nombre);
+		obj.setApe_persona(apellido);
+		obj.setDni_persona(dni);
+		obj.setFechaReg_persona(fechaReg);
+		obj.setEstado_persona(estado);
 		
 		arrDeudor.adicionar(obj);
 		arrDeudor.grabarData();
@@ -258,13 +259,13 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 		String dni = txtDniDeudor.getText();
 		Date fechaAct = new Date();
 		
-		Deudor obj = new Deudor();
+		Persona obj = new Persona();
 		
-		obj.setId_deudor(id);
-		obj.setNom_deudor(nombre);
-		obj.setApe_deudor(apellido);
-		obj.setDni_deudor(dni);
-		obj.setFechaAct_deudor(fechaAct);
+		obj.setId_persona(id);
+		obj.setNom_persona(nombre);
+		obj.setApe_persona(apellido);
+		obj.setDni_persona(dni);
+		obj.setFechaAct_persona(fechaAct);
 		
 		arrDeudor.editar(obj);
 		arrDeudor.grabarData();
@@ -287,16 +288,22 @@ public class FrmDeudor extends JFrame implements ActionListener, KeyListener{
 	
 	private void listarDeudor() {
 		
-		DefaultTableModel modelo = new DefaultTableModel();
+		DefaultTableModel modelo = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
 		
 		modelo.setColumnIdentifiers(new Object[] {"ID","NOMBRE","APELLIDO","DNI"});
 		
-		for (Deudor obj: arrDeudor.listar()) {
+		for (Persona obj: arrDeudor.listar()) {
 			Object[] x = new Object[] {
-				obj.getId_deudor(),
-				obj.getNom_deudor(),
-				obj.getApe_deudor(),
-				obj.getDni_deudor()
+				obj.getId_persona(),
+				obj.getNom_persona(),
+				obj.getApe_persona(),
+				obj.getDni_persona()
 			};
 			modelo.addRow(x);
 		}
