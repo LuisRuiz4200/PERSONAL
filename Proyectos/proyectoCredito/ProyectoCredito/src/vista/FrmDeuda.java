@@ -119,7 +119,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		panelGestionDeuda.setLayout(null);
 		
 		panelDeudor = new JPanel();
-		panelDeudor.setBorder(new TitledBorder(null, "DEUDOR"));
+		panelDeudor.setBorder(new TitledBorder(null, "PRESTATARIO"));
 		panelDeudor.setBounds(10, 91, 642, 77);
 		panelGestionDeuda.add(panelDeudor);
 		panelDeudor.setLayout(null);
@@ -130,7 +130,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		txtIdPrestatario.setBounds(10, 44, 86, 20);
 		panelDeudor.add(txtIdPrestatario);
 		
-		lblIdDeudor = new JLabel("ID DEUDOR");
+		lblIdDeudor = new JLabel("ID");
 		lblIdDeudor.setBounds(10, 28, 86, 14);
 		panelDeudor.add(lblIdDeudor);
 		
@@ -273,7 +273,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		txtIdPrestamista.setBounds(10, 44, 86, 20);
 		panelPrestamista.add(txtIdPrestamista);
 		
-		lblIdPrestamista = new JLabel("ID PRESTAMISTA");
+		lblIdPrestamista = new JLabel("ID");
 		lblIdPrestamista.setBounds(10, 28, 117, 14);
 		panelPrestamista.add(lblIdPrestamista);
 		

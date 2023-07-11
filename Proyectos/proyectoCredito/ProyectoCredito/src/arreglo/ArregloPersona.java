@@ -1,13 +1,10 @@
 package arreglo;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -17,9 +14,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import interfaz.Crud;
 import modelo.*;
 
-public class ArregloPersona {
+public class ArregloPersona implements Crud<Persona>{
 	
 	private ArrayList <Persona>arrPersona;
 	

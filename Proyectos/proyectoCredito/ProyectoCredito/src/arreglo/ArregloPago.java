@@ -13,11 +13,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import interfaz.CRUD;
+import interfaz.Crud;
 import modelo.Pago;
 import reuzable.Custom;
 
-public class ArregloPago implements CRUD<Pago> {
+public class ArregloPago implements Crud<Pago> {
 
 	private List<Pago> arrPago;
 	

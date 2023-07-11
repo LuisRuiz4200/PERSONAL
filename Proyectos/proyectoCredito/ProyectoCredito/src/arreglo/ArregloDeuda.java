@@ -13,12 +13,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import interfaz.CRUD;
+import interfaz.Crud;
 import modelo.*;
 import reuzable.Custom;
 
 
-public class ArregloDeuda implements CRUD<Deuda> {
+public class ArregloDeuda implements Crud<Deuda> {
 	
 	private ArrayList<Deuda> arrDeuda;
 	

@@ -22,5 +22,41 @@
     "estado_deuda": "REGISTRADO",
     "TEA": 0.55,
     "TEM": 0.0
+  },
+  {
+    "id_deuda": 3,
+    "id__persona_prestatario": 3,
+    "id_persona_prestamista": 1,
+    "monto_deuda": 150.0,
+    "cuota_deuda": 3,
+    "interes_deuda": 7.53,
+    "fechaReg_deuda": "Jul 10, 2023, 11:15:50 PM",
+    "estado_deuda": "REGISTRADO",
+    "TEA": 0.55,
+    "TEM": 0.0
+  },
+  {
+    "id_deuda": 4,
+    "id__persona_prestatario": 2,
+    "id_persona_prestamista": 1,
+    "monto_deuda": 150.0,
+    "cuota_deuda": 2,
+    "interes_deuda": 5.61,
+    "fechaReg_deuda": "Jul 10, 2023, 11:20:01 PM",
+    "estado_deuda": "REGISTRADO",
+    "TEA": 0.55,
+    "TEM": 0.0
+  },
+  {
+    "id_deuda": 5,
+    "id__persona_prestatario": 2,
+    "id_persona_prestamista": 5,
+    "monto_deuda": 150.0,
+    "cuota_deuda": 3,
+    "interes_deuda": 7.53,
+    "fechaReg_deuda": "Jul 10, 2023, 11:23:44 PM",
+    "estado_deuda": "REGISTRADO",
+    "TEA": 0.55,
+    "TEM": 0.0
   }
 ]
