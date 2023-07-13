@@ -23,6 +23,7 @@ public class ArregloPago implements Crud<Pago> {
 	
 	public ArregloPago() {
 		arrPago = new ArrayList<Pago>();
+		cargarData();
 	}
 
 	@Override
@@ -37,7 +38,12 @@ public class ArregloPago implements Crud<Pago> {
 
 	@Override
 	public void editar(Pago model) {
-		buscar(model.getId_deudor());
+		Pago obj = buscar(model.getId_pago());
+		obj.setEstado_pago(model.getEstado_pago());
+		obj.setFechaAct_pago(model.getFechaAct_pago());
+		obj.setId_medioPago(model.getId_medioPago());
+		obj.setId_persona_prestatario(model.getId_persona_prestatario());
+		obj.setMonto_pago(model.getMonto_pago());
 	}
 
 	@Override
@@ -64,6 +70,20 @@ public class ArregloPago implements Crud<Pago> {
 	@Override
 	public Pago obtener(int index) {
 		return arrPago.get(index);
+	}
+	
+	public int correlativo() {
+		int id = 0;
+		
+		if (tamano()==0) {
+			id =1;
+		}else {
+			for (Pago obj: listar()) {
+				id = obj.getId_pago() + 1;
+			}
+		}
+		
+		return id;
 	}
 
 	//METODOS ADICIONALES

@@ -13,6 +13,7 @@ import reuzable.Custom;
 
 import java.awt.event.ActionListener;
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
@@ -21,7 +22,7 @@ import java.util.Date;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class FrmPersona extends JFrame implements ActionListener, KeyListener{
+public class FrmPersona extends JInternalFrame implements ActionListener, KeyListener{
 	
 
 	public static JTextField txtIdDeudor;
@@ -59,16 +60,22 @@ public class FrmPersona extends JFrame implements ActionListener, KeyListener{
 		
 		FrmPersona form = new FrmPersona();
 		form.setVisible(true);
-		
+
 	}
 	
 	public FrmPersona() {
 		
-		setTitle("DEUDOR");
+		setTitle("PERSONA");
 		setSize(620,362);
-		setLocationRelativeTo(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		//setLocationRelativeTo(this);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setMaximizable(true);
+		setClosable(true);
+		setIconifiable(true);
+		
+		setLocation(60,60);
 		
 		tpDeudor = new JTabbedPane(JTabbedPane.TOP);
 		tpDeudor.setBounds(10, 11, 573, 281);

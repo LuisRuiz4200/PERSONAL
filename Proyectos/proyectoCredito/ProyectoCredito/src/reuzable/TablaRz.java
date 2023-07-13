@@ -11,8 +11,11 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,6 +28,17 @@ import modelo.Deuda;
 public class TablaRz {
 	
 	public static void main(String [] args) {
+	}
+	
+	public static void filtrarTabla(JTable tabla,String filtro, int columna) {
+		
+		TableRowSorter<TableModel> clasificador = new TableRowSorter<TableModel>(tabla.getModel());
+		
+		clasificador.setRowFilter(RowFilter.regexFilter(filtro, columna));
+		
+		tabla.setRowSorter(clasificador);
+		
+		
 	}
 	
 	public static DefaultTableModel tableModel(Object[] cabecera) {

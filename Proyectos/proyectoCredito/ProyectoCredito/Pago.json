@@ -1,0 +1,18 @@
+[
+  {
+    "id_pago": 1,
+    "id_persona_prestatario": 2,
+    "monto_pago": 125.0,
+    "fechaReg_pago": "Jul 11, 2023, 12:25:51 PM",
+    "id_medioPago": 1,
+    "estado_pago": "REGISTRADO"
+  },
+  {
+    "id_pago": 2,
+    "id_persona_prestatario": 2,
+    "monto_pago": 125.0,
+    "fechaReg_pago": "Jul 11, 2023, 12:25:57 PM",
+    "id_medioPago": 1,
+    "estado_pago": "REGISTRADO"
+  }
+]

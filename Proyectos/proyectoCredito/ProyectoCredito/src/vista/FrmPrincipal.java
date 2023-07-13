@@ -34,11 +34,10 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	public FrmPrincipal() {
 		
 		setTitle("Proyecto Crediticio");
-		setSize(931,511);
+		setSize(1000,700);
 		setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//this.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout(0, 0));
@@ -107,19 +106,25 @@ public class FrmPrincipal extends JFrame implements ActionListener{
 	
 	protected void actionPerformedMniCliente(ActionEvent e) {
 		FrmPersona frame = new FrmPersona();
+		escritorio.add(frame);
 		frame.setVisible(true);
-		//escritorio.add(frame);
+		toFront();
 	}
 	
 	protected void actionPerformedMniDeuda(ActionEvent e) {
 		FrmDeuda frame = new FrmDeuda ();
+		escritorio.add(frame);
 		frame.setVisible(true);
-		//escritorio.add(frame);
+		toFront();
 	}
 	
 	//TRANSACCION
 	
 	protected void actionPerformedMntiPago(ActionEvent e) {
+		FrmPago frame = new FrmPago();
+		escritorio.add(frame);
+		frame.setVisible(true);
+		toFront();
 	}
 	
 	//CONSULTA

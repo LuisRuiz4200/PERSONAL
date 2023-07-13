@@ -13,16 +13,7 @@ import javax.swing.table.TableRowSorter;
 
 public class Custom {
 	
-	public static void filtrarTabla(JTable tabla,String filtro, int columna) {
-		
-		TableRowSorter<TableModel> clasificador = new TableRowSorter<TableModel>(tabla.getModel());
-		
-		clasificador.setRowFilter(RowFilter.regexFilter(filtro, columna));
-		
-		tabla.setRowSorter(clasificador);
-		
-		
-	}
+
 	
 	public static void mensajeError(Component s, String msj) {
 		JOptionPane.showMessageDialog(s, msj,"ERROR!",0);

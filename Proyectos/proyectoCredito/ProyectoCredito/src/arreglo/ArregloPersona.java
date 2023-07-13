@@ -65,7 +65,7 @@ public class ArregloPersona implements Crud<Persona>{
 	
 	public int correlativo() {
 		
-		int id=0;
+		int id=2;
 		
 		if(tamano()==0) {
 			id=1;

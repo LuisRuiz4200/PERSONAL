@@ -30,7 +30,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
-public class FrmDeuda extends JFrame implements ActionListener, CaretListener, KeyListener, ChangeListener{
+public class FrmDeuda extends JInternalFrame implements ActionListener, CaretListener, KeyListener, ChangeListener{
 	
 
 	public static JTextField txtIdPrestatario;
@@ -89,12 +89,8 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	
 	
 	public static void main(String [] args) {
-		try {
-			FrmDeuda form = new FrmDeuda();
-			form.setVisible(true);
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
+		FrmDeuda form = new FrmDeuda();
+		form.setVisible(true);
 		
 	}
 	
@@ -102,8 +98,14 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 		
 		setTitle("DEUDA");
 		setSize(700,484);
-		setLocationRelativeTo(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setLocationRelativeTo(this);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		
+		setLocation(60,60);
 		
 		panel = new JPanel();
 		panel.setBounds(117, 74, 10, 10);
@@ -632,13 +634,13 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	protected void actionPerformedBtnBuscarDeudor(ActionEvent e) {
 		
 		DlgBuscarPersona.frame="FrmDeuda/Persona/Prestatario";
-		DlgBuscarPersona dlg = new DlgBuscarPersona(this,true) ;
+		DlgBuscarPersona dlg = new DlgBuscarPersona(null,true) ;
 		dlg.setVisible(true);
 	}
 	protected void actionPerformedBtnBuscarPrestamista(ActionEvent e) {
 		
 		DlgBuscarPersona.frame="FrmDeuda/Persona/Prestamista";
-		DlgBuscarPersona dlg = new DlgBuscarPersona(this,true);
+		DlgBuscarPersona dlg = new DlgBuscarPersona(null,true);
 		dlg.setVisible(true);
 	}
 	//CARET LISTENER
@@ -705,7 +707,7 @@ public class FrmDeuda extends JFrame implements ActionListener, CaretListener, K
 	public void keyTyped(KeyEvent e) {
 	}
 	protected void keyReleasedTxtFiltro(KeyEvent e) {
-		Custom.filtrarTabla(tbDeuda, txtFiltro.getText(), cboFiltro.getSelectedIndex());
+		TablaRz.filtrarTabla(tbDeuda, txtFiltro.getText(), cboFiltro.getSelectedIndex());
 	}
 	//CHANGE LISTENER
 	public void stateChanged(ChangeEvent e) {

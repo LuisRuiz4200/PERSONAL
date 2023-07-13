@@ -139,6 +139,10 @@ public class DlgBuscarPersona extends JDialog implements ActionListener, MouseLi
 			FrmDeuda.txtIdPrestamista.setText(id+"");
 			this.dispose();
 			break;
+		case "FrmPago/Persona/Prestatario":
+			FrmPago.txtIdPrestatario.setText(id + "");
+			this.dispose();
+			break;
 		default:
 			break;
 		}
