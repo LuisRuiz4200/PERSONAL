@@ -5,6 +5,8 @@ public class Cliente {
 	private int codCliente;
 	private String desCliente;
 	
+	public Cliente() {}
+	
 	public Cliente(int codCliente, String desCliente) {
 		super();
 		this.codCliente = codCliente;

@@ -1,0 +1,42 @@
+[
+  {
+    "id_persona": 1,
+    "nom_persona": "Luis",
+    "ape_persona": "Machaca Ruizz",
+    "dni_persona": "75963004",
+    "fechaReg_persona": "Jul 10, 2023, 10:18:16 AM",
+    "estado_persona": "REGISTRADO"
+  },
+  {
+    "id_persona": 2,
+    "nom_persona": "Gleydi",
+    "ape_persona": "Ruiz Siancas",
+    "dni_persona": "",
+    "fechaReg_persona": "Jul 10, 2023, 10:18:27 AM",
+    "estado_persona": "REGISTRADO"
+  },
+  {
+    "id_persona": 3,
+    "nom_persona": "Daniel",
+    "ape_persona": "Lindo Sanchez",
+    "dni_persona": "",
+    "fechaReg_persona": "Jul 10, 2023, 10:18:35 AM",
+    "estado_persona": "REGISTRADO"
+  },
+  {
+    "id_persona": 4,
+    "nom_persona": "Nathaly",
+    "ape_persona": "Villanueva",
+    "dni_persona": "",
+    "fechaReg_persona": "Jul 10, 2023, 10:18:59 AM",
+    "estado_persona": "REGISTRADO"
+  },
+  {
+    "id_persona": 5,
+    "nom_persona": "Persona",
+    "ape_persona": "Ape",
+    "dni_persona": "123456789",
+    "fechaReg_persona": "Jul 10, 2023, 10:30:06 PM",
+    "estado_persona": "REGISTRADO"
+  }
+]

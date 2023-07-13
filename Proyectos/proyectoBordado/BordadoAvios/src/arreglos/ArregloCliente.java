@@ -16,7 +16,7 @@ public class ArregloCliente {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrCliente.size();
 	}
 	
@@ -39,6 +39,12 @@ public class ArregloCliente {
 			}
 		}
 		return null;
+	}
+	
+	public List<Cliente> lista(){
+		
+		return arrCliente.subList(0, tamano());
+		
 	}
 	
 	//METODOS DE LECTURA Y ESCRITURA

@@ -8,6 +8,9 @@ public class ColorOP{
 	private int codColorOP;
 	private String desColorOP;
 	
+	
+	public ColorOP() {}
+	
 	public ColorOP(int nroOP, int codColorOP, String desColorOP) {
 		super();
 		this.nroOP = nroOP;

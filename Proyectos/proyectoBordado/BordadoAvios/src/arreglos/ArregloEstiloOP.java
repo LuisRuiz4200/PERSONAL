@@ -7,7 +7,11 @@ import reuzables.Custom;
 
 public class ArregloEstiloOP {
 
-	private ArrayList<EstiloOP> arrEstiloOP;
+	private List<EstiloOP> arrEstiloOP;
+	
+	public static void main (String[] args) {
+		new ArregloEstiloOP();
+	}
 	
 	public ArregloEstiloOP() {
 		arrEstiloOP = new ArrayList<EstiloOP>();
@@ -16,7 +20,7 @@ public class ArregloEstiloOP {
 	
 	//METODOS BASICOS
 	
-	public int tamaño() {
+	public int tamano() {
 		return arrEstiloOP.size();
 	}
 	
@@ -58,7 +62,7 @@ public class ArregloEstiloOP {
 				pw.println(texto);
 			}
 		}catch(Exception e) {
-			Custom.mensajeError(null, "Error al grabar contenido");
+			Custom.mensajeError(null, e.getMessage());
 		}finally {
 			pw.close();
 		}
@@ -73,16 +77,21 @@ public class ArregloEstiloOP {
 			br = new BufferedReader (new FileReader("estiloOp.txt"));
 			while((linea=br.readLine())!=null) {
 				texto = linea.split(";");
-				EstiloOP estiloOp = new EstiloOP(
-						Integer.parseInt(texto[0]),
-						texto[1],
-						Integer.parseInt(texto[2])
-						);
-				arrEstiloOP.add(estiloOp);
+				
+				int codigoEstiloOP = Integer.parseInt(texto[0].toString().trim());
+				String descripcion = texto[1];
+				int codigoPrenda = Integer.parseInt(texto[2].toString().trim());
+				
+				EstiloOP obj = new EstiloOP();
+				obj.setCodEstiloOP(codigoEstiloOP);
+				obj.setDesEstiloOp(descripcion);
+				obj.setCodPrenda(codigoPrenda);
+				arrEstiloOP.add(obj);
+				
 			}
 			br.close();
 		}catch (Exception e) {
-			Custom.mensajeError(null, "Error al cargar contenido");
+			Custom.mensajeError(null, e.getMessage());
 		}
 		
 		

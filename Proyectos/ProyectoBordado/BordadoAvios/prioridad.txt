@@ -1,0 +1,2 @@
+1;30510;Heathered Black;Esto es el ejemplo de una de las prioridades que existen el programa poner mucha atencion en lo acontecido recientemente en la planta y sucursales aledañas;;1;27/05/2023 01:58:29;REGISTRADO;
+2;31988;WHITE;;;1;31/05/2023 10:51:32;REGISTRADO;

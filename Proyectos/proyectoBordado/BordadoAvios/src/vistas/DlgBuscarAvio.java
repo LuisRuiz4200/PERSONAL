@@ -20,7 +20,7 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 	private JComboBox<Object> cboTipoAvio;
 	private JScrollPane scrollPane;
 	private DefaultTableModel modelo;
-	public static String source;
+	public static String frame;
 	
 	
 	public static void main (String[] args) {
@@ -91,15 +91,19 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 	}
 	protected void actionPerformedBtnAceptar(ActionEvent e) {
 		
+		
+		int codAvio = (int) table.getValueAt(table.getSelectedRow(), 0);
+		
 		ArregloAvio arrAvio = new ArregloAvio();
 		ArregloUniMed arrUM = new ArregloUniMed();
 		
-		switch (source){
+		Avio objAvio = arrAvio.buscar(codAvio);
+		
+		switch (frame){
 			case "FrmIngresoAvio":
-				FrmIngresoAvio.txtCodAvio.setText(leerCodAvio() + "");
-				FrmIngresoAvio.txtDesAvio.setText(arrAvio.buscar(leerCodAvio()).getDesAvio());
-				String UM = arrAvio.buscar(leerCodAvio()).getMedidaAvio() + " " + arrUM.buscar(arrAvio.buscar(leerCodAvio()).getCodUM()).getDesUM();
-				FrmIngresoAvio.txtMedidaAvio.setText(UM);
+				
+				FrmIngresoAvio.txtCodAvio.setText(objAvio.getCodAvio() + "");
+				
 				this.dispose();
 				break;
 				
@@ -158,7 +162,7 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 		
 		cboTipoAvio.setSelectedIndex(-1);
 		
-		for (int i=0;i<arrTipoAvio.tamaño();i++) {
+		for (int i=0;i<arrTipoAvio.tamano();i++) {
 			
 			cboTipoAvio.addItem(arrTipoAvio.obtener(i).getDesTipoAvio());
 			
@@ -173,7 +177,7 @@ public class DlgBuscarAvio extends JDialog implements ActionListener, MouseListe
 		
 		modelo.setRowCount(0);
 		
-		for (int i=0;i<arrAvio.tamaño();i++) {
+		for (int i=0;i<arrAvio.tamano();i++) {
 			
 			Object[] x = {
 					arrAvio.obtener(i).getCodAvio(),

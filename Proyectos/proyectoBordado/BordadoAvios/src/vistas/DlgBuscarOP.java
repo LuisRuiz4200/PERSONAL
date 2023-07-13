@@ -22,6 +22,7 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 	private JButton btnElegir;
 	private DefaultTableModel model;
 	private JScrollPane spTable;
+	public static String frame;
 	
 	private ArregloOrdenProduccion arrOP;
 	
@@ -85,10 +86,9 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 	}
 	protected void actionPerformedBtnElegir(ActionEvent e) {
 		
-		this.dispose();
-		FrmIngresoAvio.txtNroOP.setText(txtOP.getText());
-		FrmIngresoAvio.txtClienteOP.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
-		FrmIngresoAvio.txtEstiloOP.setText(table.getValueAt(table.getSelectedRow(),1).toString());
+		exportarOP();
+		
+		
 		
 	}
 	//EVENTOS DE LA TABLA MOUSE CLIKED
@@ -134,7 +134,7 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamano();i++) {
 			
 			Object[] x = new Object[] {
 					arrOP.obtener(i).getNroOp(),
@@ -153,7 +153,7 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 		
 		model.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamano();i++) {
 			
 			String nroOp = String.valueOf(arrOP.obtener(i).getNroOp());
 			
@@ -171,11 +171,30 @@ public class DlgBuscarOP extends JDialog implements ActionListener, KeyListener,
 	}
 	
 	private void mostrarOP() {
+		
+		
 		int n = table.getSelectedRow();
 		
 		String nroOp = table.getValueAt(n, 0).toString();
 		
 		txtOP.setText(nroOp);
+		
+		
+		
+		
+	}
+	
+	private void exportarOP() {
+		switch(frame) {
+		case "FrmProgramaAcabado":
+			FrmProgramaAcabado.txtNroOP.setText(this.txtOP.getText());
+			this.dispose();
+			break;
+		case "":
+			break;
+		default:
+			
+		}
 	}
 	
 	

@@ -11,7 +11,7 @@ import clases.*;
 import arreglos.*;
 
 @SuppressWarnings("serial")
-public class FrmOrdenProd extends JFrame implements ActionListener, MouseListener{
+public class FrmOrdenProd extends JInternalFrame implements ActionListener, MouseListener{
 	private JPanel panelBtnMantener;
 	private JButton btnAgregar;
 	private JButton btnModificar;
@@ -36,9 +36,13 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 	public FrmOrdenProd() {
 		
 		this.setTitle("ORDEN DE PRODUCCION");
-		this.setBounds(0,0,429,326);
-		this.setLocationRelativeTo(this);
+		this.setBounds(0,0,577,326);
+		//this.setLocationRelativeTo(this);
 		this.getContentPane().setLayout(null);
+		this.setLocation(50,50);
+		this.setClosable(true);
+		this.setMaximizable(true);
+		this.setIconifiable(true);
 		
 		panelBtnMantener = new JPanel();
 		panelBtnMantener.setLayout(null);
@@ -75,7 +79,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 		getContentPane().add(lblCodCliente);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(153, 59, 250, 217);
+		scrollPane.setBounds(153, 59, 398, 217);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -195,7 +199,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0;i<arrOP.tamaño();i++) {
+		for(int i=0;i<arrOP.tamano();i++) {
 			Object[] x = {
 					arrOP.obtener(i).getNroOp(),
 					arrCliente.obtener(arrOP.obtener(i).getCodCliente()-1).getDesCliente(),
@@ -208,7 +212,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 	private void cargarCliente() {
 		ArregloCliente arrCliente = new ArregloCliente ();
 		cboCodCliente.setSelectedIndex(-1);
-		for(int i=0;i<arrCliente.tamaño();i++) {
+		for(int i=0;i<arrCliente.tamano();i++) {
 			cboCodCliente.addItem(arrCliente.obtener(i).getDesCliente());
 		}
 	}
@@ -216,7 +220,7 @@ public class FrmOrdenProd extends JFrame implements ActionListener, MouseListene
 	private void cargarEstilo() {
 		ArregloEstiloOP arrEstiloOP = new ArregloEstiloOP();
 		cboCodEstilo.setSelectedIndex(-1);
-		for(int i=0;i<arrEstiloOP.tamaño();i++) {
+		for(int i=0;i<arrEstiloOP.tamano();i++) {
 			cboCodEstilo.addItem(arrEstiloOP.obtener(i).getDesEstiloOp());
 		}
 	}

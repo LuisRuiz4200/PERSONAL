@@ -184,7 +184,7 @@ public class FrmEstiloOP extends JFrame implements ActionListener, MouseListener
 		modelo.setRowCount(0);
 		ArregloPrenda arrPrenda= new ArregloPrenda();
 		
-		for(int i=0;i<arrEstiloOP.tamaño();i++) {
+		for(int i=0;i<arrEstiloOP.tamano();i++) {
 			Object[] x = {
 					arrEstiloOP.obtener(i).getCodEstiloOp(),
 					arrEstiloOP.obtener(i).getDesEstiloOp(),
@@ -197,7 +197,7 @@ public class FrmEstiloOP extends JFrame implements ActionListener, MouseListener
 	private void cargarPrenda() {
 		ArregloPrenda arrPrenda= new ArregloPrenda();
 		cboCodPrenda.setSelectedIndex(-1);
-		for(int i=0;i<arrPrenda.tamaño();i++) {
+		for(int i=0;i<arrPrenda.tamano();i++) {
 			cboCodPrenda.addItem(arrPrenda.obtener(i).getDesPrenda().toString());
 		}
 	}

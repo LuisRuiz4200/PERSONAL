@@ -15,7 +15,7 @@ public class ArregloAvio {
 	}
 	
 	//METODOS BASICOS
-	public int tamaño() {
+	public int tamano() {
 		return arrAvio.size();
 	}
 	
