@@ -138,7 +138,7 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 		}else {
 			arrCliente.adicionar(new Cliente (codigo,nombre,apellido,dni));
 			arrCliente.grabarCliente();
-			Tool.mensajeExito(this, "Se registró el cliente con exito !");
+			Tool.mensajeExito(this, "Se registrï¿½ el cliente con exito !");
 			listar();
 		}
 		
@@ -212,7 +212,7 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 		
 		modelo.setRowCount(0);
 		
-		for (int i=0;i<arrCliente.tamaño();i++) {
+		for (int i=0;i<arrCliente.tamano();i++) {
 			Cliente c =  arrCliente.obtener(i);
 			
 			String codigo =c.getCodigo();
@@ -229,11 +229,11 @@ public class FrmCliente extends JInternalFrame implements ActionListener{
 	
 	int correlativo() {
 		
-		if(arrCliente.tamaño()==0) {
+		if(arrCliente.tamano()==0) {
 			return 1 ;
 		}else {
 			
-			String codigo = arrCliente.obtener(arrCliente.tamaño()-1).getCodigo();
+			String codigo = arrCliente.obtener(arrCliente.tamaï¿½o()-1).getCodigo();
 			
 			return Integer.parseInt(codigo.substring(1))+1 ;
 		}

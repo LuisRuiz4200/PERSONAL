@@ -111,7 +111,7 @@ public class FrmConsultaGasto extends JInternalFrame implements ActionListener{
 		
 		modelo.setRowCount(0);
 		
-		for(int i=0; i<arrGasto.tamaño();i++) {
+		for(int i=0; i<arrGasto.tamano();i++) {
 			Gasto g = arrGasto.obtener(i);
 			
 			Cliente c = arrCliente.buscar(g.getCliente());
